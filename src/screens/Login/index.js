@@ -61,8 +61,8 @@ function login(props) {
             />
             {errors.password && <Error>{errors.password}</Error>}
             <Text style={styles.ForgotText}>Forgot password</Text>
-            <ButtonLoginBox > 
-              <ButtonLogin onPress={handleSubmit} title="Submit">
+            <ButtonLoginBox  onPress={handleSubmit} title="Submit"> 
+              <ButtonLogin>
                 Login
               </ButtonLogin>
             </ButtonLoginBox>

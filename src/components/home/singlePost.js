@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
-import moment from "moment";
+import moment from 'moment';
+import {useMutation} from '@apollo/react-hooks';
 
 import UserImage from '../../fonts/icon/user.jpg';
+import {LIKEPOST} from '../../graphql/mutation';
 
 import {
   Container,
@@ -35,7 +37,21 @@ function SinglePost({
     avatar,
     username,
   },
+  Username,
 }) {
+  const [likepost] = useMutation(LIKEPOST);
+  function LikePost() {
+    likepost({
+      variables: {postId: id},
+    });
+  }
+
+  const [liked, setLiked] = useState(false);
+  useEffect(() => {
+    if (Username && likes.find(like => like.username === Username)) {
+      setLiked(true);
+    } else setLiked(false);
+  }, [Username, likes]);
   return (
     <Container>
       <TopTitle>
@@ -58,7 +74,7 @@ function SinglePost({
         <BodyPost>{body}</BodyPost>
 
         {image.length === 0 ? (
-         <Text></Text>
+          <Text></Text>
         ) : (
           <ImagePost
             source={{
@@ -70,7 +86,12 @@ function SinglePost({
 
       <BottomPost>
         <BoxButton>
-          <IconAntDesign name="like2" size={30} />
+          {liked ? (
+            <IconAntDesign name="like1" size={30} onPress={() => LikePost()} />
+          ) : (
+            <IconAntDesign name="like2" size={30} onPress={() => LikePost()} />
+          )}
+
           <NumForButton>{likeCount}</NumForButton>
         </BoxButton>
 

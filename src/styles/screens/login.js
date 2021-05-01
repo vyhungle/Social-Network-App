@@ -6,7 +6,7 @@ export const Error = styled.Text`
   margin-top: 5px;
 `;
 
-export const ButtonLoginBox=styled.View `
+export const ButtonLoginBox=styled.Button `
  margin-left: 15px;
   margin-right: 15px;
   height:44px;

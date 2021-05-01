@@ -2,15 +2,16 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ApolloProvider} from '@apollo/react-hooks';
+import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Login from './src/screens/login';
 import HomeScreen from './src/screens/home';
 import {client} from './src/graphql/client';
+import CreatePostScreen from './src/screens/CreatePost';
+
 
 const Tab = createBottomTabNavigator();
-
-
 function MyTabs() {
   return (
     <Tab.Navigator
@@ -44,11 +45,18 @@ function MyTabs() {
   );
 }
 
+const RootStack = createStackNavigator();
+
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>    
-        <MyTabs />
+    
+      <NavigationContainer> 
+        <RootStack.Navigator screenOptions={{headerShown: false}}>
+          <RootStack.Screen name="MyTabs" component={MyTabs} />
+          <RootStack.Screen name="CreatePost" component={CreatePostScreen} />
+         
+        </RootStack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
   );
