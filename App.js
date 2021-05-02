@@ -9,7 +9,7 @@ import Login from './src/screens/login';
 import HomeScreen from './src/screens/home';
 import {client} from './src/graphql/client';
 import CreatePostScreen from './src/screens/CreatePost';
-
+import {AuthProvider} from './src/context/auth';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -50,14 +50,14 @@ const RootStack = createStackNavigator();
 const App = () => {
   return (
     <ApolloProvider client={client}>
-    
-      <NavigationContainer> 
-        <RootStack.Navigator screenOptions={{headerShown: false}}>
-          <RootStack.Screen name="MyTabs" component={MyTabs} />
-          <RootStack.Screen name="CreatePost" component={CreatePostScreen} />
-         
-        </RootStack.Navigator>
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+          <RootStack.Navigator screenOptions={{headerShown: false}}>
+            <RootStack.Screen name="MyTabs" component={MyTabs} />
+            <RootStack.Screen name="CreatePost" component={CreatePostScreen} />
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </AuthProvider>
     </ApolloProvider>
   );
 };

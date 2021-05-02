@@ -6,9 +6,11 @@ import {Formik} from 'formik';
 import {setAccessToken} from '../../utils/storage';
 import {LOGIN} from '../../graphql/mutation';
 import {ButtonLoginBox,ButtonLogin, Error} from '../../styles/screens/login';
+import { AuthContext } from "../../context/auth";
 
 var errors = {};
 function login(props) {
+  const context = React.useContext(AuthContext);
   const [Login, {loading}] = useMutation(LOGIN);
   return (
     <View style={styles.Container}>
@@ -35,7 +37,7 @@ function login(props) {
                   } else errors.password = userData.error[i].message;
                 }
               } else {
-                await setAccessToken(userData.user.token, userData.user);
+                context.login(userData.user);
                 props.navigation.navigate('Home');
               }
             },
