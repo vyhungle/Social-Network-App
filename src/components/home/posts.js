@@ -6,7 +6,7 @@ import {ScrollView, View, TouchableOpacity, Text} from 'react-native';
 import {ButtonPost} from '../../styles/components/home/posts';
 import {GET_POSTS} from '../../graphql/query';
 import SinglePost from '../../components/home/singlePost';
-import {getAccessUser} from '../../context/auth';
+import {getAccessUser} from '../../utils/storage';
 import CreatePostBar from '../../components/home/postBar';
 
 function Posts() {

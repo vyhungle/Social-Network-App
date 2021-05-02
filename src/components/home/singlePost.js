@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
 import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
+import PhotoGrid from 'react-native-thumbnail-grid';
+
 
 import UserImage from '../../fonts/icon/user.jpg';
 import {LIKEPOST} from '../../graphql/mutation';
@@ -17,7 +19,7 @@ import {
   Title,
   DateTime,
   ContainerPost,
-  ImagePost,
+  ImageBox,
   BodyPost,
   BottomPost,
   BoxButton,
@@ -52,6 +54,7 @@ function SinglePost({
       setLiked(true);
     } else setLiked(false);
   }, [Username, likes]);
+
   return (
     <Container>
       <TopTitle>
@@ -76,11 +79,14 @@ function SinglePost({
         {image.length === 0 ? (
           <Text></Text>
         ) : (
-          <ImagePost
-            source={{
-              uri: image[0],
-            }}
-          />
+          <ImageBox>
+               <PhotoGrid
+              source={image}
+              width={350}
+              height={300}
+              onPressImage={() =>{}}
+            />
+          </ImageBox>
         )}
       </ContainerPost>
 

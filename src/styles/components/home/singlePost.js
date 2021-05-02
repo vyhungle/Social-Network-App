@@ -40,9 +40,7 @@ export const ContainerPost = styled.View``;
 export const BodyPost = styled.Text`
   margin: 10px;
 `;
-export const ImagePost = styled.Image`
-  width: 95%;
-  height: 280px;
+export const ImageBox = styled.View`
   margin:10px;
   border-radius:15px;
 `;
