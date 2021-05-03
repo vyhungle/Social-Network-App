@@ -85,7 +85,6 @@ export const BoxViewMore = styled.View`
 
 
 export const BoxTextMore = styled.Text`
-
     font-size:40px;
     font-weight:800;
     color:white;

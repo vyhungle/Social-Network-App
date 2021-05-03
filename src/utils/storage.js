@@ -15,6 +15,6 @@ export const setAccessToken = async (token, user) => {
 };
 
 export const deleteAccess = async () => {
-  await AsyncStorage.multiRemove('jwtToken');
-  await AsyncStorage.multiRemove('user');
+  await AsyncStorage.removeItem('jwtToken');
+  await AsyncStorage.removeItem('user');
 };

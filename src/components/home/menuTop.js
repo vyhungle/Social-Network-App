@@ -12,10 +12,6 @@ import {ButtonIcon} from '../../styles/components/general';
 function MenuTop() {
   return (
     <Container>
-      <ButtonIcon >
-        <Icon name="menu-outline" size={30} style={{marginLeft: 10}} />
-      </ButtonIcon>
-
       <Title>SocialNetwork</Title>
       <IconRight>
        <ButtonIcon>

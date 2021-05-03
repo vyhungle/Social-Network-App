@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
 import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
-
+import {useNavigation} from '@react-navigation/native';
 
 import UserImage from '../../fonts/icon/user.jpg';
 import {LIKEPOST} from '../../graphql/mutation';
@@ -24,6 +24,7 @@ import {
   BoxButton,
   NumForButton,
 } from '../../styles/components/home/singlePost';
+import {AuthContext} from '../../context/auth';
 
 function SinglePost({
   post: {
@@ -40,6 +41,7 @@ function SinglePost({
   },
   Username,
 }) {
+  const context = React.useContext(AuthContext);
   const [likepost] = useMutation(LIKEPOST);
   function LikePost() {
     likepost({
@@ -54,6 +56,14 @@ function SinglePost({
   }, [Username, likes]);
 
  
+  const navigation = useNavigation();
+  function handleClickImage(post) {
+    navigation.push('CommentScreen', {
+      post: post,
+    });
+  }
+
+  
   return (
     <Container>
       <TopTitle>

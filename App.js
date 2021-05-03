@@ -5,12 +5,19 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Login from './src/screens/login';
+
+
+import LoginScreen from './src/screens/login';
 import HomeScreen from './src/screens/home';
+import MenuScreen from "./src/screens/menu";
+import GroupScreen from "./src/screens/Group";
+import ProductScreen from "./src/screens/product";
+import SignUpScreen from "./src/screens/signup";
 import {client} from './src/graphql/client';
 import CreatePostScreen from './src/screens/CreatePost';
 import {AuthProvider,AuthContext} from './src/context/auth';
 import Wrapper from "./src/components/general/wrapper";
+import CommentScreen from "./src/screens/comment";
 
 
 
@@ -25,12 +32,12 @@ function MyTabs() {
 
           if (route.name === 'Home') {
             iconName = focused ? 'ios-home' : 'home-outline';
-          } else if (route.name === 'Login') {
-            iconName = focused ? 'people-sharp' : 'people-outline';
-          } else if (route.name === 'Search') {
+          } else if (route.name === 'Product') {
             iconName = focused ? 'cart' : 'cart-outline';
-          } else if (route.name === 'Follow') {
-            iconName = focused ? 'md-add-circle' : 'md-add-circle-outline';
+          } else if (route.name === 'GroupScreen') {
+            iconName = focused ? 'people-sharp' : 'people-outline';
+          } else if (route.name === 'MenuScreen') {
+            iconName = focused ? 'menu' : 'menu-outline';
           }
 
           // You can return any component that you like here!
@@ -41,10 +48,10 @@ function MyTabs() {
         activeTintColor: '#262626',
         inactiveTintColor: '#262626',
       }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={HomeScreen} />
-      <Tab.Screen name="Login" component={Login} />
-      <Tab.Screen name="Follow" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{tabBarLabel:""}}/>
+      <Tab.Screen name="GroupScreen" component={GroupScreen} options={{tabBarLabel:""}} />
+      <Tab.Screen name="Product" component={ProductScreen} options={{tabBarLabel:""}}/>
+      <Tab.Screen name="MenuScreen" component={MenuScreen} options={{tabBarLabel:""}}/>
     </Tab.Navigator>
   );
 }
@@ -61,6 +68,9 @@ const App = () => {
             <RootStack.Screen name="MyTabs" component={MyTabs} />
             <RootStack.Screen name="CreatePost" component={CreatePostScreen} />
             <RootStack.Screen name="Wrapper" component={Wrapper} />
+            <RootStack.Screen name="Login" component={LoginScreen}/>
+            <RootStack.Screen name="SignUpScreen" component={SignUpScreen}/>
+            <RootStack.Screen name="CommentScreen" component={CommentScreen}/>
           </RootStack.Navigator>
         </NavigationContainer>
       </AuthProvider>

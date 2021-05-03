@@ -51,9 +51,10 @@ export const BottomPost = styled.View`
   margin-left:20px;
 `;
 
-export const BoxButton = styled.View`
+export const BoxButton = styled.TouchableOpacity`
   flex-direction: row;
   margin-right:15px;
+  margin-bottom:10px;
 `;
 
 export const NumForButton=styled.Text `
