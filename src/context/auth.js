@@ -1,5 +1,10 @@
 import React, {useReducer, createContext} from 'react';
-import { deleteAccess, setAccessToken } from "../utils/storage";
+import {
+  deleteAccess,
+  getAccessToken,
+  getAccessUser,
+  setAccessToken,
+} from '../utils/storage';
 
 const initialState = {
   user: null,
@@ -13,20 +18,18 @@ const AuthContext = createContext({
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     case 'LOGOUT':
       return {
         ...state,
-        user: null
+        user: null,
       };
-      default:
-        return state;
-   
+    default:
+      return state;
   }
 };
 
@@ -34,7 +37,7 @@ function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   async function login(userData) {
-    await setAccessToken(userData.token,userData)
+    await setAccessToken(userData.token, userData);
     dispatch({
       type: 'LOGIN',
       payload: userData,
@@ -45,6 +48,19 @@ function AuthProvider(props) {
     await deleteAccess();
     dispatch({type: 'LOGOUT'});
   }
+
+  React.useEffect(() => {
+    setTimeout(async () => {
+      let userData;
+      userData = null;
+      try {
+        userData = await getAccessUser();
+      } catch (e) {
+        console.log(e);
+      }
+      dispatch({type: 'LOGIN', payload: userData});
+    }, 1000);
+  }, []);
 
   return (
     <AuthContext.Provider

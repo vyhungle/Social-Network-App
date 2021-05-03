@@ -5,9 +5,9 @@ import {Formik} from 'formik';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/react-hooks';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import {AuthContext} from '../../context/auth';
 
 import {ButtonIcon} from '../../styles/components/general';
 import {
@@ -25,15 +25,12 @@ import {
   ImagePost,
 } from '../../styles/screens/createPost';
 import {CREATE_POST} from '../../graphql/mutation';
-import {GET_MY_USER} from '../../graphql/query';
-
 function Index() {
+  const context = React.useContext(AuthContext);
   const navigation = useNavigation();
   const [createPost, {loading}] = useMutation(CREATE_POST);
-  const {data: {getMyUser: user} = {}} = useQuery(GET_MY_USER);
   var base64Image = [];
   function SelectImage(formProps) {
-   
     ImagePicker.openPicker({
       multiple: true,
       includeBase64: true,
@@ -80,8 +77,8 @@ function Index() {
           return (
             <Content>
               <BoxBody>
-                {user ? (
-                  <ImageAvatar source={{uri: user.profile.avatar}} />
+                {context.user !== null ? (
+                  <ImageAvatar source={{uri: context.user.profile.avatar}} />
                 ) : (
                   <ImageAvatar source={require('../../fonts/icon/user.jpg')} />
                 )}

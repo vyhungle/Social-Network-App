@@ -3,7 +3,6 @@ import {Text, View, TextInput, StyleSheet, Button} from 'react-native';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik} from 'formik';
 
-import {setAccessToken} from '../../utils/storage';
 import {LOGIN} from '../../graphql/mutation';
 import {ButtonLoginBox,ButtonLogin, Error} from '../../styles/screens/login';
 import { AuthContext } from "../../context/auth";

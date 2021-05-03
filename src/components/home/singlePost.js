@@ -5,12 +5,11 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
 import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
-import PhotoGrid from 'react-native-thumbnail-grid';
 
 
 import UserImage from '../../fonts/icon/user.jpg';
 import {LIKEPOST} from '../../graphql/mutation';
-
+import PostPhotoGrid from '../../components/general/postPhotoGrid';
 import {
   Container,
   Avatar,
@@ -47,7 +46,6 @@ function SinglePost({
       variables: {postId: id},
     });
   }
-
   const [liked, setLiked] = useState(false);
   useEffect(() => {
     if (Username && likes.find(like => like.username === Username)) {
@@ -55,6 +53,7 @@ function SinglePost({
     } else setLiked(false);
   }, [Username, likes]);
 
+ 
   return (
     <Container>
       <TopTitle>
@@ -80,12 +79,7 @@ function SinglePost({
           <Text></Text>
         ) : (
           <ImageBox>
-               <PhotoGrid
-              source={image}
-              width={350}
-              height={300}
-              onPressImage={() =>{}}
-            />
+            <PostPhotoGrid images={image} />
           </ImageBox>
         )}
       </ContainerPost>
