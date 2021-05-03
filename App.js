@@ -18,6 +18,7 @@ import CreatePostScreen from './src/screens/CreatePost';
 import {AuthProvider,AuthContext} from './src/context/auth';
 import Wrapper from "./src/components/general/wrapper";
 import CommentScreen from "./src/screens/comment";
+import ProfileScreen from "./src/screens/profile";
 
 
 
@@ -71,6 +72,7 @@ const App = () => {
             <RootStack.Screen name="Login" component={LoginScreen}/>
             <RootStack.Screen name="SignUpScreen" component={SignUpScreen}/>
             <RootStack.Screen name="CommentScreen" component={CommentScreen}/>
+            <RootStack.Screen name="ProfileScreen" component={ProfileScreen}/>
           </RootStack.Navigator>
         </NavigationContainer>
       </AuthProvider>

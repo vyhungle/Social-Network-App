@@ -58,7 +58,7 @@ function Menu() {
           <TextMenu>Home</TextMenu>
         </BoxItem>
 
-        <BoxItem>
+        <BoxItem onPress={()=>navigation.navigate("ProfileScreen")}>
           <IconFeather name="user" size={30} />
           <TextMenu>My Profile</TextMenu>
         </BoxItem>

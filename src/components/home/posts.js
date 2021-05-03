@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/auth";
 import {GET_POSTS} from '../../graphql/query';
 import SinglePost from '../../components/home/singlePost';
 import CreatePostBar from '../../components/home/postBar';
+import LoadingPost from "../../components/general/loading";
 
 function Posts() {
   const context= React.useContext(AuthContext)
@@ -17,6 +18,9 @@ function Posts() {
     },
     pollInterval: 500,
   });
+
+
+  if(loading) return (<LoadingPost/>)
   return (
     <View>
      <CreatePostBar/>
