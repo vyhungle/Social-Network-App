@@ -1,9 +1,8 @@
 import React from 'react';
 import {Container} from '../../styles/screens/home';
 
-import MenuTop from '../../components/home/menuTop';
-import Posts from '../../components/home/posts';
-
+import MenuTop from './components/menuTop';
+import Posts from './components/posts';
 
 function HomeScreen() {
   return (
@@ -14,7 +13,3 @@ function HomeScreen() {
   );
 }
 export default HomeScreen;
-
-
-
-

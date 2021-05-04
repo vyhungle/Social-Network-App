@@ -170,6 +170,12 @@ export const GET_ROOM_CHAT = gql`
           avatar
         }
       }
+      content {
+        displayname
+        username
+        content
+        createdAt
+      }
     }
   }
 `;
@@ -212,6 +218,7 @@ export const GET_MY_USER = gql`
       }
       profile {
         avatar
+        coverImage
       }
     }
   }
@@ -311,6 +318,18 @@ export const GET_MY_PRODUCTS = gql`
       }
       seller {
         username
+      }
+    }
+  }
+`;
+
+export const GET_FOLLOWER = gql`
+  query getFollower {
+    getMyUser {
+      follower {
+        username
+        displayname
+        avatar
       }
     }
   }

@@ -7,9 +7,9 @@ import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
 
-import UserImage from '../../fonts/icon/user.jpg';
-import {LIKEPOST} from '../../graphql/mutation';
-import PostPhotoGrid from '../../components/general/postPhotoGrid';
+import UserImage from '../../../fonts/icon/user.jpg';
+import {LIKEPOST} from '../../../graphql/mutation';
+import PostPhotoGrid from '../../../components/general/postPhotoGrid';
 import {
   Container,
   Avatar,
@@ -23,8 +23,8 @@ import {
   BottomPost,
   BoxButton,
   NumForButton,
-} from '../../styles/components/home/singlePost';
-import {AuthContext} from '../../context/auth';
+} from '../../../styles/components/home/singlePost';
+import {AuthContext} from '../../../context/auth';
 
 function SinglePost({
   post: {

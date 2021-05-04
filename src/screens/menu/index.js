@@ -63,7 +63,7 @@ function Menu() {
           <TextMenu>My Profile</TextMenu>
         </BoxItem>
 
-        <BoxItem>
+        <BoxItem onPress={()=>navigation.navigate("MessageScreen")}>
           <IconAntDesign name="message1" size={30} />
           <TextMenu>Messages</TextMenu>
         </BoxItem>

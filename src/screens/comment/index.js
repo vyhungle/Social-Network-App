@@ -29,7 +29,7 @@ import {
 } from '../../styles/components/home/comment';
 import {CREATE_COMMENT} from '../../graphql/mutation';
 import {GET_COMMENT} from '../../graphql/query';
-import SinglePost from '../../components/home/singlePost';
+import SinglePost from '../../screens/home/components/singlePost';
 import TopBar from '../../components/general/topBar';
 import Loading from '../../components/general/loading';
 

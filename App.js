@@ -19,8 +19,8 @@ import {AuthProvider,AuthContext} from './src/context/auth';
 import Wrapper from "./src/components/general/wrapper";
 import CommentScreen from "./src/screens/comment";
 import ProfileScreen from "./src/screens/profile";
-
-
+import MessageScreen from "./src/screens/message";
+import CreateChatScreen from "./src/screens/createChat";
 
 
 const Tab = createBottomTabNavigator();
@@ -73,6 +73,8 @@ const App = () => {
             <RootStack.Screen name="SignUpScreen" component={SignUpScreen}/>
             <RootStack.Screen name="CommentScreen" component={CommentScreen}/>
             <RootStack.Screen name="ProfileScreen" component={ProfileScreen}/>
+            <RootStack.Screen name="MessageScreen" component={MessageScreen}/>
+            <RootStack.Screen name="CreateChatScreen" component={CreateChatScreen}/>
           </RootStack.Navigator>
         </NavigationContainer>
       </AuthProvider>
