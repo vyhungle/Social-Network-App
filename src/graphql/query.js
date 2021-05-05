@@ -181,8 +181,8 @@ export const GET_ROOM_CHAT = gql`
 `;
 
 export const GET_CHAT = gql`
-  query getChatReverse($roomId: ID!) {
-    getChatReverse(roomId: $roomId) {
+  query getChat($roomId: ID!) {
+    getChat(roomId: $roomId) {
       id
       members {
         username

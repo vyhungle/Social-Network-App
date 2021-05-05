@@ -21,6 +21,7 @@ import CommentScreen from "./src/screens/comment";
 import ProfileScreen from "./src/screens/profile";
 import MessageScreen from "./src/screens/message";
 import CreateChatScreen from "./src/screens/createChat";
+import RoomChatScreen from "./src/screens/roomChat";
 
 
 const Tab = createBottomTabNavigator();
@@ -75,6 +76,7 @@ const App = () => {
             <RootStack.Screen name="ProfileScreen" component={ProfileScreen}/>
             <RootStack.Screen name="MessageScreen" component={MessageScreen}/>
             <RootStack.Screen name="CreateChatScreen" component={CreateChatScreen}/>
+            <RootStack.Screen name="RoomChatScreen" component={RoomChatScreen}/>
           </RootStack.Navigator>
         </NavigationContainer>
       </AuthProvider>

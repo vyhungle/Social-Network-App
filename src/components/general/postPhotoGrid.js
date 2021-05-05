@@ -21,7 +21,6 @@ import {
 const OnePic = images => {
   const navigation = useNavigation();
   function handleClickImage(images, index) {
-    console.log(index);
     navigation.push('Wrapper', {
       images: images,
       index: index,
@@ -46,7 +45,6 @@ const OnePic = images => {
 const TwoPic = images => {
   const navigation = useNavigation();
   function handleClickImage(images, index) {
-    console.log(index);
     navigation.push('Wrapper', {
       images: images,
       index: index,
@@ -74,7 +72,6 @@ const TwoPic = images => {
 const LeftImageForThreePic = images => {
   const navigation = useNavigation();
   function handleClickImage(images, index) {
-    console.log(index);
     navigation.push('Wrapper', {
       images: images,
       index: index,
@@ -96,7 +93,6 @@ const LeftImageForThreePic = images => {
 const RightImageForThreePic = images => {
   const navigation = useNavigation();
   function handleClickImage(images, index) {
-    console.log(index);
     navigation.push('Wrapper', {
       images: images,
       index: index,
@@ -136,7 +132,6 @@ const ThreePic = images => {
 const FourPic = images => {
   const navigation = useNavigation();
   function handleClickImage(images, index) {
-    console.log(index);
     navigation.push('Wrapper', {
       images: images,
       index: index,
@@ -164,7 +159,6 @@ const FourPic = images => {
 const MorePic = images => {
   const navigation = useNavigation();
   function handleClickImage(images, index) {
-    console.log(index);
     navigation.push('Wrapper', {
       images: images,
       index: index,

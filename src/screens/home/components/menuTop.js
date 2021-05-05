@@ -20,7 +20,7 @@ function MenuTop() {
         <ButtonIcon>
           <Icon name="search" size={30} />
         </ButtonIcon>
-        <ButtonIcon onPress={()=>navigation.push("MessageScreen")}>
+        <ButtonIcon  onPress={()=>navigation.navigate("MessageScreen")}>
           <IconAntDesign name="message1" size={30} />
         </ButtonIcon>
       </IconRight>

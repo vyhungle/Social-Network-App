@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Keyboard,
 } from 'react-native';
 import {Formik} from 'formik';
 import {useMutation, useQuery} from '@apollo/react-hooks';
@@ -40,7 +41,7 @@ function Comment() {
   const [createComment] = useMutation(CREATE_COMMENT, {
     pollInterval: 500,
   });
-  const {loading,data: {getPost: post} = {}} = useQuery(GET_COMMENT, {
+  const {loading, data: {getPost: post} = {}} = useQuery(GET_COMMENT, {
     variables: {postId: id},
     pollInterval: 500,
   });
@@ -76,6 +77,8 @@ function Comment() {
               createComment({
                 variables: values,
               });
+              Keyboard.dismiss();
+              values.body = '';
             }
           }}>
           {formProps => {
@@ -102,7 +105,7 @@ function Comment() {
     return (
       <View style={{marginBottom: 70}}>
         {post &&
-          post.comments.map((comment,index) => (
+          post.comments.map((comment, index) => (
             <ListBox key={index}>
               <Avatar
                 source={{
@@ -121,7 +124,7 @@ function Comment() {
   };
   const title = 'COMMENTS';
 
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
   return (
     <Container>
       <TopBar title={title} key={title} />
