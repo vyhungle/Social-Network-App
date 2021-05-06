@@ -26,16 +26,18 @@ export const FormBox = styled.View`
   height: 60px;
   display: flex;
   align-items: center;
+  border-top-color:gainsboro;
+  border-top-width:.75px;
 `;
 
 export const BoxInput = styled.View`
   display: flex;
   align-items: center;
   flex-direction: row;
+ 
 `;
 export const InputComment = styled.TextInput`
-  border-color: gainsboro;
-  border-width: 0.75px;
+ 
   color: black;
   width: 250px;
   margin-left: 5px;

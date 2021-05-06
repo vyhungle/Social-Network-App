@@ -197,6 +197,7 @@ export const GET_CHAT = gql`
         content
         createdAt
         username
+        image
       }
     }
   }
@@ -327,6 +328,7 @@ export const GET_FOLLOWER = gql`
   query getFollower {
     getMyUser {
       follower {
+        id
         username
         displayname
         avatar

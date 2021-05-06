@@ -4,6 +4,7 @@ import {useQuery} from '@apollo/react-hooks';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
 
+import Loading from '../../../components/general/loading';
 import {GET_ROOM_CHAT} from '../../../graphql/query';
 import {
   Avatar,
@@ -36,6 +37,18 @@ function Listchats() {
     return chat.members[0];
   };
 
+  const getUriAvatar = uri => {
+    if (uri === null) {
+      return <Avatar source={require('../../../fonts/icon/user.jpg')} />;
+    }
+    return (
+      <Avatar
+        source={{
+          uri: uri,
+        }}
+      />
+    );
+  };
   const navigation = useNavigation();
 
   const handleClick = (id, user) => {
@@ -44,40 +57,42 @@ function Listchats() {
       id: id,
     });
   };
+  if (loading) return <Loading />;
   return (
     <Container>
       {chats &&
         chats.map((chat, index) => {
           const member = getUser(chat);
+          const AvatarUser = getUriAvatar(member.profile.avatar);
           return (
             <ChatItem key={index} onPress={() => handleClick(chat.id, member)}>
-              <Avatar
-                source={{
-                  uri: member.profile.avatar,
-                }}
-              />
+              {AvatarUser}
               <BoxText>
                 <TextName>{member.displayname}</TextName>
-                <BoxTextContent>
-                  <Text>
-                    {getNameLastSend(
-                      chat.content[chat.content.length - 1].username,
-                      chat.content[chat.content.length - 1].displayname,
-                    )}
-                    :
-                  </Text>
-                  <TextBody numberOfLines={1}>
-                    {' '}
-                    {chat.content[chat.content.length - 1].content}
-                  </TextBody>
+                {chat.content.length === 0 ? (
+                  <View></View>
+                ) : (
+                  <BoxTextContent>
+                    <Text>
+                      {getNameLastSend(
+                        chat.content[chat.content.length - 1].username,
+                        chat.content[chat.content.length - 1].displayname,
+                      )}
+                      :
+                    </Text>
+                    <TextBody numberOfLines={1}>
+                      {' '}
+                      {chat.content[chat.content.length - 1].content}
+                    </TextBody>
 
-                  <TextDate>
-                    {' '}
-                    {moment(
-                      chat.content[chat.content.length - 1].createdAt,
-                    ).fromNow(true)}
-                  </TextDate>
-                </BoxTextContent>
+                    <TextDate>
+                      {' '}
+                      {moment(
+                        chat.content[chat.content.length - 1].createdAt,
+                      ).fromNow(true)}
+                    </TextDate>
+                  </BoxTextContent>
+                )}
               </BoxText>
             </ChatItem>
           );

@@ -4,12 +4,10 @@ export const Container = styled.View`
   border-color:gainsboro;
   border-width:.75px;
   padding-top:10px;
-  padding-bottom:10px;
   border-radius:20px;
   margin:10px;
+  margin-bottom:0;
   background-color:white;
- 
-  
 `;
 
 export const Avatar = styled.Image`

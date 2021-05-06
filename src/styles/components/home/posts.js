@@ -9,7 +9,7 @@ export const ButtonPost =styled.TouchableOpacity `
     justify-content:center;
     align-items:center;
     position:absolute;
-    bottom:70px;
+    bottom:30px;
     right:15px;
     z-index:10;
 `

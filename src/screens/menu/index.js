@@ -53,12 +53,12 @@ function Menu() {
       </MenuTop>
 
       <MenuContent>
-        <BoxItem>
+        <BoxItem onPress={()=>navigation.navigate("Home")}>
           <Icon name="home-outline" size={30} />
           <TextMenu>Home</TextMenu>
         </BoxItem>
 
-        <BoxItem onPress={()=>navigation.navigate("ProfileScreen")}>
+        <BoxItem onPress={()=>navigation.navigate("ProfileScreen" ,{username:context.user.username})}>
           <IconFeather name="user" size={30} />
           <TextMenu>My Profile</TextMenu>
         </BoxItem>
@@ -68,7 +68,7 @@ function Menu() {
           <TextMenu>Messages</TextMenu>
         </BoxItem>
 
-        <BoxItem>
+        <BoxItem onPress={()=>navigation.navigate("Product")}>
           <IconFeather name="shopping-bag" size={30} />
           <TextMenu>Products</TextMenu>
         </BoxItem>

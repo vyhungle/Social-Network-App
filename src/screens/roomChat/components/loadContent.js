@@ -1,21 +1,26 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 import {useQuery} from '@apollo/react-hooks';
 import moment from 'moment';
 
 import {AuthContext} from '../../../context/auth';
 import {GET_CHAT} from '../../../graphql/query';
+import Loading from '../../../components/general/loading';
 import {
   Container,
   BoxItemYou,
   BoxItemFriend,
   TimeFriend,
   TimeYou,
+  ImageChat,
+  TextYou,
+  TextFriend,
+  BoxImageYou,
 } from '../../../styles/components/roomChat/loadContent';
 
 function LoadContent({id}) {
   const context = React.useContext(AuthContext);
-  const {data: {getChat: chat} = {}} = useQuery(GET_CHAT, {
+  const {loading, data: {getChat: chat} = {}} = useQuery(GET_CHAT, {
     variables: {roomId: id},
     pollInterval: 500,
   });
@@ -29,13 +34,33 @@ function LoadContent({id}) {
     }
     return null;
   };
+  const getImageImage = chat => {
+    if (chat.image !== null) {
+      return (
+        <ImageChat
+          source={{
+            uri: chat.image,
+          }}
+        />
+      );
+    }
+    return <View></View>;
+  };
+
   const GetBoxItem = (chat, index) => {
     var time = GetTime(index);
     if (context.user.username === chat.username) {
       return (
         <View key={index}>
           <BoxItemYou>
-            <Text>{chat.content}</Text>
+            {chat.content === '' ? (
+              <View></View>
+            ) : (
+              <TextYou>
+                <Text style={{color: 'white'}}>{chat.content}</Text>
+              </TextYou>
+            )}
+            <BoxImageYou>{getImageImage(chat)}</BoxImageYou>
           </BoxItemYou>
           {time === null ? (
             <View></View>
@@ -48,7 +73,14 @@ function LoadContent({id}) {
       return (
         <View key={index}>
           <BoxItemFriend>
-            <Text>{chat.content}</Text>
+            {chat.content === '' ? (
+              <Text></Text>
+            ) : (
+              <TextFriend>
+                <Text>{chat.content}</Text>
+              </TextFriend>
+            )}
+            {getImageImage(chat)}
           </BoxItemFriend>
           {time === null ? (
             <View></View>
@@ -60,6 +92,7 @@ function LoadContent({id}) {
   };
 
   const scrollViewRef = React.useRef();
+  if (loading) return <Loading />;
   return (
     <Container>
       <ScrollView

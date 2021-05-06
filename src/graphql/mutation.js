@@ -119,22 +119,16 @@ export const FIND_USERS = gql`
 `;
 
 export const CREATE_ROOM_CHAT = gql`
-  mutation createRoomChat($userId: String!) {
-    createRoomChat(userId: $userId) {
+  mutation createRoomChatUsername($username: String!) {
+    createRoomChatUsername(username: $username) {
       id
-      content {
-        id
-        username
-        createdAt
-        content
-      }
     }
   }
 `;
 
 export const CREATE_CONTENT_CHAT = gql`
-  mutation createContentChat($roomId: String!, $content: String!) {
-    createContentChat(roomId: $roomId, content: $content) {
+  mutation createContentChat($roomId: String!, $content: String,$image:String) {
+    createContentChat(roomId: $roomId, content: $content, image:$image) {
       content {
         displayname
         username

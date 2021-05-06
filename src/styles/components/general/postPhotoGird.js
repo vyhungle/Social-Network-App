@@ -75,7 +75,6 @@ export const BoxViewMore = styled.View`
   display:flex;
   align-items:center;
   justify-content:center;
-  background: rgba(0,0,0,.5);
   position:absolute;
   top:-150px;
   right:0;

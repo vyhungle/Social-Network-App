@@ -2,27 +2,24 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ApolloProvider} from '@apollo/react-hooks';
-import {createStackNavigator} from '@react-navigation/stack';
+import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-
 
 import LoginScreen from './src/screens/login';
 import HomeScreen from './src/screens/home';
-import MenuScreen from "./src/screens/menu";
-import GroupScreen from "./src/screens/Group";
-import ProductScreen from "./src/screens/product";
-import SignUpScreen from "./src/screens/signup";
+import MenuScreen from './src/screens/menu';
+import GroupScreen from './src/screens/Group';
+import ProductScreen from './src/screens/product';
+import SignUpScreen from './src/screens/signup';
 import {client} from './src/graphql/client';
 import CreatePostScreen from './src/screens/CreatePost';
-import {AuthProvider,AuthContext} from './src/context/auth';
-import Wrapper from "./src/components/general/wrapper";
-import CommentScreen from "./src/screens/comment";
-import ProfileScreen from "./src/screens/profile";
-import MessageScreen from "./src/screens/message";
-import CreateChatScreen from "./src/screens/createChat";
-import RoomChatScreen from "./src/screens/roomChat";
-
+import {AuthProvider, AuthContext} from './src/context/auth';
+import Wrapper from './src/components/general/wrapper';
+import CommentScreen from './src/screens/comment';
+import ProfileScreen from './src/screens/profile';
+import MessageScreen from './src/screens/message';
+import CreateChatScreen from './src/screens/createChat';
+import RoomChatScreen from './src/screens/roomChat';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -49,11 +46,28 @@ function MyTabs() {
       tabBarOptions={{
         activeTintColor: '#262626',
         inactiveTintColor: '#262626',
+        style: {height: 70, paddingTop: 10},
       }}>
-      <Tab.Screen name="Home" component={HomeScreen} options={{tabBarLabel:""}}/>
-      <Tab.Screen name="GroupScreen" component={GroupScreen} options={{tabBarLabel:""}} />
-      <Tab.Screen name="Product" component={ProductScreen} options={{tabBarLabel:""}}/>
-      <Tab.Screen name="MenuScreen" component={MenuScreen} options={{tabBarLabel:""}}/>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{tabBarLabel: ''}}
+      />
+      <Tab.Screen
+        name="GroupScreen"
+        component={GroupScreen}
+        options={{tabBarLabel: ''}}
+      />
+      <Tab.Screen
+        name="Product"
+        component={ProductScreen}
+        options={{tabBarLabel: ''}}
+      />
+      <Tab.Screen
+        name="MenuScreen"
+        component={MenuScreen}
+        options={{tabBarLabel: ''}}
+      />
     </Tab.Navigator>
   );
 }
@@ -61,22 +75,34 @@ function MyTabs() {
 const RootStack = createStackNavigator();
 
 const App = () => {
-  const context=React.useContext(AuthContext);
+  const context = React.useContext(AuthContext);
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
         <NavigationContainer>
-          <RootStack.Navigator screenOptions={{headerShown: false}}>
+          <RootStack.Navigator
+            screenOptions={{
+              headerShown: false,
+              gestureEnabled: true,
+              gestureDirection: 'horizontal',
+              cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS
+            }}>
             <RootStack.Screen name="MyTabs" component={MyTabs} />
             <RootStack.Screen name="CreatePost" component={CreatePostScreen} />
             <RootStack.Screen name="Wrapper" component={Wrapper} />
-            <RootStack.Screen name="Login" component={LoginScreen}/>
-            <RootStack.Screen name="SignUpScreen" component={SignUpScreen}/>
-            <RootStack.Screen name="CommentScreen" component={CommentScreen}/>
-            <RootStack.Screen name="ProfileScreen" component={ProfileScreen}/>
-            <RootStack.Screen name="MessageScreen" component={MessageScreen}/>
-            <RootStack.Screen name="CreateChatScreen" component={CreateChatScreen}/>
-            <RootStack.Screen name="RoomChatScreen" component={RoomChatScreen}/>
+            <RootStack.Screen name="Login" component={LoginScreen} />
+            <RootStack.Screen name="SignUpScreen" component={SignUpScreen} />
+            <RootStack.Screen name="CommentScreen" component={CommentScreen} />
+            <RootStack.Screen name="ProfileScreen" component={ProfileScreen} />
+            <RootStack.Screen name="MessageScreen" component={MessageScreen} />
+            <RootStack.Screen
+              name="CreateChatScreen"
+              component={CreateChatScreen}
+            />
+            <RootStack.Screen
+              name="RoomChatScreen"
+              component={RoomChatScreen}
+            />
           </RootStack.Navigator>
         </NavigationContainer>
       </AuthProvider>

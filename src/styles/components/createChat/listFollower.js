@@ -19,7 +19,7 @@ export const Avatar = styled.Image`
   height: 50px;
   width: 50px;
   border-radius: 50px;
-  margin-left:10px;
+  margin-left: 10px;
 `;
 
 export const ViewBoxItem = styled.View`
@@ -41,8 +41,22 @@ export const TouchableOpacityBox = styled.TouchableOpacity`
   position: absolute;
   right: 10px;
   display: flex;
-  justify-content:center;
-  align-items:center;
-  width:50px;
-  height:60px
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 60px;
+`;
+
+export const ButtonNext = styled.TouchableOpacity`
+  width: 50px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -100px;
+  right: 10px;
+  z-index: 20;
+  background-color:#262626;
+  border-radius: 10px;
 `;
