@@ -152,14 +152,14 @@ export const EDIT_PROFILE = gql`
   mutation editProfile(
     $avatar: String
     $dateOfBirth: String
-    $fullname: String!
+    $fullName: String!
     $story: String
     $coverImage: String
   ) {
     editProfile(
       avatar: $avatar
       dateOfBirth: $dateOfBirth
-      fullName: $fullname
+      fullName: $fullName
       story: $story
       coverImage: $coverImage
     ) {

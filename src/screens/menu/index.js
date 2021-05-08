@@ -5,7 +5,6 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
-
 import {AuthContext} from '../../context/auth';
 import {
   Container,
@@ -29,20 +28,33 @@ function Menu() {
       <MenuTop>
         {context.user ? (
           <BoxChildMenuTop>
-            <Avatar
-              source={{
-                uri: context.user.profile.avatar,
-              }}
-            />
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('ProfileScreen', {
+                  username: context.user.username,
+                })
+              }>
+              <Avatar
+                source={{
+                  uri: context.user.profile.avatar,
+                }}
+              />
+            </TouchableOpacity>
             <View style={{marginLeft: 10}}>
               <TextName>{context.user.displayname}</TextName>
               <TextUsername>@ {context.user.username}</TextUsername>
               <View style={{flexDirection: 'row'}}>
                 <TextFollow>
-                {/*   {context.user.following.length} Following */}
+                  {context.user.following.length === 0
+                    ? 0
+                    : context.user.following.length}{' '}
+                  Following
                 </TextFollow>
                 <TextFollow>
-                {/*   {context.user.follower.length} Following */}
+                  {context.user.follower.length === 0
+                    ? 0
+                    : context.user.follower.length}{' '}
+                  Following
                 </TextFollow>
               </View>
             </View>
@@ -53,31 +65,36 @@ function Menu() {
       </MenuTop>
 
       <MenuContent>
-        <BoxItem onPress={()=>navigation.navigate("Home")}>
+        <BoxItem onPress={() => navigation.navigate('Home')}>
           <Icon name="home-outline" size={30} />
           <TextMenu>Home</TextMenu>
         </BoxItem>
 
-        <BoxItem onPress={()=>navigation.navigate("ProfileScreen" ,{username:context.user.username})}>
+        <BoxItem
+          onPress={() =>
+            navigation.navigate('ProfileScreen', {
+              username: context.user.username,
+            })
+          }>
           <IconFeather name="user" size={30} />
           <TextMenu>My Profile</TextMenu>
         </BoxItem>
 
-        <BoxItem onPress={()=>navigation.navigate("MessageScreen")}>
+        <BoxItem onPress={() => navigation.navigate('MessageScreen')}>
           <IconAntDesign name="message1" size={30} />
           <TextMenu>Messages</TextMenu>
         </BoxItem>
 
-        <BoxItem onPress={()=>navigation.navigate("Product")}>
+        <BoxItem onPress={() => navigation.navigate('Product')}>
           <IconFeather name="shopping-bag" size={30} />
           <TextMenu>Products</TextMenu>
         </BoxItem>
 
         {context.user ? (
           <BoxItem
-            onPress={async() => {
+            onPress={async () => {
               context.logout();
-              navigation.push('Login')
+              navigation.push('Login');
             }}>
             <IconAntDesign name="logout" size={30} />
             <TextMenu>Logout</TextMenu>

@@ -20,6 +20,7 @@ import ProfileScreen from './src/screens/profile';
 import MessageScreen from './src/screens/message';
 import CreateChatScreen from './src/screens/createChat';
 import RoomChatScreen from './src/screens/roomChat';
+import EditProfileScreen from "./src/screens/profile/editProfile";
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -103,6 +104,7 @@ const App = () => {
               name="RoomChatScreen"
               component={RoomChatScreen}
             />
+             <RootStack.Screen name="EditProfileScreen" component={EditProfileScreen} />
           </RootStack.Navigator>
         </NavigationContainer>
       </AuthProvider>

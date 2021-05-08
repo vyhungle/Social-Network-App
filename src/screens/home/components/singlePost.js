@@ -41,7 +41,6 @@ function SinglePost({
   },
   Username,
 }) {
-
   const context = React.useContext(AuthContext);
   const [likepost] = useMutation(LIKEPOST);
   function LikePost() {
@@ -66,15 +65,22 @@ function SinglePost({
   return (
     <Container>
       <TopTitle>
-        {avatar === null ? (
-          (source = <UserImage />)
-        ) : (
-          <Avatar
-            source={{
-              uri: avatar,
-            }}
-          />
-        )}
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('ProfileScreen', {
+              username: username,
+            })
+          }>
+          {avatar === null ? (
+            (source = <UserImage />)
+          ) : (
+            <Avatar
+              source={{
+                uri: avatar,
+              }}
+            />
+          )}
+        </TouchableOpacity>
         <TitleBox>
           <Title>{displayname}</Title>
           <DateTime>{moment(createdAt).fromNow(true)}</DateTime>
@@ -104,7 +110,7 @@ function SinglePost({
           <NumForButton>{likeCount}</NumForButton>
         </BoxButton>
 
-        <BoxButton onPress={()=> handleClickImage(id)}>
+        <BoxButton onPress={() => handleClickImage(id)}>
           <IconFontisto name="comment" size={30} />
           <NumForButton>{commentCount}</NumForButton>
         </BoxButton>

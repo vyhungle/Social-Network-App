@@ -13,6 +13,7 @@ import {useMutation, useQuery} from '@apollo/react-hooks';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useRoute} from '@react-navigation/native';
 import moment from 'moment';
+import {useNavigation} from '@react-navigation/native';
 
 import {AuthContext} from '../../context/auth';
 import {
@@ -36,6 +37,7 @@ import Loading from '../../components/general/loading';
 
 function Comment() {
   const context = React.useContext(AuthContext);
+  const navigation = useNavigation();
   const route = useRoute();
   const {id} = route.params;
   const [createComment] = useMutation(CREATE_COMMENT, {
@@ -57,15 +59,22 @@ function Comment() {
   const FormComment = () => {
     return (
       <FormBox>
-        {context.user.profile.avatar ? (
-          <Avatar
-            source={{
-              uri: context.user.profile.avatar,
-            }}
-          />
-        ) : (
-          <Avatar source={require('../../fonts/icon/user.jpg')} />
-        )}
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('ProfileScreen', {
+              username: context.user.username,
+            })
+          }>
+          {context.user.profile.avatar ? (
+            <Avatar
+              source={{
+                uri: context.user.profile.avatar,
+              }}
+            />
+          ) : (
+            <Avatar source={require('../../fonts/icon/user.jpg')} />
+          )}
+        </TouchableOpacity>
         <Formik
           initialValues={{
             body: '',
@@ -107,11 +116,22 @@ function Comment() {
         {post &&
           post.comments.map((comment, index) => (
             <ListBox key={index}>
-              <Avatar
-                source={{
-                  uri: comment.avatar,
-                }}
-              />
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('ProfileScreen', {
+                    username: context.user.username,
+                  })
+                }>
+                {comment.avatar===null ? (
+                  <Avatar source={require('../../fonts/icon/user.jpg')}/>
+                ):(
+                  <Avatar
+                  source={{
+                    uri: comment.avatar,
+                  }}
+                />
+                )}
+              </TouchableOpacity>
               <BoxText>
                 <TextName>{comment.displayname}</TextName>
                 <TextBody>{comment.body}</TextBody>
