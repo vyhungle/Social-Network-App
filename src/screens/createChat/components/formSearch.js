@@ -7,9 +7,16 @@ import {
   Container,
   InputSearch,
 } from '../../../styles/components/createChat/formChat';
+import { TextInput } from 'react-native-gesture-handler';
 
 
-function FormSearch() {
+function FormSearch(props) {
+  
+  const [value,setValue]=React.useState("");
+  const handleChange=(values)=>{
+    setValue(values)
+    props.parentCallback(value)
+  }
   return (
     <Container>
       <View style={styles.Icon}>
@@ -18,6 +25,8 @@ function FormSearch() {
       <InputSearch
         placeholder="Tìm kiếm người và nhóm"
         placeholderTextColor="gray"
+        values={value}
+        onChangeText={(values)=>handleChange(values)}
       />
     </Container>
   );

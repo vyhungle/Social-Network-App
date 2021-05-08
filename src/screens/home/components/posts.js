@@ -7,6 +7,7 @@ import {GET_POSTS} from '../../../graphql/query';
 import SinglePost from './singlePost';
 import CreatePostBar from './postBar';
 import LoadingPost from '../../../components/general/loading';
+import ListMember from "./listMemberTop";
 
 function Posts() {
   const context = React.useContext(AuthContext);
@@ -24,23 +25,12 @@ function Posts() {
     <View>
       {posts && <CreatePostBar />}
       <ScrollView>
+      <ListMember/>
         {posts &&
           posts.posts.map(post => (
             <SinglePost post={post} Username={username} key={post.id} />
           ))}
 
-        {/* <TouchableOpacity
-          style={{width: 100, height: 100}}
-          onPress={() => fetchMore({
-            variables:{
-              limit:10
-            }
-            
-              
-            
-          })}>
-          <Text>load</Text>
-      </TouchableOpacity> */}
       </ScrollView>
     </View>
   );

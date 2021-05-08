@@ -48,7 +48,7 @@ export const TextDate=styled.Text `
 
 
 export const TextBody=styled.Text `
- max-width:180px;
+ max-width:170px;
  overflow:hidden;
  
 `

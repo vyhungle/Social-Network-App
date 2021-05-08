@@ -159,6 +159,16 @@ export const GET_USERS_FOLLOWING = gql`
     }
   }
 `;
+
+export const GET_USERS_FOLLOWER = gql`
+ query getUserFollower($username:String!){
+  getUser(username:$username){
+    follower{
+      avatar
+    }
+  }
+}
+`;
 export const GET_ROOM_CHAT = gql`
   query getRoomChat {
     getRoomChat {
@@ -331,6 +341,22 @@ export const GET_FOLLOWER = gql`
         id
         username
         displayname
+        avatar
+      }
+    }
+  }
+`;
+
+
+export const FIND_USERS = gql`
+  query findUsers($displayname: String!) {
+    findUsers(displayname: $displayname) {
+      id
+      email
+      username
+      createdAt
+      displayname
+      profile {
         avatar
       }
     }
