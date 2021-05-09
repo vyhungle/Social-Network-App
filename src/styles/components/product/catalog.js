@@ -54,7 +54,7 @@ export const ViewSort=styled.TouchableOpacity `
   align-items:center;
   justify-content:center;
   background-color:white;
-  width:50px;
+  width:40px;
   border-radius:20px;
   margin-right: 5px;
 `

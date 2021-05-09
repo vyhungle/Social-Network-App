@@ -19,11 +19,11 @@ function Catalog(props) {
       <BoxPicker>
         {props.sortProduct === -1 ? (
           <ViewSort  onPress={() => props.handleChangeSort(1)}>
-            <Icon name="sort-amount-down" size={25} />
+            <Icon name="sort-amount-down" size={15} />
           </ViewSort>
         ) : (
           <ViewSort onPress={() => props.handleChangeSort(-1)}>
-            <Icon name="sort-amount-up" size={25} />
+            <Icon name="sort-amount-up" size={15} />
           </ViewSort>
         )}
         <ViewPicker onPress={() => props.handelChangeModel(true)}>

@@ -17,7 +17,7 @@ export const ViewLoading=styled.View `
   height:${win.height-200}px;
 `
 
-export const BoxItem = styled.View`
+export const BoxItem = styled.TouchableOpacity`
     width:175px;
     height:250px;
     background-color:white;

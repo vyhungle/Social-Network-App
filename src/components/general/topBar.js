@@ -15,7 +15,7 @@ function Index({title}){
           onPress={() => navigation.goBack()}
         />
       </ButtonIcon>
-      <Title>{title}</Title>
+      <Title numberOfLines={1}>{title}</Title>
     </TopBar>
   );
 };

@@ -25,6 +25,7 @@ export const Title = styled.Text`
   font-weight: 700;
   font-size: 20px;
   margin-left: 10px;
+  max-width:300px;
 `;
 
 export const ContainerLoading=styled.View `
