@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import {Dimensions} from 'react-native';
+
+const win = Dimensions.get('window');
 
 export const Container = styled.View`
   flex: 1;
@@ -6,8 +9,13 @@ export const Container = styled.View`
   flex-wrap: wrap;
   align-items: flex-start;
   padding:10px;
-  margin-bottom:130px;
+  margin-bottom:10px;
 `;
+
+export const ViewLoading=styled.View `
+  flex:1;
+  height:${win.height-200}px;
+`
 
 export const BoxItem = styled.View`
     width:175px;

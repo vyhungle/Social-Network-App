@@ -161,13 +161,13 @@ export const GET_USERS_FOLLOWING = gql`
 `;
 
 export const GET_USERS_FOLLOWER = gql`
- query getUserFollower($username:String!){
-  getUser(username:$username){
-    follower{
-      avatar
+  query getUserFollower($username: String!) {
+    getUser(username: $username) {
+      follower {
+        avatar
+      }
     }
   }
-}
 `;
 export const GET_ROOM_CHAT = gql`
   query getRoomChat {
@@ -313,6 +313,16 @@ export const GET_LOCATIONS = gql`
   }
 `;
 
+export const GET_CATAGORIES = gql`
+  query getCategories {
+    getCategories {
+      id
+      name
+      slug
+    }
+  }
+`;
+
 export const GET_MY_PRODUCTS = gql`
   query getMyProducts {
     getMyProducts {
@@ -346,7 +356,6 @@ export const GET_FOLLOWER = gql`
     }
   }
 `;
-
 
 export const FIND_USERS = gql`
   query findUsers($displayname: String!) {
