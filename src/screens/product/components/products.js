@@ -21,7 +21,7 @@ function Products({category, address, sort}) {
   });
   const navigation = useNavigation();
   const routeDetail = productId => {
-    navigation.push('ProductDetailScreen',{
+    navigation.navigate('ProductDetailScreen',{
       productId:productId
     });
   };

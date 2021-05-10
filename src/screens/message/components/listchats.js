@@ -52,7 +52,7 @@ function Listchats() {
   const navigation = useNavigation();
 
   const handleClick = (id, user) => {
-    navigation.push('RoomChatScreen', {
+    navigation.navigate('RoomChatScreen', {
       user: user,
       id: id,
     });

@@ -17,7 +17,7 @@ function MenuTop() {
     <Container>
       <Title>SocialNetwork</Title>
       <IconRight>
-        <ButtonIcon>
+        <ButtonIcon onPress={()=>navigation.navigate("SearchScreen")}>
           <Icon name="search" size={30} />
         </ButtonIcon>
         <ButtonIcon  onPress={()=>navigation.navigate("MessageScreen")}>

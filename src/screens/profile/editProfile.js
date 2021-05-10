@@ -24,7 +24,7 @@ import {
   TouchableOpacityCover,
   TouchableOpacityAvatar,
   LayoutCover,
-  LayoutAvatar
+  LayoutAvatar,
 } from '../../styles/components/profile/editProfile';
 import {EDIT_PROFILE} from '../../graphql/mutation';
 import {GET_USER_PROFILE} from '../../graphql/query';
@@ -34,7 +34,8 @@ function editProfile() {
   const route = useRoute();
   const {username} = route.params;
   const {data: {getUser: user} = {}} = useQuery(GET_USER_PROFILE, {
-    variables: {username: username}, pollInterval:500
+    variables: {username: username},
+    pollInterval: 500,
   });
 
   function editForm() {
@@ -97,22 +98,32 @@ function editProfile() {
         onSubmit={values => {
           values.dateOfBirth = date.toISOString().slice(0, 10);
           EditProfile({
-            variables:values,
-          })
+            variables: values,
+          });
         }}>
         {formProps => {
           return (
             <ViewForm>
-              <ImageCover source={{uri: formProps.values.coverImage}} />
+              {formProps.values.imageCover === undefined ? (
+                <ImageCover source={require('../../fonts/icon/cover.jpg')} />
+              ) : (
+                <ImageCover source={{uri: formProps.values.coverImage}} />
+              )}
               <LayoutCover></LayoutCover>
-              <ImageAvatar source={{uri: formProps.values.avatar}} />
+              {formProps.values.avatar === undefined ? (
+                <ImageAvatar source={require('../../fonts/icon/user.jpg')} />
+              ) : (
+                <ImageAvatar source={{uri: formProps.values.avatar}} />
+              )}
               <LayoutAvatar></LayoutAvatar>
-              <TouchableOpacityCover onPress={() => SelectImageCover(formProps)}>
-                <IconEvilIcons name="camera" size={70}  color="white"/>
+              <TouchableOpacityCover
+                onPress={() => SelectImageCover(formProps)}>
+                <IconEvilIcons name="camera" size={70} color="white" />
               </TouchableOpacityCover>
 
-              <TouchableOpacityAvatar onPress={() => SelectImageAvatar(formProps)}>
-              <IconEvilIcons name="camera" size={45} color="white"/>
+              <TouchableOpacityAvatar
+                onPress={() => SelectImageAvatar(formProps)}>
+                <IconEvilIcons name="camera" size={45} color="white" />
               </TouchableOpacityAvatar>
               <ViewFormContent>
                 <TextInputField

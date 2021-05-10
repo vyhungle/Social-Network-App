@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Touchable, TouchableOpacity, View,Text } from 'react-native'
 
 import {Container} from "../../styles/screens/message";
 import TopBar from "../../components/general/topBar";

@@ -72,7 +72,7 @@ function Menu() {
 
         <BoxItem
           onPress={() =>
-            navigation.navigate('ProfileScreen', {
+            navigation.push('ProfileScreen', {
               username: context.user.username,
             })
           }>
@@ -80,7 +80,7 @@ function Menu() {
           <TextMenu>My Profile</TextMenu>
         </BoxItem>
 
-        <BoxItem onPress={() => navigation.navigate('MessageScreen')}>
+        <BoxItem onPress={() => navigation.push('MessageScreen')}>
           <IconAntDesign name="message1" size={30} />
           <TextMenu>Messages</TextMenu>
         </BoxItem>

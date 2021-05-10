@@ -99,6 +99,7 @@ function LoadContent({id}) {
         ref={scrollViewRef}
         onContentSizeChange={() =>
           scrollViewRef.current.scrollToEnd({animated: true})
+         
         }>
         {chat &&
           chat.content.map((Chat, index) => {

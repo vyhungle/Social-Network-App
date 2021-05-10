@@ -2,7 +2,10 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ApolloProvider} from '@apollo/react-hooks';
-import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import LoginScreen from './src/screens/login';
@@ -20,8 +23,10 @@ import ProfileScreen from './src/screens/profile';
 import MessageScreen from './src/screens/message';
 import CreateChatScreen from './src/screens/createChat';
 import RoomChatScreen from './src/screens/roomChat';
-import EditProfileScreen from "./src/screens/profile/editProfile";
-import ProductDetailScreen from "./src/screens/product/detail";
+import EditProfileScreen from './src/screens/profile/editProfile';
+import ProductDetailScreen from './src/screens/product/detail';
+import LoadingScreen from './src/screens/loading';
+import SearchScreen from "./src/screens/search";
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -78,31 +83,71 @@ const RootStack = createStackNavigator();
 
 const App = () => {
   const context = React.useContext(AuthContext);
+  const [isLoading, SetLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      SetLoading(false);
+    }, 2000);
+  });
+
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
-        <NavigationContainer>
-          <RootStack.Navigator
-            screenOptions={{
-              headerShown: false,
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-              cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS
-            }}>
-            <RootStack.Screen name="MyTabs" component={MyTabs} />
-            <RootStack.Screen name="CreatePost" component={CreatePostScreen} />
-            <RootStack.Screen name="Wrapper" component={Wrapper} />
-            <RootStack.Screen name="Login" component={LoginScreen} />
-            <RootStack.Screen name="SignUpScreen" component={SignUpScreen} />
-            <RootStack.Screen name="CommentScreen" component={CommentScreen} />
-            <RootStack.Screen name="ProfileScreen" component={ProfileScreen} />
-            <RootStack.Screen name="MessageScreen" component={MessageScreen} />
-            <RootStack.Screen name="CreateChatScreen" component={CreateChatScreen} />
-            <RootStack.Screen name="RoomChatScreen" component={RoomChatScreen}/>
-            <RootStack.Screen name="EditProfileScreen" component={EditProfileScreen} />
-            <RootStack.Screen name="ProductDetailScreen" component={ProductDetailScreen} />
-          </RootStack.Navigator>
-        </NavigationContainer>
+        {isLoading === false ? (
+          <NavigationContainer>
+            <RootStack.Navigator
+              screenOptions={{
+                headerShown: false,
+              
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              }}>
+              <RootStack.Screen name="MyTabs" component={MyTabs} />
+           
+              <RootStack.Screen
+                name="CreatePost"
+                component={CreatePostScreen}
+              />
+              <RootStack.Screen name="Wrapper" component={Wrapper} />
+              <RootStack.Screen name="Login" component={LoginScreen} />
+              <RootStack.Screen name="SignUpScreen" component={SignUpScreen} />
+              <RootStack.Screen
+                name="CommentScreen"
+                component={CommentScreen}
+              />
+              <RootStack.Screen
+                name="ProfileScreen"
+                component={ProfileScreen}
+              />
+              <RootStack.Screen
+                name="MessageScreen"
+                component={MessageScreen}
+              />
+              <RootStack.Screen
+                name="CreateChatScreen"
+                component={CreateChatScreen}
+              />
+              <RootStack.Screen
+                name="RoomChatScreen"
+                component={RoomChatScreen}
+              />
+              <RootStack.Screen
+                name="EditProfileScreen"
+                component={EditProfileScreen}
+              />
+              <RootStack.Screen
+                name="ProductDetailScreen"
+                component={ProductDetailScreen}
+              />
+              <RootStack.Screen
+                name="SearchScreen"
+                component={SearchScreen}
+              />
+            </RootStack.Navigator>
+          </NavigationContainer>
+        ) : (
+          <LoadingScreen />
+        )}
       </AuthProvider>
     </ApolloProvider>
   );

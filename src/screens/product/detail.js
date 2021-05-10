@@ -12,7 +12,7 @@ import {useQuery} from '@apollo/react-hooks';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {GET_PRODUCT} from '../../graphql/query';
-import TopBar from '../../components/general/topBar';
+import TopBar from '../../components/general/topBarNavigate';
 import Loading from '../../components/general/loading';
 import {
   Container,
@@ -51,7 +51,7 @@ function Detail() {
   if (loading) return <Loading />;
   return (
     <Container>
-      <TopBar title={product.body} />
+      <TopBar title={product.body} navigate="Product"/>
       <ScrollView>
         {product && (
           <View>
