@@ -1,25 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useQuery} from '@apollo/react-hooks';
+import {ScrollView} from 'react-native';
 
-import {GET_USERS_FOLLOWING} from '../../../graphql/query';
-import {ScrollView} from 'react-native-gesture-handler';
-import ButtonFollow from "./buttonFollow";
-import Loading from "../../../components/general/loading";
+import {FIND_USERS, GET_MY_USER} from '../../../graphql/query';
+import Loading from '../../../components/general/loading';
+import ButtonFollow from './buttonFollow';
+import ButtonUnFollow from './buttonUnfollow';
 
+function LoadSearch({displayname}) {
+  const {loading, data: {findUsers: members} = {}} = useQuery(FIND_USERS, {
+    variables: {displayname: displayname},
+    pollInterval: 500
+  });
+  const {data: {getMyUser: user} = {}} = useQuery(GET_MY_USER,{pollInterval:500});
 
-function LoadMember() {
-  const {
-    loading,
-    data: {getUserFollowing: members} = {},
-  } = useQuery(GET_USERS_FOLLOWING, {pollInterval: 500});
+  const getFollow = (following, username) => {
+    for (var i = 0; i < following.length; i++) {
+      if (following[i].username === username) return false;
+    }
+    return true;
+  };
 
-
-  if(loading) return <Loading/>
+  if (loading) return <Loading />;
   return (
     <ScrollView>
       <Container>
-        {members &&
+        {user &&
+          members &&
           members.map((member, index) => (
             <BoxMember key={index}>
               {member.profile.avatar === null ? (
@@ -31,8 +39,11 @@ function LoadMember() {
                 <Name>{member.displayname}</Name>
                 <Username>@{member.username}</Username>
               </BoxName>
-
-              <ButtonFollow username={member.username}/>
+              {getFollow(user.following, member.username) === true ? (
+                <ButtonFollow username={member.username}/>
+              ) : (
+                <ButtonUnFollow  username={member.username}/>
+              )}
             </BoxMember>
           ))}
       </Container>
@@ -40,7 +51,7 @@ function LoadMember() {
   );
 }
 
-export default LoadMember;
+export default LoadSearch;
 
 const Container = styled.View`
   flex: 1;
@@ -75,4 +86,3 @@ const Name = styled.Text`
   font-size: 17px;
   font-weight: 700;
 `;
-

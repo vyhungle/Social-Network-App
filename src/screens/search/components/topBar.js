@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {Dimensions} from 'react-native';
 const win = Dimensions.get('window');
 
-function Index({title}) {
+function Index(props) {
   const navigation = useNavigation();
   return (
     <TopBar>
@@ -20,6 +20,7 @@ function Index({title}) {
       <InputSearch
         placeholder="Search with name.."
         placeholderTextColor="gray"
+        onChangeText={(value)=>props.handleSetKey(value)}
       />
     </TopBar>
   );
