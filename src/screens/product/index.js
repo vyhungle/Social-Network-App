@@ -14,6 +14,7 @@ import Products from './components/products';
 import ModelCategories from './components/modelCategories';
 import ModelLocation from './components/modelLocation';
 import Catalog from './components/catalog';
+import AddProduct from "./components/buttonAddProduct";
 
 function Index() {
   const [category, setCategory] = React.useState('All Categories');
@@ -95,6 +96,7 @@ function Index() {
       <TopBar title="PRODUCTS" />
       {modelCategories()}
       {modelLocation()}
+      <AddProduct/>
       <ScrollView>
         {/* Top */}
         <Catalog

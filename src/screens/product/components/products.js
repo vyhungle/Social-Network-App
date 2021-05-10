@@ -17,7 +17,7 @@ import Loading from '../../../components/general/loading';
 
 function Products({category, address, sort}) {
   const {loading, data: {getProducts: products} = {}} = useQuery(GET_PRODUCTS, {
-    variables: {category, address, sort: parseInt(sort)},
+    variables: {category, address, sort: parseInt(sort)},pollInterval:500
   });
   const navigation = useNavigation();
   const routeDetail = productId => {

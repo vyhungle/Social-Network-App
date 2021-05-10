@@ -8,7 +8,7 @@ function Index() {
     <Container>
       <ImageLd source={require('../../fonts/icon/v.png')} />
 
-        <TextBottom>Social Network</TextBottom>
+       {/*  <TextBottom>Social Network</TextBottom> */}
     </Container>
   );
 }

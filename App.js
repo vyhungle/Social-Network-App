@@ -27,6 +27,7 @@ import EditProfileScreen from './src/screens/profile/editProfile';
 import ProductDetailScreen from './src/screens/product/detail';
 import LoadingScreen from './src/screens/loading';
 import SearchScreen from "./src/screens/search";
+import AddProductScreen from "./src/screens/product/addProduct";
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -142,6 +143,11 @@ const App = () => {
               <RootStack.Screen
                 name="SearchScreen"
                 component={SearchScreen}
+              />
+               
+              <RootStack.Screen
+                name="AddProductScreen"
+                component={AddProductScreen}
               />
             </RootStack.Navigator>
           </NavigationContainer>
