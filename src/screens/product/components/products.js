@@ -14,6 +14,7 @@ import {
 } from '../../../styles/components/product/products';
 import {GET_PRODUCTS} from '../../../graphql/query';
 import Loading from '../../../components/general/loading';
+import LoadingProduct from './loadingProduct';
 
 function Products({category, address, sort}) {
   const {loading, data: {getProducts: products} = {}} = useQuery(GET_PRODUCTS, {
@@ -33,9 +34,8 @@ function Products({category, address, sort}) {
   //return
   if (loading)
     return (
-      <ViewLoading>
-        <Loading />
-      </ViewLoading>
+      <LoadingProduct/>
+      
     );
   return (
     <Container>

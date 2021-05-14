@@ -10,17 +10,20 @@ import {
   BoxMe,
 } from '../../../styles/components/home/listMemberTop';
 import {AuthContext} from '../../../context/auth';
+import MemberLoading from './memberLoading';
 
 function listMemberTop() {
   const context = React.useContext(AuthContext);
   var user = '';
   context.user ? (user = context.user) : user;
 
-  const {data: {getUser: users} = {}} = useQuery(GET_USERS_FOLLOWER, {
+  const {loading,data: {getUser: users} = {}} = useQuery(GET_USERS_FOLLOWER, {
     variables: {
       username: user.username,
     },
   });
+
+  if(loading) return (<MemberLoading/>)
   return (
     <Container>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

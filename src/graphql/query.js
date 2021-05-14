@@ -35,6 +35,7 @@ export const GET_MY_POSTS = gql`
       posts {
         id
         body
+        username
         createdAt
         displayname
         image
@@ -367,6 +368,92 @@ export const FIND_USERS = gql`
       displayname
       profile {
         avatar
+      }
+    }
+  }
+`;
+
+export const GET_MY_POST_IN_GROUP = gql`
+  query getPostInMyGroup {
+    getPostInMyGroup {
+      groupId
+      groupName
+      post {
+        id
+        body
+        createdAt
+        displayname
+        image
+        avatar
+        username
+        comments {
+          id
+          createdAt
+          username
+          body
+        }
+        likes {
+          id
+          createdAt
+          username
+        }
+        likeCount
+        commentCount
+      }
+    }
+  }
+`;
+
+export const GET_LIST_GROUPS = gql`
+  query getMyGroups {
+    getMyGroups {
+      id
+      name
+      imageCover
+    }
+  }
+`;
+
+export const GET_Group = gql`
+  query getGroup($groupId: String!) {
+    getGroup(groupId: $groupId) {
+      id
+      name
+      imageCover
+      describe
+      countMembers
+      public
+      createdAt
+      posts {
+        id
+        body
+        createdAt
+        displayname
+        image
+        avatar
+        username
+        comments {
+          id
+          createdAt
+          username
+          body
+        }
+        likes {
+          id
+          createdAt
+          username
+        }
+        likeCount
+        commentCount
+      }
+      leader {
+        displayname
+      }
+      admins {
+        id
+      }
+      members {
+        id
       }
     }
   }

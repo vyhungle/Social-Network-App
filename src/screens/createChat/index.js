@@ -8,7 +8,7 @@ import ListFollower from './components/listFollower';
 import ListSearch from './components/listSearch';
 
 function Index() {
-  const [keyword, setKeyword] = React.useState(null);
+  const [keyword, setKeyword] = React.useState("");
   function callbackFunction(childData) {
     setKeyword(childData);
   }
@@ -16,7 +16,7 @@ function Index() {
     <Container>
       <TopBar title={'NEW MESSAGE'} />
       <FormSearch parentCallback={callbackFunction} />
-      {keyword === null ? <ListFollower /> : <ListSearch keyword={keyword} />}
+      <ListSearch keyword={keyword} />
     </Container>
   );
 }

@@ -70,7 +70,9 @@ function Index() {
             createPost({
               variables: values,
             });
-            navigation.goBack();
+            navigation.navigate("Home",{
+              loading:true
+            });
           }
         }}>
         {formProps => {

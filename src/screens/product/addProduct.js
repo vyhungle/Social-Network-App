@@ -155,64 +155,66 @@ function AddProduct() {
         return (
           <Container>
             <TopBar title="Create Product" />
-            {modelCategories()}
-            {modelLocation()}
-            <Field
-              placeholder="Tên sản phẩm.."
-              placeholderTextColor="gray"
-              onChangeText={formProps.handleChange('body')}
-              value={formProps.values.body}
-            />
-            {errors.body && <Error>{errors.body}</Error>}
-            <BoxImage>
-              <ScrollView horizontal={true}>
-                {base64Image !== null &&
-                  base64Image.map((uri, index) => (
-                    <Item source={{uri: uri}} key={index} />
-                  ))}
-                <BoxItem onPress={() => SelectImage(formProps)}>
-                  <Icon name="camera-plus-outline" size={30} />
-                </BoxItem>
-              </ScrollView>
-            </BoxImage>
+            <View style={{padding:10,paddingTop:0}}>
+              {modelCategories()}
+              {modelLocation()}
+              <Field
+                placeholder="Tên sản phẩm.."
+                placeholderTextColor="gray"
+                onChangeText={formProps.handleChange('body')}
+                value={formProps.values.body}
+              />
+              {errors.body && <Error>{errors.body}</Error>}
+              <BoxImage>
+                <ScrollView horizontal={true}>
+                  {base64Image !== null &&
+                    base64Image.map((uri, index) => (
+                      <Item source={{uri: uri}} key={index} />
+                    ))}
+                  <BoxItem onPress={() => SelectImage(formProps)}>
+                    <Icon name="camera-plus-outline" size={30} />
+                  </BoxItem>
+                </ScrollView>
+              </BoxImage>
 
-            <PickerItem onPress={() => handelChangeModel(true)}>
-              <Text>{category}</Text>
-              <BoxIcon>
-                <IconMaterialIcons name="arrow-drop-down" size={25} />
-              </BoxIcon>
-            </PickerItem>
+              <PickerItem onPress={() => handelChangeModel(true)}>
+                <Text>{category}</Text>
+                <BoxIcon>
+                  <IconMaterialIcons name="arrow-drop-down" size={25} />
+                </BoxIcon>
+              </PickerItem>
 
-            <PickerItem onPress={() => handelChangeModelLocation(true)}>
-              <Text>{location}</Text>
-              <BoxIcon>
-                <IconMaterialIcons name="arrow-drop-down" size={25} />
-              </BoxIcon>
-            </PickerItem>
+              <PickerItem onPress={() => handelChangeModelLocation(true)}>
+                <Text>{location}</Text>
+                <BoxIcon>
+                  <IconMaterialIcons name="arrow-drop-down" size={25} />
+                </BoxIcon>
+              </PickerItem>
 
-            <Field
-              placeholder="Giá sản phẩm.."
-              placeholderTextColor="gray"
-              onChangeText={formProps.handleChange('price')}
-              value={formProps.values.price}
-            />
-            {errors.price && <Error>{errors.price}</Error>}
+              <Field
+                placeholder="Giá sản phẩm.."
+                placeholderTextColor="gray"
+                onChangeText={formProps.handleChange('price')}
+                value={formProps.values.price}
+              />
+              {errors.price && <Error>{errors.price}</Error>}
 
-            <FieldMultiple
-              placeholder="Mô tả sản phẩm.."
-              placeholderTextColor="gray"
-              multiline={true}
-              style={{textAlignVertical: 'top'}}
-              onChangeText={formProps.handleChange('describe')}
-              value={formProps.values.describe}
-            />
-            {errors.describe && <Error>{errors.describe}</Error>}
+              <FieldMultiple
+                placeholder="Mô tả sản phẩm.."
+                placeholderTextColor="gray"
+                multiline={true}
+                style={{textAlignVertical: 'top'}}
+                onChangeText={formProps.handleChange('describe')}
+                value={formProps.values.describe}
+              />
+              {errors.describe && <Error>{errors.describe}</Error>}
 
-            <BoxCenter>
-              <ButtonSubmit onPress={() => formProps.handleSubmit()}>
-                <TextButton>Submit</TextButton>
-              </ButtonSubmit>
-            </BoxCenter>
+              <BoxCenter>
+                <ButtonSubmit onPress={() => formProps.handleSubmit()}>
+                  <TextButton>Submit</TextButton>
+                </ButtonSubmit>
+              </BoxCenter>
+            </View>
           </Container>
         );
       }}
@@ -225,7 +227,7 @@ export default AddProduct;
 const Container = styled.View`
   flex: 1;
   background-color: white;
-  padding: 10px;
+ 
 `;
 const Field = styled.TextInput`
   background-color: #f6f6f6;

@@ -17,6 +17,7 @@ import {
 } from '../../../styles/components/createChat/listFollower';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Loading from '../../../components/general/loading';
+import {createNativeWrapper} from 'react-native-gesture-handler';
 
 const getAvatarUri = user => {
   if (user.profile.avatar === null)
@@ -31,45 +32,64 @@ const getAvatarUri = user => {
 };
 
 function ListSearch({keyword}) {
-    const  { data: { findUsers: users } = {}, loading } = useQuery(
-        FIND_USERS,{variables:{displayname:keyword}}
-    );
+  const {data: {findUsers: users} = {}, loading} = useQuery(FIND_USERS, {
+    variables: {displayname: keyword},
+  });
 
-  console.log(users);
-  const [username, SetUsername] = React.useState('');
+  const [userId, SetUserId] = React.useState('');
+  const [roomID, setRoomID] = React.useState('');
+  const [displayname, setDisplayname] = React.useState('');
+
   const [createRoom] = useMutation(CREATE_ROOM_CHAT);
   const navigation = useNavigation();
 
-  const AddChat = username => {
+  const handleClickBox = (displayname, id) => {
+    setDisplayname(displayname);
+    SetUserId(id);
+
+    // console.log(displayname,id)
+  };
+
+  const AddChat = userId => {
     createRoom({
       variables: {
-        username: username,
+        userId: userId,
+      },
+      update(proxy, {data: {createRoomChat: RoomId} = {}}) {
+        if (RoomId) {
+          navigation.navigate('RoomChatScreen', {
+            id: RoomId,
+            displayname: displayname,
+          });
+        }
       },
     });
 
-    navigation.navigate('MessageScreen');
+    
   };
   if (loading) return <Loading />;
   return (
     <Container>
-      {username === '' ? (
+      {userId === '' ? (
         <View></View>
       ) : (
-        <ButtonNext onPress={() => AddChat(username)}>
+        <ButtonNext onPress={() => AddChat(userId)}>
           <Text style={{color: 'white'}}>Next</Text>
         </ButtonNext>
       )}
       <ScrollView>
         {users &&
           users.map((user, index) => (
-            <BoxItem key={index} onPress={() => SetUsername(user.username)}>
+            <BoxItem
+              key={index}
+              onPress={() => handleClickBox(user.displayname, user.id)}>
               {getAvatarUri(user)}
               <ViewBoxItem>
                 <TextName>{user.displayname}</TextName>
                 <TextUsername>@{user.username}</TextUsername>
               </ViewBoxItem>
 
-              {username === user.username ? (
+              {userId === user.id ? (
                 <TouchableOpacityBox>
                   <Icon name="check-square" size={25} />
                 </TouchableOpacityBox>

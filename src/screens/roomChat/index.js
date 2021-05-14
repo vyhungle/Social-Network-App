@@ -9,10 +9,10 @@ import { Container } from "../../styles/screens/roomChat";
 
 function Index() {
   const route = useRoute();
-  const {id, user} = route.params;
+  const {id, displayname} = route.params;
   return (
     <Container>
-      <TopBar title={user.displayname} />
+      <TopBar title={displayname} />
       <LoadContent id={id} />
       <FormBody id={id}/>
     </Container>

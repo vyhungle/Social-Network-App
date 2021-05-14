@@ -51,10 +51,10 @@ function Listchats() {
   };
   const navigation = useNavigation();
 
-  const handleClick = (id, user) => {
+  const handleClick = (id, displayname) => {
     navigation.navigate('RoomChatScreen', {
-      user: user,
       id: id,
+      displayname: displayname,
     });
   };
   if (loading) return <Loading />;
@@ -65,7 +65,7 @@ function Listchats() {
           const member = getUser(chat);
           const AvatarUser = getUriAvatar(member.profile.avatar);
           return (
-            <ChatItem key={index} onPress={() => handleClick(chat.id, member)}>
+            <ChatItem key={index} onPress={() => handleClick(chat.id, member.displayname)}>
               {AvatarUser}
               <BoxText>
                 <TextName>{member.displayname}</TextName>

@@ -23,10 +23,14 @@ export const TopTitle = styled.View`
 
 export const TitleBox = styled.View`
   margin-left: 10px;
+  height:60px;
+  display:flex;
+  justify-content:center;
 `;
 
 export const Title = styled.Text`
   font-weight: 700;
+  max-width:240px;
 `;
 
 export const DateTime = styled.Text`
@@ -57,4 +61,14 @@ export const BoxButton = styled.TouchableOpacity`
 
 export const NumForButton=styled.Text `
   margin-left:3px
+`
+
+
+export const BoxIconRight=styled.TouchableOpacity `
+  width:30px;
+  height:30px;
+  border-radius:20px;
+  position:absolute;
+  right:10px;
+  top:5px;
 `

@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity,Modal} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
@@ -24,26 +31,12 @@ import {
   BottomPost,
   BoxButton,
   NumForButton,
-  BoxIconRight
+  BoxIconRight,
 } from '../../../styles/components/home/singlePost';
 import {AuthContext} from '../../../context/auth';
-import PopupCatalog from "./popupCatalog";
+// import PopupCatalog from "./popupCatalog";
 
-function SinglePost({
-  post: {
-    id,
-    body,
-    createdAt,
-    displayname,
-    image,
-    likeCount,
-    likes,
-    commentCount,
-    avatar,
-    username,
-  },
-  Username,
-}) {
+function SinglePost(props) {
   const context = React.useContext(AuthContext);
   const [likepost] = useMutation(LIKEPOST);
   function LikePost() {
@@ -53,10 +46,13 @@ function SinglePost({
   }
   const [liked, setLiked] = useState(false);
   useEffect(() => {
-    if (Username && likes.find(like => like.username === Username)) {
+    if (
+      props.Username &&
+      props.post.post.likes.find(like => like.username === Username)
+    ) {
       setLiked(true);
     } else setLiked(false);
-  }, [Username, likes]);
+  }, [props.Username, props.post.post.likes]);
 
   const navigation = useNavigation();
   function handleClickImage(id) {
@@ -66,12 +62,11 @@ function SinglePost({
   }
 
   //popup
-  const[isPopup,setPopup]=React.useState(false);
-  
+  const [isPopup, setPopup] = React.useState(false);
 
-  const handelChangeModel=(value)=>{
-    setPopup(value)
-  }
+  const handelChangeModel = value => {
+    setPopup(value);
+  };
 
   const modelCatalog = () => {
     return (
@@ -80,55 +75,60 @@ function SinglePost({
         animationType="fade"
         visible={isPopup}
         nRequestClose={() => handelChangeModel(false)}>
-        <PopupCatalog
+        {/* <PopupCatalog
           handelChangeModel={handelChangeModel}
           username={username}
           id={id}
-        />
+        /> */}
       </Modal>
     );
   };
 
-
   return (
     <Container>
       <TopTitle>
-      {modelCatalog()}
-        <TouchableOpacity
+        {modelCatalog()}
+        <TouchableOpacity style={{width:60,justifyContent:"center"}}
           onPress={() =>
             navigation.navigate('ProfileScreen', {
-              username: username,
+              username: props.post.post.username,
             })
           }>
-          {avatar === null ? (
+          {props.post.post.avatar === null ? (
             (source = <UserImage />)
           ) : (
             <Avatar
               source={{
-                uri: avatar,
+                uri: props.post.post.avatar,
               }}
             />
           )}
         </TouchableOpacity>
         <TitleBox>
-          <Title>{displayname}</Title>
-          <DateTime>{moment(createdAt).fromNow(true)}</DateTime>
+          <TouchableOpacity onPress={()=>navigation.navigate("GroupDetailScreen",{
+            groupId:props.post.groupId
+          })}>
+            <Title numberOfLines={2}>{props.post.groupName}</Title>
+          </TouchableOpacity>
+          <DateTime>
+            {props.post.post.displayname} -{' '}
+            {moment(props.post.post.createdAt).fromNow(true)}
+          </DateTime>
         </TitleBox>
 
-        <BoxIconRight onPress={()=>handelChangeModel(true)}>
-          <IconEntypo name="dots-three-horizontal" size={20} color="gray"/>
+        <BoxIconRight onPress={() => handelChangeModel(true)}>
+          <IconEntypo name="dots-three-horizontal" size={20} color="gray" />
         </BoxIconRight>
-
       </TopTitle>
 
       <ContainerPost>
-        <BodyPost>{body}</BodyPost>
+        <BodyPost>{props.post.post.body}</BodyPost>
 
-        {image.length === 0 ? (
+        {props.post.post.image.length === 0 ? (
           <Text></Text>
         ) : (
           <ImageBox>
-            <PostPhotoGrid images={image} />
+            <PostPhotoGrid images={props.post.post.image} />
           </ImageBox>
         )}
       </ContainerPost>
@@ -141,12 +141,12 @@ function SinglePost({
             <IconAntDesign name="like2" size={30} onPress={() => LikePost()} />
           )}
 
-          <NumForButton>{likeCount}</NumForButton>
+          <NumForButton>{props.post.post.likeCount}</NumForButton>
         </BoxButton>
 
         <BoxButton onPress={() => handleClickImage(id)}>
           <IconFontisto name="comment" size={30} />
-          <NumForButton>{commentCount}</NumForButton>
+          <NumForButton>{props.post.post.commentCount}</NumForButton>
         </BoxButton>
 
         <BoxButton>

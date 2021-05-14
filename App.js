@@ -28,6 +28,8 @@ import ProductDetailScreen from './src/screens/product/detail';
 import LoadingScreen from './src/screens/loading';
 import SearchScreen from "./src/screens/search";
 import AddProductScreen from "./src/screens/product/addProduct";
+import NotificationScreen from "./src/screens/notification";
+import GroupDetailScreen from "./src/screens/Group/components/groupDetail";
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -46,9 +48,12 @@ function MyTabs() {
           } else if (route.name === 'MenuScreen') {
             iconName = focused ? 'menu' : 'menu-outline';
           }
+          else{
+            iconName = focused ? 'notifications' : 'notifications-outline';
+          }
 
           // You can return any component that you like here!
-          return <Icon name={iconName} size={35} color={color} />;
+          return <Icon name={iconName} size={30} color={color} />;
         },
       })}
       tabBarOptions={{
@@ -71,14 +76,22 @@ function MyTabs() {
         component={ProductScreen}
         options={{tabBarLabel: ''}}
       />
+       <Tab.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
+        options={{tabBarLabel: ''}}
+      />
       <Tab.Screen
         name="MenuScreen"
         component={MenuScreen}
         options={{tabBarLabel: ''}}
       />
+     
     </Tab.Navigator>
   );
 }
+
+
 
 const RootStack = createStackNavigator();
 
@@ -148,6 +161,10 @@ const App = () => {
               <RootStack.Screen
                 name="AddProductScreen"
                 component={AddProductScreen}
+              />
+               <RootStack.Screen
+                name="GroupDetailScreen"
+                component={GroupDetailScreen}
               />
             </RootStack.Navigator>
           </NavigationContainer>

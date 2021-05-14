@@ -1,0 +1,31 @@
+import React from 'react';
+import {useQuery} from '@apollo/react-hooks';
+import {ScrollView, View, TouchableOpacity, Text} from 'react-native';
+import {AuthContext} from '../../../context/auth';
+
+import {GET_MY_POST_IN_GROUP} from '../../../graphql/query';
+import SinglePost from './singlePost';
+import LoadingPost from '../../../components/general/loading';
+
+function Posts() {
+  const context = React.useContext(AuthContext);
+  let username = '';
+  context.user ? (username = context.user.username) : (username = '');
+  const {loading, data: {getPostInMyGroup: posts} = {}} = useQuery(
+    GET_MY_POST_IN_GROUP,
+    {
+      pollInterval: 500,
+    },
+  );
+  if (loading) return <LoadingPost />;
+  return (
+    <View>
+      {posts &&
+        posts.map((post,index) => (
+          <SinglePost post={post} Username={username} key={index} />
+        ))}
+    </View>
+  );
+}
+
+export default Posts;
