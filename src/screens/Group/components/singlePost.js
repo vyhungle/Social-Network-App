@@ -16,7 +16,7 @@ import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
 
 import UserImage from '../../../fonts/icon/user.jpg';
-import {LIKEPOST} from '../../../graphql/mutation';
+import {LIKE_POST_IN_GROUP} from '../../../graphql/mutation';
 import PostPhotoGrid from '../../../components/general/postPhotoGrid';
 import {
   Container,
@@ -38,26 +38,33 @@ import {AuthContext} from '../../../context/auth';
 
 function SinglePost(props) {
   const context = React.useContext(AuthContext);
-  const [likepost] = useMutation(LIKEPOST);
+  const [likepost] = useMutation(LIKE_POST_IN_GROUP);
   function LikePost() {
     likepost({
-      variables: {postId: id},
+      variables: {
+        postId: props.post.id,
+        groupId: props.groupId,
+      },
     });
   }
   const [liked, setLiked] = useState(false);
   useEffect(() => {
     if (
       props.Username &&
-      props.post.post.likes.find(like => like.username === Username)
+      props.post.likes.find(like => like.username === props.Username)
     ) {
       setLiked(true);
     } else setLiked(false);
-  }, [props.Username, props.post.post.likes]);
+  }, [props.Username, props.post.likes]);
 
   const navigation = useNavigation();
-  function handleClickImage(id) {
-    navigation.navigate('CommentScreen', {
-      id: id,
+
+  function handleClickImage(groupId, postId, groupName, username) {
+    navigation.navigate('CommentGroupScreen', {
+      groupId: groupId,
+      postId: postId,
+      groupName: groupName,
+      username: username,
     });
   }
 
@@ -88,31 +95,35 @@ function SinglePost(props) {
     <Container>
       <TopTitle>
         {modelCatalog()}
-        <TouchableOpacity style={{width:60,justifyContent:"center"}}
+        <TouchableOpacity
+          style={{width: 60, justifyContent: 'center'}}
           onPress={() =>
             navigation.navigate('ProfileScreen', {
-              username: props.post.post.username,
+              username: props.post.username,
             })
           }>
-          {props.post.post.avatar === null ? (
+          {props.post.avatar === null ? (
             (source = <UserImage />)
           ) : (
             <Avatar
               source={{
-                uri: props.post.post.avatar,
+                uri: props.post.avatar,
               }}
             />
           )}
         </TouchableOpacity>
         <TitleBox>
-          <TouchableOpacity onPress={()=>navigation.navigate("GroupDetailScreen",{
-            groupId:props.post.groupId
-          })}>
-            <Title numberOfLines={2}>{props.post.groupName}</Title>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('GroupDetailScreen', {
+                groupId: props.groupId,
+              })
+            }>
+            <Title numberOfLines={2}>{props.groupName}</Title>
           </TouchableOpacity>
           <DateTime>
-            {props.post.post.displayname} -{' '}
-            {moment(props.post.post.createdAt).fromNow(true)}
+            {props.post.displayname} -{' '}
+            {moment(props.post.createdAt).fromNow(true)}
           </DateTime>
         </TitleBox>
 
@@ -122,13 +133,13 @@ function SinglePost(props) {
       </TopTitle>
 
       <ContainerPost>
-        <BodyPost>{props.post.post.body}</BodyPost>
+        <BodyPost>{props.post.body}</BodyPost>
 
-        {props.post.post.image.length === 0 ? (
+        {props.post.image.length === 0 ? (
           <Text></Text>
         ) : (
           <ImageBox>
-            <PostPhotoGrid images={props.post.post.image} />
+            <PostPhotoGrid images={props.post.image} />
           </ImageBox>
         )}
       </ContainerPost>
@@ -141,12 +152,20 @@ function SinglePost(props) {
             <IconAntDesign name="like2" size={30} onPress={() => LikePost()} />
           )}
 
-          <NumForButton>{props.post.post.likeCount}</NumForButton>
+          <NumForButton>{props.post.likeCount}</NumForButton>
         </BoxButton>
 
-        <BoxButton onPress={() => handleClickImage(id)}>
+        <BoxButton
+          onPress={() =>
+            handleClickImage(
+              props.groupId,
+              props.post.id,
+              props.groupName,
+              props.Username,
+            )
+          }>
           <IconFontisto name="comment" size={30} />
-          <NumForButton>{props.post.post.commentCount}</NumForButton>
+          <NumForButton>{props.post.commentCount}</NumForButton>
         </BoxButton>
 
         <BoxButton>

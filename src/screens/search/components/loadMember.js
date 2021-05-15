@@ -5,7 +5,7 @@ import {useQuery} from '@apollo/react-hooks';
 import {GET_USERS_FOLLOWING} from '../../../graphql/query';
 import {ScrollView} from 'react-native-gesture-handler';
 import ButtonFollow from "./buttonFollow";
-import Loading from "../../../components/general/loading";
+import Loading from "../../notification/components/loading";
 
 
 function LoadMember() {
@@ -15,7 +15,13 @@ function LoadMember() {
   } = useQuery(GET_USERS_FOLLOWING, {pollInterval: 500});
 
 
-  if(loading) return <Loading/>
+  if(loading) return (
+    <Container>
+       <Loading/>
+       <Loading/>
+       <Loading/>
+    </Container>
+  )
   return (
     <ScrollView>
       <Container>

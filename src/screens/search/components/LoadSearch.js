@@ -4,7 +4,7 @@ import {useQuery} from '@apollo/react-hooks';
 import {ScrollView} from 'react-native';
 
 import {FIND_USERS, GET_MY_USER} from '../../../graphql/query';
-import Loading from '../../../components/general/loading';
+import Loading from '../../notification/components/loading';
 import ButtonFollow from './buttonFollow';
 import ButtonUnFollow from './buttonUnfollow';
 
@@ -22,7 +22,13 @@ function LoadSearch({displayname}) {
     return true;
   };
 
-  if (loading) return <Loading />;
+  if (loading) return(
+    <Container>
+       <Loading />
+       <Loading />
+       <Loading />
+    </Container>
+  );
   return (
     <ScrollView>
       <Container>

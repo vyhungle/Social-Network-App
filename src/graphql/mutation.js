@@ -209,3 +209,29 @@ export const DELETE_POST = gql`
     deletePost(postId: $postId)
   }
 `;
+
+export const COMMENT_POST_IN_GROUP = gql`
+  mutation CommentPostInGroup(
+    $groupId: String!
+    $postId: String!
+    $body: String!
+  ) {
+    CommentPostInGroup(groupId: $groupId, postId: $postId, body: $body)
+  }
+`;
+
+export const LIKE_POST_IN_GROUP = gql`
+  mutation likePostInGroup($groupId: String!, $postId: String!) {
+    likePostInGroup(groupId: $groupId, postId: $postId)
+  }
+`;
+
+export const CREATE_POST_IN_GROUP = gql`
+  mutation createPostInGroup(
+    $groupId: String!
+    $body: String
+    $image: [String]
+  ) {
+    createPostInGroup(groupId: $groupId, body: $body, image: $image)
+  }
+`;

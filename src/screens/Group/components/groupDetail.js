@@ -7,6 +7,8 @@ import Icom from 'react-native-vector-icons/MaterialIcons';
 
 import {GET_Group} from '../../../graphql/query';
 import Posts from './postsInDetail';
+import Loading from './loadingDetail';
+import CreatePost from './buttonCreatePost';
 
 const win = Dimensions.get('window');
 
@@ -14,13 +16,21 @@ export default function groupDetail() {
   const route = useRoute();
   const {groupId} = route.params;
   const {loading, data: {getGroup: group} = {}} = useQuery(GET_Group, {
-    variables: {groupId: groupId},
+    variables: {groupId: groupId},pollInterval:500
   });
+
+  if (loading)
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
   return (
     <Container>
-      <ScrollView>
-        {group && (
-          <View>
+      {group && (
+        <View>
+          <CreatePost groupId={group.id} />
+          <ScrollView>
             <BoxTop>
               <ImageCover source={{uri: group.imageCover}} />
               <BoxLeader>
@@ -52,11 +62,15 @@ export default function groupDetail() {
             </BoxTop>
 
             <BoxPosts>
-              <Posts posts={group.posts} />
+              <Posts
+                posts={group.posts}
+                groupId={group.id}
+                groupName={group.name}
+              />
             </BoxPosts>
-          </View>
-        )}
-      </ScrollView>
+          </ScrollView>
+        </View>
+      )}
     </Container>
   );
 }
@@ -94,6 +108,7 @@ const BoxBody = styled.View`
   display: flex;
   align-items: center;
   flex-direction: row;
+  
 `;
 
 const TextBody = styled.Text``;

@@ -14,7 +14,7 @@ function Posts(props) {
     <View>
       {props.posts &&
         props.posts.map((post,index) => (
-          <SinglePost post={post} Username={username} key={index} />
+          <SinglePost post={post} Username={username} groupId={props.groupId} groupName={props.groupName} key={index} />
         ))}
     </View>
   );

@@ -5,7 +5,7 @@ import {AuthContext} from '../../../context/auth';
 
 import {GET_MY_POST_IN_GROUP} from '../../../graphql/query';
 import SinglePost from './singlePost';
-import LoadingPost from '../../../components/general/loading';
+import LoadingPost from '../../home/components/postLoading';
 
 function Posts() {
   const context = React.useContext(AuthContext);
@@ -22,7 +22,7 @@ function Posts() {
     <View>
       {posts &&
         posts.map((post,index) => (
-          <SinglePost post={post} Username={username} key={index} />
+          <SinglePost post={post.post} Username={username} groupId={post.groupId} groupName={post.groupName} key={index} />
         ))}
     </View>
   );

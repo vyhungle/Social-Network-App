@@ -16,8 +16,7 @@ import {
   ButtonNext,
 } from '../../../styles/components/createChat/listFollower';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import Loading from '../../../components/general/loading';
-import {createNativeWrapper} from 'react-native-gesture-handler';
+import Loading from "../../notification/components/loading";
 
 const getAvatarUri = user => {
   if (user.profile.avatar === null)
@@ -67,7 +66,13 @@ function ListSearch({keyword}) {
 
     
   };
-  if (loading) return <Loading />;
+  if (loading) return (
+    <Container>
+      <Loading/>
+      <Loading/>
+      <Loading/>
+    </Container>
+  );
   return (
     <Container>
       {userId === '' ? (

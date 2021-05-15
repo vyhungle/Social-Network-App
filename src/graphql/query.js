@@ -458,3 +458,40 @@ export const GET_Group = gql`
     }
   }
 `;
+
+export const GET_COMMENT_POST_IN_GROUP = gql`
+  query getCommentInGroup($groupId: String!, $postId: String!) {
+    getCommentInGroup(groupId: $groupId, postId: $postId) {
+      id
+      createdAt
+      username
+      body
+      displayname
+      avatar
+    }
+  }
+`;
+
+export const GET_POST_IN_GROUP = gql`
+  query getPostInGroup($groupId: String!, $postId: String!) {
+    getPostInGroup(groupId: $groupId, postId: $postId) {
+      id
+      body
+      createdAt
+      username
+      verified
+      image
+      displayname
+      avatar
+      likeCount
+      commentCount
+      likes {
+        id
+        createdAt
+        username
+        displayname
+        avatar
+      }
+    }
+  }
+`;

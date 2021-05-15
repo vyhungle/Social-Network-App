@@ -4,7 +4,7 @@ import {useQuery} from '@apollo/react-hooks';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
 
-import Loading from '../../../components/general/loading';
+import Loading from '../../notification/components/loading';
 import {GET_ROOM_CHAT} from '../../../graphql/query';
 import {
   Avatar,
@@ -57,7 +57,13 @@ function Listchats() {
       displayname: displayname,
     });
   };
-  if (loading) return <Loading />;
+  if (loading) return (
+    <Container>
+      <Loading />
+      <Loading />
+      <Loading />
+    </Container>
+  );
   return (
     <Container>
       {chats &&

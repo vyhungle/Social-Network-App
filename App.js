@@ -26,10 +26,12 @@ import RoomChatScreen from './src/screens/roomChat';
 import EditProfileScreen from './src/screens/profile/editProfile';
 import ProductDetailScreen from './src/screens/product/detail';
 import LoadingScreen from './src/screens/loading';
-import SearchScreen from "./src/screens/search";
-import AddProductScreen from "./src/screens/product/addProduct";
-import NotificationScreen from "./src/screens/notification";
-import GroupDetailScreen from "./src/screens/Group/components/groupDetail";
+import SearchScreen from './src/screens/search';
+import AddProductScreen from './src/screens/product/addProduct';
+import NotificationScreen from './src/screens/notification';
+import GroupDetailScreen from './src/screens/Group/components/groupDetail';
+import CommentGroupScreen from './src/screens/Group/components/comment';
+import CreatePostGroupScreen from './src/screens/Group/components/createPost';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -47,8 +49,7 @@ function MyTabs() {
             iconName = focused ? 'people-sharp' : 'people-outline';
           } else if (route.name === 'MenuScreen') {
             iconName = focused ? 'menu' : 'menu-outline';
-          }
-          else{
+          } else {
             iconName = focused ? 'notifications' : 'notifications-outline';
           }
 
@@ -76,7 +77,7 @@ function MyTabs() {
         component={ProductScreen}
         options={{tabBarLabel: ''}}
       />
-       <Tab.Screen
+      <Tab.Screen
         name="NotificationScreen"
         component={NotificationScreen}
         options={{tabBarLabel: ''}}
@@ -86,12 +87,9 @@ function MyTabs() {
         component={MenuScreen}
         options={{tabBarLabel: ''}}
       />
-     
     </Tab.Navigator>
   );
 }
-
-
 
 const RootStack = createStackNavigator();
 
@@ -113,11 +111,11 @@ const App = () => {
             <RootStack.Navigator
               screenOptions={{
                 headerShown: false,
-              
+
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               }}>
               <RootStack.Screen name="MyTabs" component={MyTabs} />
-           
+
               <RootStack.Screen
                 name="CreatePost"
                 component={CreatePostScreen}
@@ -153,18 +151,24 @@ const App = () => {
                 name="ProductDetailScreen"
                 component={ProductDetailScreen}
               />
-              <RootStack.Screen
-                name="SearchScreen"
-                component={SearchScreen}
-              />
-               
+              <RootStack.Screen name="SearchScreen" component={SearchScreen} />
+
               <RootStack.Screen
                 name="AddProductScreen"
                 component={AddProductScreen}
               />
-               <RootStack.Screen
+              <RootStack.Screen
                 name="GroupDetailScreen"
                 component={GroupDetailScreen}
+              />
+              <RootStack.Screen
+                name="CommentGroupScreen"
+                component={CommentGroupScreen}
+              />
+
+              <RootStack.Screen
+                name="CreatePostGroupScreen"
+                component={CreatePostGroupScreen}
               />
             </RootStack.Navigator>
           </NavigationContainer>

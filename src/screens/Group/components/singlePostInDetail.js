@@ -16,7 +16,7 @@ import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
 
 import UserImage from '../../../fonts/icon/user.jpg';
-import {LIKEPOST} from '../../../graphql/mutation';
+import {LIKE_POST_IN_GROUP} from '../../../graphql/mutation';
 import PostPhotoGrid from '../../../components/general/postPhotoGrid';
 import {
   Container,
@@ -38,27 +38,33 @@ import {AuthContext} from '../../../context/auth';
 
 function SinglePost(props) {
   const context = React.useContext(AuthContext);
-  const [likepost] = useMutation(LIKEPOST);
+  const [likepost] = useMutation(LIKE_POST_IN_GROUP);
   function LikePost() {
     likepost({
-      variables: {postId: id},
+      variables: {
+        postId: props.post.id,
+        groupId: props.groupId,
+      },
     });
   }
   const [liked, setLiked] = useState(false);
   useEffect(() => {
     if (
       props.Username &&
-      props.post.likes.find(like => like.username === Username)
+      props.post.likes.find(like => like.username === props.Username)
     ) {
       setLiked(true);
     } else setLiked(false);
   }, [props.Username, props.post.likes]);
 
   const navigation = useNavigation();
-  function handleClickImage(id) {
-    navigation.navigate('CommentScreen', {
-      id: id,
-    });
+  function handleClickImage(groupId,postId,groupName,username) {
+    navigation.navigate('CommentGroupScreen', {
+      groupId:groupId,
+      postId:postId,
+      groupName:groupName,
+      username:username,
+     });
   }
 
   //popup
@@ -139,7 +145,7 @@ function SinglePost(props) {
           <NumForButton>{props.post.likeCount}</NumForButton>
         </BoxButton>
 
-        <BoxButton onPress={() => handleClickImage(id)}>
+        <BoxButton onPress={() => handleClickImage(props.groupId,props.post.id,props.groupName,props.Username)}>
           <IconFontisto name="comment" size={30} />
           <NumForButton>{props.post.commentCount}</NumForButton>
         </BoxButton>
