@@ -154,7 +154,7 @@ function AddProduct() {
       {formProps => {
         return (
           <Container>
-            <TopBar title="Create Product" />
+            <TopBar title="Tạo sản phẩm" />
             <View style={{padding:10,paddingTop:0}}>
               {modelCategories()}
               {modelLocation()}
@@ -211,7 +211,7 @@ function AddProduct() {
 
               <BoxCenter>
                 <ButtonSubmit onPress={() => formProps.handleSubmit()}>
-                  <TextButton>Submit</TextButton>
+                  <TextButton>Hoàn thành</TextButton>
                 </ButtonSubmit>
               </BoxCenter>
             </View>
@@ -301,7 +301,7 @@ const BoxCenter = styled.View`
 `;
 
 const ButtonSubmit = styled.TouchableOpacity`
-  width: 100px;
+  width: 110px;
   border-radius: 20px;
   background-color: #262626;
   height: 50px;

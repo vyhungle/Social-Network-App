@@ -1,11 +1,11 @@
 import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {ScrollView, View, TouchableOpacity, Text} from 'react-native';
-import {AuthContext} from '../../../context/auth';
+import {AuthContext} from '../../../../context/auth';
 
-import {GET_MY_POST_IN_GROUP} from '../../../graphql/query';
+import {GET_MY_POST_IN_GROUP} from '../../../../graphql/query';
 import SinglePost from './singlePost';
-import LoadingPost from '../../home/components/postLoading';
+import LoadingPost from '../../../home/components/postLoading';
 
 function Posts() {
   const context = React.useContext(AuthContext);

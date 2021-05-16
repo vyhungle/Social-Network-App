@@ -160,7 +160,7 @@ function editProfile() {
 
                 <ViewFormButton>
                   <ButtonSubmit onPress={formProps.handleSubmit}>
-                    <Text style={{color: 'white'}}>Submit</Text>
+                    <Text style={{color: 'white'}}>Lưu</Text>
                   </ButtonSubmit>
                 </ViewFormButton>
               </ViewFormContent>

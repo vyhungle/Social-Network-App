@@ -29,9 +29,13 @@ import LoadingScreen from './src/screens/loading';
 import SearchScreen from './src/screens/search';
 import AddProductScreen from './src/screens/product/addProduct';
 import NotificationScreen from './src/screens/notification';
-import GroupDetailScreen from './src/screens/Group/components/groupDetail';
-import CommentGroupScreen from './src/screens/Group/components/comment';
-import CreatePostGroupScreen from './src/screens/Group/components/createPost';
+import GroupDetailScreen from './src/screens/Group/components/Detail/groupDetail';
+import CommentGroupScreen from './src/screens/Group/components/General/comment';
+import CreatePostGroupScreen from './src/screens/Group/components/General/createPost';
+import InvitationScreen from './src/screens/Group/components/Invite/invitation';
+import InviteScreen from './src/screens/Group/components/Invite/invite';
+import DiscoverScreen from './src/screens/Group/components/discover';
+import MemberScreen from './src/screens/Group/components/member';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -169,6 +173,24 @@ const App = () => {
               <RootStack.Screen
                 name="CreatePostGroupScreen"
                 component={CreatePostGroupScreen}
+              />
+
+              <RootStack.Screen
+                name="InvitationScreen"
+                component={InvitationScreen}
+              />
+
+              <RootStack.Screen
+                name="InviteScreen"
+                component={InviteScreen}
+              />
+               <RootStack.Screen
+                name="DiscoverScreen"
+                component={DiscoverScreen}
+              />
+                <RootStack.Screen
+                name="MemberScreen"
+                component={MemberScreen}
               />
             </RootStack.Navigator>
           </NavigationContainer>

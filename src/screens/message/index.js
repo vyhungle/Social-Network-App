@@ -11,7 +11,7 @@ function Index() {
 
     return (
         <Container>
-            <TopBar title="MESSAGES"/>
+            <TopBar title="Tin nhắn"/>
             <ListChats/>
             <ButtonNewRoom/>
         </Container>

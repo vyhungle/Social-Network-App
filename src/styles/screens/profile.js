@@ -37,7 +37,7 @@ export const TextStory = styled.Text`
 export const TouchableOpacityButton = styled.TouchableOpacity`
   background-color: #262626;
   height: 44px;
-  width: 90px;
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;

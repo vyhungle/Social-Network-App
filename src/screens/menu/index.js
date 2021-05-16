@@ -48,13 +48,13 @@ function Menu() {
                   {context.user.following.length === 0
                     ? 0
                     : context.user.following.length}{' '}
-                  Following
+                  Theo dõi
                 </TextFollow>
                 <TextFollow>
                   {context.user.follower.length === 0
                     ? 0
                     : context.user.follower.length}{' '}
-                  Following
+                  Người theo dõi
                 </TextFollow>
               </View>
             </View>
@@ -67,7 +67,7 @@ function Menu() {
       <MenuContent>
         <BoxItem onPress={() => navigation.navigate('Home')}>
           <Icon name="home-outline" size={30} />
-          <TextMenu>Home</TextMenu>
+          <TextMenu>Trang chủ</TextMenu>
         </BoxItem>
 
         <BoxItem
@@ -77,17 +77,17 @@ function Menu() {
             })
           }>
           <IconFeather name="user" size={30} />
-          <TextMenu>My Profile</TextMenu>
+          <TextMenu>Hồ sơ</TextMenu>
         </BoxItem>
 
         <BoxItem onPress={() => navigation.push('MessageScreen')}>
           <IconAntDesign name="message1" size={30} />
-          <TextMenu>Messages</TextMenu>
+          <TextMenu>Tin nhắn</TextMenu>
         </BoxItem>
 
         <BoxItem onPress={() => navigation.navigate('Product')}>
           <IconFeather name="shopping-bag" size={30} />
-          <TextMenu>Products</TextMenu>
+          <TextMenu>Chợ</TextMenu>
         </BoxItem>
 
         {context.user ? (
@@ -97,12 +97,12 @@ function Menu() {
               navigation.push('Login');
             }}>
             <IconAntDesign name="logout" size={30} />
-            <TextMenu>Logout</TextMenu>
+            <TextMenu>Đăng xuất</TextMenu>
           </BoxItem>
         ) : (
           <BoxItem onPress={() => navigation.push('Login')}>
             <IconAntDesign name="logout" size={30} />
-            <TextMenu>Login</TextMenu>
+            <TextMenu>Đăng nhập</TextMenu>
           </BoxItem>
         )}
       </MenuContent>

@@ -31,8 +31,8 @@ function ModelLocation(props) {
 
         <ViewItem>
           <ScrollView>
-            <Item key="all" onPress={() => onClickItem('All Locations', '')}>
-              <Text>All Locations</Text>
+            <Item key="all" onPress={() => onClickItem('Tất cả địa điểm', '')}>
+              <Text>Tất cả địa điểm</Text>
             </Item>
             {locations &&
               locations.map((location, index) => (

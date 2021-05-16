@@ -56,7 +56,7 @@ function Index() {
             onPress={() => navigation.goBack()}
           />
         </ButtonIcon>
-        <Title>CREATE POST</Title>
+        <Title>Tạo bài viết</Title>
       </TopBar>
 
       <Formik
@@ -119,7 +119,7 @@ function Index() {
                   </ButtonIcon>
 
                   <BtnSummit onPress={formProps.handleSubmit}>
-                    <Text style={{color: 'white'}}>Post</Text>
+                    <Text style={{color: 'white'}}>Đăng</Text>
                   </BtnSummit>
                 </Bottom>
               </BottomBox>

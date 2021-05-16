@@ -79,7 +79,7 @@ function ListSearch({keyword}) {
         <View></View>
       ) : (
         <ButtonNext onPress={() => AddChat(userId)}>
-          <Text style={{color: 'white'}}>Next</Text>
+          <Text style={{color: 'white'}}>Tiếp</Text>
         </ButtonNext>
       )}
       <ScrollView>

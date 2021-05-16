@@ -37,7 +37,7 @@ function Index() {
     );
   return (
     <Container>
-      <TopBar title="NOTIFICATIONS" />
+      <TopBar title="Thông báo" />
       <ScrollView>
         {notifications &&
           notifications.notifications.map((n, index) => (
@@ -85,6 +85,7 @@ const BoxItem = styled.TouchableOpacity`
   border-bottom-color: gainsboro;
   padding: 5px;
   min-height: 90px;
+  background-color: white;
 `;
 
 const Avatar = styled.Image`

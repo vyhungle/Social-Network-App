@@ -4,21 +4,19 @@ const win = Dimensions.get('window');
 
 export const Container = styled.View`
   width: ${win.width}px;
-  padding:10px;
+
 `;
 
 export const ChatItem = styled.TouchableOpacity`
- width:${win.width-20}px;
- min-height:60px;
+ width:${win.width}px;
+ min-height:70px;
  padding:10px;
  background-color:white;
- border-radius:20px;
- border-color:gainsboro;
- border-width:.75px;
+ border-bottom-color:gainsboro;
+ border-bottom-width:.5px;
  flex-direction:row;
  display:flex;
  align-items:center;
- margin-bottom:5px;
 `;
 
 export const Avatar=styled.Image `

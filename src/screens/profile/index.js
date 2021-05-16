@@ -65,7 +65,7 @@ function Index() {
             </ViewBoxContentTop>
             {user.username === context.user.username && (
               <TouchableOpacityButton onPress={() => handleEdit(user.username)}>
-                <Text style={{color: 'white'}}>Edit Profile</Text>
+                <Text style={{color: 'white'}}>chỉ sửa hồ sơ</Text>
               </TouchableOpacityButton>
             )}
           </BoxTop>

@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components';
 import {useQuery} from '@apollo/react-hooks';
 
-import {GET_LIST_GROUPS} from '../../../graphql/query';
+import {GET_LIST_GROUPS} from '../../../../graphql/query';
 import Loading from './loadingListGroup';
 
 export default function listGroupMain() {

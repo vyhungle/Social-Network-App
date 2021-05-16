@@ -30,8 +30,8 @@ function ModelCategories(props) {
         </ButtonClose>
        
           <ViewItem>
-            <Item key="all" onPress={()=>onClickItem("All Categories","")}>
-              <Text>All Categories</Text>
+            <Item key="all" onPress={()=>onClickItem("Tất cả sản phẩm","")}>
+              <Text>Tất cả sản phẩm</Text>
             </Item>
             {categories &&
               categories.map(category => (

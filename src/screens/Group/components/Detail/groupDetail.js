@@ -5,14 +5,17 @@ import {useQuery} from '@apollo/react-hooks';
 import {useRoute} from '@react-navigation/native';
 import Icom from 'react-native-vector-icons/MaterialIcons';
 
-import {GET_Group} from '../../../graphql/query';
-import Posts from './postsInDetail';
+import {GET_Group} from '../../../../graphql/query';
+import Posts from '../Detail/postsInDetail';
 import Loading from './loadingDetail';
 import CreatePost from './buttonCreatePost';
+import ListMember from "./listMember";
+
 
 const win = Dimensions.get('window');
 
 export default function groupDetail() {
+
   const route = useRoute();
   const {groupId} = route.params;
   const {loading, data: {getGroup: group} = {}} = useQuery(GET_Group, {
@@ -58,6 +61,8 @@ export default function groupDetail() {
                     </TextBody>
                   </BoxBody>
                 )}
+
+                <ListMember members={group.members} leader={group.leader} groupId={group.id}/>
               </BoxBodyTop>
             </BoxTop>
 
@@ -97,6 +102,12 @@ const TextLeader = styled.Text`
 
 const BoxBodyTop = styled.View`
   padding: 10px;
+  background-color:white;
+  margin-bottom:10px;
+  border-bottom-left-radius:20px;
+  border-bottom-right-radius:20px;
+  border-color:gainsboro;
+  border-width:.75px;
 `;
 
 const TextName = styled.Text`
@@ -108,6 +119,7 @@ const BoxBody = styled.View`
   display: flex;
   align-items: center;
   flex-direction: row;
+  
   
 `;
 

@@ -14,7 +14,7 @@ function Index() {
   }
   return (
     <Container>
-      <TopBar title={'NEW MESSAGE'} />
+      <TopBar title={'Tin nhắm mới'} />
       <FormSearch parentCallback={callbackFunction} />
       <ListSearch keyword={keyword} />
     </Container>

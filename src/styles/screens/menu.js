@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container= styled.View `
     color:black;
     flex:1;
+    background-color:white;
 `
 
 export const MenuTop=styled.View `

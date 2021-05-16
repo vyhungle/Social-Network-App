@@ -410,6 +410,9 @@ export const GET_LIST_GROUPS = gql`
       id
       name
       imageCover
+      members {
+        id
+      }
     }
   }
 `;
@@ -448,12 +451,18 @@ export const GET_Group = gql`
       }
       leader {
         displayname
+        username
       }
       admins {
         id
       }
       members {
         id
+        username
+        displayname
+        profile {
+          avatar
+        }
       }
     }
   }
@@ -491,6 +500,39 @@ export const GET_POST_IN_GROUP = gql`
         username
         displayname
         avatar
+      }
+    }
+  }
+`;
+
+export const GET_MY_INVITES = gql`
+  query getMyInvites {
+    getMyInvites {
+      id
+      groupId
+      name
+      imageCover
+      from {
+        id
+        username
+        displayname
+      }
+      to {
+        id
+      }
+    }
+  }
+`;
+
+export const FIND_GROUPS = gql`
+  query findGroups($name: String!) {
+    findGroups(name: $name) {
+      id
+      name
+      imageCover
+      members {
+        id
+        username
       }
     }
   }

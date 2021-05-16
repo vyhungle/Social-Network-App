@@ -7,9 +7,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation,useRoute} from '@react-navigation/native';
 import {useMutation} from '@apollo/react-hooks';
 import ImagePicker from 'react-native-image-crop-picker';
-import {AuthContext} from '../../../context/auth';
+import {AuthContext} from '../../../../context/auth';
 
-import {ButtonIcon} from '../../../styles/components/general';
+import {ButtonIcon} from '../../../../styles/components/general';
 import {
   Container,
   Content,
@@ -23,8 +23,8 @@ import {
   BoxBody,
   BoxListImage,
   ImagePost,
-} from '../../../styles/screens/createPost';
-import {CREATE_POST_IN_GROUP} from '../../../graphql/mutation';
+} from '../../../../styles/screens/createPost';
+import {CREATE_POST_IN_GROUP} from '../../../../graphql/mutation';
 function Index() {
   const context = React.useContext(AuthContext);
   const navigation = useNavigation();
@@ -58,7 +58,7 @@ function Index() {
             onPress={() => navigation.goBack()}
           />
         </ButtonIcon>
-        <Title>CREATE POST</Title>
+        <Title>Tạo bài viết</Title>
       </TopBar>
 
       <Formik
@@ -71,7 +71,6 @@ function Index() {
           if (values.body === '' && values.image.length === 0) {
             
           } else {
-            console.log(values)
             createPost({
               variables: values,
             });
@@ -85,7 +84,7 @@ function Index() {
                 {context.user !== null ? (
                   <ImageAvatar source={{uri: context.user.profile.avatar}} />
                 ) : (
-                  <ImageAvatar source={require('../../../fonts/icon/user.jpg')} />
+                  <ImageAvatar source={require('../../../../fonts/icon/user.jpg')} />
                 )}
                 <InputBody
                   onChangeText={formProps.handleChange('body')}

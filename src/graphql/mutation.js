@@ -235,3 +235,25 @@ export const CREATE_POST_IN_GROUP = gql`
     createPostInGroup(groupId: $groupId, body: $body, image: $image)
   }
 `;
+
+export const CREATE_INVITE = gql`
+  mutation createInvite($groupId: String!, $userId: String!) {
+    createInvite(groupId: $groupId, userId: $userId)
+  }
+`;
+
+export const ACCEPT_INVITATION = gql`
+  mutation acceptInvite(
+    $groupId: String!
+    $userId: String!
+    $inviteId: String!
+  ) {
+    acceptInvite(groupId: $groupId, userId: $userId, inviteId: $inviteId)
+  }
+`;
+
+export const CREATE_JOIN = gql`
+  mutation createJoin($groupId:String!) {
+    createJoin(groupId: $groupId)
+  }
+`;

@@ -12,7 +12,7 @@ function ButtonFollow({username}) {
         <Container onPress={()=> isFollowing({
             variables:{username:username}
         })}>
-            <TextName>Follow</TextName>
+            <TextName>Theo dõi</TextName>
         </Container>
     )
 }
@@ -21,8 +21,8 @@ export default ButtonFollow
 
 
 const Container= styled.TouchableOpacity `
-    width:90px;
-    height:35px;
+    width:115px;
+    height:40px;
     background-color:#1DA1F2;
     position:absolute;
     right:10px;

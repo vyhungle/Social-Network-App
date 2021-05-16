@@ -15,7 +15,7 @@ import {useRoute} from '@react-navigation/native';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
 
-import {AuthContext} from '../../../context/auth';
+import {AuthContext} from '../../../../context/auth';
 import {
   Avatar,
   Container,
@@ -28,15 +28,15 @@ import {
   TextBody,
   TextDate,
   BoxText,
-} from '../../../styles/components/home/comment';
-import {COMMENT_POST_IN_GROUP} from '../../../graphql/mutation';
+} from '../../../../styles/components/home/comment';
+import {COMMENT_POST_IN_GROUP} from '../../../../graphql/mutation';
 import {
   GET_COMMENT_POST_IN_GROUP,
   GET_POST_IN_GROUP,
-} from '../../../graphql/query';
-import SinglePost from './singlePost';
-import TopBar from '../../../components/general/topBar';
-import Loading from '../../../components/general/loading';
+} from '../../../../graphql/query';
+import SinglePost from '../Main/singlePost';
+import TopBar from '../../../../components/general/topBar';
+import Loading from '../../../../components/general/loading';
 
 function Comment() {
   const context = React.useContext(AuthContext);
@@ -56,8 +56,6 @@ function Comment() {
       pollInterval: 500,
     },
   );
-
-  console.log(post);
   const Post = post => {
     return (
       <View>
@@ -82,7 +80,7 @@ function Comment() {
               }}
             />
           ) : (
-            <Avatar source={require('../../../fonts/icon/user.jpg')} />
+            <Avatar source={require('../../../../fonts/icon/user.jpg')} />
           )}
         </TouchableOpacity>
         <Formik
@@ -135,7 +133,7 @@ function Comment() {
                   })
                 }>
                 {comment.avatar === null ? (
-                  <Avatar source={require('../../../fonts/icon/user.jpg')} />
+                  <Avatar source={require('../../../../fonts/icon/user.jpg')} />
                 ) : (
                   <Avatar
                     source={{

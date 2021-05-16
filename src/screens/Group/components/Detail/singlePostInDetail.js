@@ -15,9 +15,9 @@ import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
 
-import UserImage from '../../../fonts/icon/user.jpg';
-import {LIKE_POST_IN_GROUP} from '../../../graphql/mutation';
-import PostPhotoGrid from '../../../components/general/postPhotoGrid';
+import UserImage from '../../../../fonts/icon/user.jpg';
+import {LIKE_POST_IN_GROUP} from '../../../../graphql/mutation';
+import PostPhotoGrid from '../../../../components/general/postPhotoGrid';
 import {
   Container,
   Avatar,
@@ -32,8 +32,8 @@ import {
   BoxButton,
   NumForButton,
   BoxIconRight,
-} from '../../../styles/components/home/singlePost';
-import {AuthContext} from '../../../context/auth';
+} from '../../../../styles/components/home/singlePost';
+import {AuthContext} from '../../../../context/auth';
 // import PopupCatalog from "./popupCatalog";
 
 function SinglePost(props) {
@@ -58,14 +58,13 @@ function SinglePost(props) {
   }, [props.Username, props.post.likes]);
 
   const navigation = useNavigation();
-
-  function handleClickImage(groupId, postId, groupName, username) {
+  function handleClickImage(groupId,postId,groupName,username) {
     navigation.navigate('CommentGroupScreen', {
-      groupId: groupId,
-      postId: postId,
-      groupName: groupName,
-      username: username,
-    });
+      groupId:groupId,
+      postId:postId,
+      groupName:groupName,
+      username:username,
+     });
   }
 
   //popup
@@ -113,18 +112,9 @@ function SinglePost(props) {
           )}
         </TouchableOpacity>
         <TitleBox>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('GroupDetailScreen', {
-                groupId: props.groupId,
-              })
-            }>
-            <Title numberOfLines={2}>{props.groupName}</Title>
-          </TouchableOpacity>
-          <DateTime>
-            {props.post.displayname} -{' '}
-            {moment(props.post.createdAt).fromNow(true)}
-          </DateTime>
+          <Title numberOfLines={2}>{props.post.displayname}</Title>
+
+          <DateTime>{moment(props.post.createdAt).fromNow(true)}</DateTime>
         </TitleBox>
 
         <BoxIconRight onPress={() => handelChangeModel(true)}>
@@ -155,15 +145,7 @@ function SinglePost(props) {
           <NumForButton>{props.post.likeCount}</NumForButton>
         </BoxButton>
 
-        <BoxButton
-          onPress={() =>
-            handleClickImage(
-              props.groupId,
-              props.post.id,
-              props.groupName,
-              props.Username,
-            )
-          }>
+        <BoxButton onPress={() => handleClickImage(props.groupId,props.post.id,props.groupName,props.Username)}>
           <IconFontisto name="comment" size={30} />
           <NumForButton>{props.post.commentCount}</NumForButton>
         </BoxButton>

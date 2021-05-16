@@ -17,8 +17,8 @@ import Catalog from './components/catalog';
 import AddProduct from "./components/buttonAddProduct";
 
 function Index() {
-  const [category, setCategory] = React.useState('All Categories');
-  const [location, setLocation] = React.useState('All Locations');
+  const [category, setCategory] = React.useState('Tất cả sản phẩm');
+  const [location, setLocation] = React.useState('Tất cả địa điểm');
 
   const [openModel, setOpenModel] = React.useState(false);
   const [openModelLocation, setOpenModelLocation] = React.useState(false);
@@ -93,7 +93,7 @@ function Index() {
 
   return (
     <Container>
-      <TopBar title="PRODUCTS" />
+      <TopBar title="Chợ" />
       {modelCategories()}
       {modelLocation()}
       <AddProduct/>

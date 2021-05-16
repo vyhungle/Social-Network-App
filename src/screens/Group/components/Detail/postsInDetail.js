@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, View, TouchableOpacity, Text} from 'react-native';
-import {AuthContext} from '../../../context/auth';
+import {AuthContext} from '../../../../context/auth';
 
 import SinglePost from './singlePostInDetail';
 
