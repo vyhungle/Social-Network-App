@@ -9,6 +9,8 @@ import {AuthContext} from '../../../../context/auth';
 export default function listMember(props) {
   const context = React.useContext(AuthContext);
   const navigation = useNavigation();
+
+  // console.log(props.members)
   return (
     <Container>
       <TouchableOpacity style={{flexDirection:"row"}} onPress={()=>navigation.navigate("MemberScreen")}>
@@ -20,6 +22,7 @@ export default function listMember(props) {
                 source={{uri: member.profile.avatar}}
                 vt={index}
               />
+           
             );
         })}
         {props.members.length > 2 ? (

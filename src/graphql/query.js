@@ -410,9 +410,9 @@ export const GET_LIST_GROUPS = gql`
       id
       name
       imageCover
-      members {
-        id
-      }
+      # members {
+      #   id
+      # }
     }
   }
 `;

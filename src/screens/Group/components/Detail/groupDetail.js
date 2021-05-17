@@ -22,6 +22,7 @@ export default function groupDetail() {
     variables: {groupId: groupId},pollInterval:500
   });
 
+  // console.log(group.members)
   if (loading)
     return (
       <Container>
@@ -61,7 +62,7 @@ export default function groupDetail() {
                     </TextBody>
                   </BoxBody>
                 )}
-
+                  {/* {console.log(group.members)} */}
                 <ListMember members={group.members} leader={group.leader} groupId={group.id}/>
               </BoxBodyTop>
             </BoxTop>
