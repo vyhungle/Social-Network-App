@@ -7,6 +7,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
+import {BottomSheet, ListItem} from 'react-native-elements';
 
 import UserImage from '../../../fonts/icon/user.jpg';
 import {LIKEPOST} from '../../../graphql/mutation';
@@ -27,7 +28,7 @@ import {
   BoxIconRight
 } from '../../../styles/components/home/singlePost';
 import {AuthContext} from '../../../context/auth';
-import PopupCatalog from "./popupCatalog";
+import BottomMenu from "./bottomSheet";
 
 function SinglePost({
   post: {
@@ -65,27 +66,29 @@ function SinglePost({
     });
   }
 
-  //popup
-  const[isPopup,setPopup]=React.useState(false);
-  
 
-  const handelChangeModel=(value)=>{
-    setPopup(value)
-  }
 
-  const modelCatalog = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPostId,setPostId]=useState("");
+  const [isUsername,setUsername]=useState("");
+
+
+  const setValue=(postId,username)=>{
+    setUsername(username)
+    setPostId(postId);
+    setIsVisible(true)
+  } 
+
+  const handleChangeVisible = value => {
+    setIsVisible(value);
+  };
+  const buttonSheet = () => {
     return (
-      <Modal
-        transparent={true}
-        animationType="fade"
-        visible={isPopup}
-        nRequestClose={() => handelChangeModel(false)}>
-        <PopupCatalog
-          handelChangeModel={handelChangeModel}
-          username={username}
-          id={id}
-        />
-      </Modal>
+      <BottomSheet
+        isVisible={isVisible}
+        containerStyle={{backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)'}}>
+        <BottomMenu handleChangeVisible={handleChangeVisible}  postId={isPostId} username={isUsername}/>
+      </BottomSheet>
     );
   };
 
@@ -93,7 +96,7 @@ function SinglePost({
   return (
     <Container>
       <TopTitle>
-      {modelCatalog()}
+      {buttonSheet()}
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('ProfileScreen', {
@@ -115,7 +118,7 @@ function SinglePost({
           <DateTime>{moment(createdAt).fromNow(true)}</DateTime>
         </TitleBox>
 
-        <BoxIconRight onPress={()=>handelChangeModel(true)}>
+        <BoxIconRight onPress={()=>setValue(id,username)}>
           <IconEntypo name="dots-three-horizontal" size={20} color="gray"/>
         </BoxIconRight>
 

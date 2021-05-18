@@ -70,6 +70,11 @@ function Menu() {
           <TextMenu>Trang chủ</TextMenu>
         </BoxItem>
 
+        <BoxItem onPress={() => navigation.push('MessageScreen')}>
+          <IconAntDesign name="message1" size={30} />
+          <TextMenu>Tin nhắn</TextMenu>
+        </BoxItem>
+
         <BoxItem
           onPress={() =>
             navigation.push('ProfileScreen', {
@@ -80,10 +85,14 @@ function Menu() {
           <TextMenu>Hồ sơ</TextMenu>
         </BoxItem>
 
-        <BoxItem onPress={() => navigation.push('MessageScreen')}>
-          <IconAntDesign name="message1" size={30} />
-          <TextMenu>Tin nhắn</TextMenu>
+        <BoxItem onPress={() => navigation.navigate('GroupScreen')}>
+          <Icon name="people-outline" size={30} />
+          <TextMenu>Nhóm</TextMenu>
         </BoxItem>
+
+       
+
+       
 
         <BoxItem onPress={() => navigation.navigate('Product')}>
           <IconFeather name="shopping-bag" size={30} />

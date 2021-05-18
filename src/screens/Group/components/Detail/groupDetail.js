@@ -31,9 +31,10 @@ export default function groupDetail() {
     );
   return (
     <Container>
+     <CreatePost groupId={group.id} />
       {group && (
         <View>
-          <CreatePost groupId={group.id} />
+         
           <ScrollView>
             <BoxTop>
               <ImageCover source={{uri: group.imageCover}} />

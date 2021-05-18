@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Text, ScrollView} from 'react-native';
 import {Formik} from 'formik';
 
+
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
@@ -41,6 +42,17 @@ function Index() {
       formProps.setFieldValue('image', base64Image);
     });
   }
+  
+  // function SelectCamera(formProps) {
+  //   ImagePicker.openCamera({
+  //     width: 300,
+  //     height: 400,
+  //     cropping: true,
+  //     includeBase64: true,
+  //   }).then(image => {
+  //     console.log(image);
+  //   });
+  // }
   function renderImage(file) {
     var image = `data:${file.mime};base64,${file.data}`;
     base64Image.push(image);
@@ -70,9 +82,7 @@ function Index() {
             createPost({
               variables: values,
             });
-            navigation.navigate("Home",{
-              loading:true
-            });
+            navigation.goBack()
           }
         }}>
         {formProps => {

@@ -17,6 +17,7 @@ import SignUpScreen from './src/screens/signup';
 import {client} from './src/graphql/client';
 import CreatePostScreen from './src/screens/CreatePost';
 import {AuthProvider, AuthContext} from './src/context/auth';
+
 import Wrapper from './src/components/general/wrapper';
 import CommentScreen from './src/screens/comment';
 import ProfileScreen from './src/screens/profile';
@@ -36,6 +37,9 @@ import InvitationScreen from './src/screens/Group/components/Invite/invitation';
 import InviteScreen from './src/screens/Group/components/Invite/invite';
 import DiscoverScreen from './src/screens/Group/components/discover';
 import MemberScreen from './src/screens/Group/components/member';
+import AddGroupScreen from './src/screens/Group/components/addGroup';
+import ManageScreen from './src/screens/Group/components/member/manage';
+import MyGroupScreen from './src/screens/Group/components/myGroup';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -98,13 +102,12 @@ function MyTabs() {
 const RootStack = createStackNavigator();
 
 const App = () => {
-  const context = React.useContext(AuthContext);
   const [isLoading, SetLoading] = React.useState(true);
 
   React.useEffect(() => {
     setTimeout(() => {
       SetLoading(false);
-    }, 2000);
+    }, 1000);
   });
 
   return (
@@ -115,7 +118,6 @@ const App = () => {
             <RootStack.Navigator
               screenOptions={{
                 headerShown: false,
-
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               }}>
               <RootStack.Screen name="MyTabs" component={MyTabs} />
@@ -180,17 +182,20 @@ const App = () => {
                 component={InvitationScreen}
               />
 
+              <RootStack.Screen name="InviteScreen" component={InviteScreen} />
               <RootStack.Screen
-                name="InviteScreen"
-                component={InviteScreen}
-              />
-               <RootStack.Screen
                 name="DiscoverScreen"
                 component={DiscoverScreen}
               />
-                <RootStack.Screen
-                name="MemberScreen"
-                component={MemberScreen}
+              <RootStack.Screen name="MemberScreen" component={MemberScreen} />
+              <RootStack.Screen
+                name="AddGroupScreen"
+                component={AddGroupScreen}
+              />
+              <RootStack.Screen name="ManageScreen" component={ManageScreen} />
+              <RootStack.Screen
+                name="MyGroupScreen"
+                component={MyGroupScreen}
               />
             </RootStack.Navigator>
           </NavigationContainer>

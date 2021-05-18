@@ -5,7 +5,7 @@ import TopBar from './topBar';
 import LoadSearch from "./loadSearch";
 
 export default function index() {
-  const [isKey, setKey] = React.useState('a');
+  const [isKey, setKey] = React.useState('');
   const handleSetKey = value => {
     setKey(value);
   };

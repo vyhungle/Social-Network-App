@@ -253,7 +253,45 @@ export const ACCEPT_INVITATION = gql`
 `;
 
 export const CREATE_JOIN = gql`
-  mutation createJoin($groupId:String!) {
+  mutation createJoin($groupId: String!) {
     createJoin(groupId: $groupId)
+  }
+`;
+
+export const CREATE_GROUP = gql`
+  mutation createGroup(
+    $name: String!
+    $describe: String!
+    $imageCover: String!
+    $typeGroup: String!
+    $public: Boolean!
+  ) {
+    createGroup(
+      name: $name
+      describe: $describe
+      imageCover: $imageCover
+      typeGroup: $typeGroup
+      public: $public
+    ) {
+      error {
+        field
+        message
+      }
+      group {
+        name
+      }
+    }
+  }
+`;
+
+export const ACCEPT_JOIN = gql`
+  mutation acceptJoin($groupId: String!, $userId: String!, $joinId: String!) {
+    acceptJoin(groupId: $groupId, userId: $userId, joinId: $joinId)
+  }
+`;
+
+export const DELETE_POST_IN_GROUP = gql`
+  mutation deletePostInGroup($groupId: String!, $postId: String!) {
+    deletePostInGroup(groupId: $groupId, postId: $postId)
   }
 `;

@@ -12,7 +12,7 @@ export default function index() {
 
     return (
         <Container>
-        <TopBar title="INVITATION"/>
+        <TopBar title="Thư mời"/>
             {invites && invites.map((i,index)=>(
                 <Item key={index}>
                     <Avatar source={{uri:i.imageCover}}/>

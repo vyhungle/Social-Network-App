@@ -5,11 +5,14 @@ import IconFontisto from 'react-native-vector-icons/Fontisto';
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 
-export default function catalog() {
+export default function catalog(props) {
   const navigation = useNavigation();
   return (
     <Container>
-      <Item>
+      <Item
+        onPress={() =>
+          navigation.navigate('MyGroupScreen', {groups: props.groups})
+        }>
         <Icon
           name="people-outline"
           size={20}
@@ -19,7 +22,7 @@ export default function catalog() {
         <TextItem>Nhóm của bạn</TextItem>
       </Item>
 
-      <Item onPress={()=>navigation.navigate("DiscoverScreen")}>
+      <Item onPress={() => navigation.navigate('DiscoverScreen')}>
         <Icon
           name="compass-outline"
           size={20}
@@ -36,7 +39,7 @@ export default function catalog() {
           style={{marginRight: 5}}
           color="white"
         />
-        <TextItem>Lời mời</TextItem>
+        <TextItem>Thư mời</TextItem>
       </Item>
     </Container>
   );

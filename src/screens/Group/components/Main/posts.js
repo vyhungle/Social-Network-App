@@ -19,7 +19,7 @@ function Posts() {
   );
   if (loading) return <LoadingPost />;
   return (
-    <View>
+    <View style={{paddingBottom:60}}>
       {posts &&
         posts.map((post,index) => (
           <SinglePost post={post.post} Username={username} groupId={post.groupId} groupName={post.groupName} key={index} />

@@ -410,9 +410,9 @@ export const GET_LIST_GROUPS = gql`
       id
       name
       imageCover
-      # members {
-      #   id
-      # }
+      members {
+        id
+      }
     }
   }
 `;
@@ -533,6 +533,31 @@ export const FIND_GROUPS = gql`
       members {
         id
         username
+      }
+    }
+  }
+`;
+
+export const GET_TYPE_GROUP = gql`
+  query getTypeGroup {
+    getTypeGroup {
+      name
+    }
+  }
+`;
+
+export const GET_JOIN = gql`
+  query getJoinInGroup($groupId: String!) {
+    getJoinInGroup(groupId: $groupId) {
+      id
+      groupId
+      member {
+        id
+        displayname
+        username
+        profile {
+          avatar
+        }
       }
     }
   }

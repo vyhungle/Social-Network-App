@@ -13,16 +13,31 @@ export default function listMember(props) {
   // console.log(props.members)
   return (
     <Container>
-      <TouchableOpacity style={{flexDirection:"row"}} onPress={()=>navigation.navigate("MemberScreen")}>
+      <TouchableOpacity
+        style={{flexDirection: 'row'}}
+        onPress={() =>
+          navigation.navigate('MemberScreen', {
+            members: props.members,
+            groupId: props.groupId,
+            leader:props.leader,
+          })
+        }>
         {props.members.map((member, index) => {
           if (index < 3)
             return (
-              <Item
-                key={index}
-                source={{uri: member.profile.avatar}}
-                vt={index}
-              />
-           
+              <View key={index}>           
+                {member.profile.avatar === null ? (
+                  <Item             
+                    source={require('../../../../fonts/icon/user.jpg')}
+                    vt={index}
+                  />
+                ) : (
+                  <Item
+                    source={{uri: member.profile.avatar}}
+                    vt={index}
+                  />
+                )}
+              </View>
             );
         })}
         {props.members.length > 2 ? (

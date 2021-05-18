@@ -9,6 +9,7 @@ import CreatePostBar from './postBar';
 import ListMember from './listMemberTop';
 import PostLoading from './postLoading';
 import MemberLoading from './memberLoading';
+import styled from 'styled-components';
 
 function Posts(props) {
   const context = React.useContext(AuthContext);
@@ -31,17 +32,22 @@ function Posts(props) {
       </View>
     );
   return (
-    <View>
+    <Container >
       {posts && <CreatePostBar />}
-      <ScrollView>
-        <ListMember />
+      <ScrollView >
+        <ListMember/>
         {posts &&
           posts.posts.map(post => (
             <SinglePost post={post} Username={username} key={post.id} />
           ))}
       </ScrollView>
-    </View>
+    </Container>
   );
 }
 
 export default Posts;
+
+const Container=styled.View `
+  flex:1;
+  
+`

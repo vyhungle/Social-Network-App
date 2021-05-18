@@ -2,20 +2,13 @@ import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components';
-import {useQuery} from '@apollo/react-hooks';
 
-import {GET_LIST_GROUPS} from '../../../../graphql/query';
 import Loading from './loadingListGroup';
 
-export default function listGroupMain() {
-  const {loading, data: {getMyGroups: groups} = {}} = useQuery(
-    GET_LIST_GROUPS,
-    {pollInterval: 500},
-  );
-
+export default function listGroupMain(props) {
   const navigation = useNavigation();
 
-  if (loading)
+  if (props.loading)
     return (
       <Container>
         <Loading />
@@ -24,19 +17,21 @@ export default function listGroupMain() {
   return (
     <Container>
       <ScrollView horizontal={true}>
-        {groups &&
-          groups.map((g, index) => (
-            <Item
-              key={index}
-              onPress={() =>
-                navigation.navigate('GroupDetailScreen', {groupId: g.id})
-              }>
-              <ImageCover source={{uri: g.imageCover}} />
-              <BoxName>
-                <Name numberOfLines={2}>{g.name}</Name>
-              </BoxName>
-            </Item>
-          ))}
+        {props.groups &&
+          props.groups.map((g, index) => {
+            return (
+              <Item
+                key={index}
+                onPress={() =>
+                  navigation.navigate('GroupDetailScreen', {groupId: g.id})
+                }>
+                <ImageCover source={{uri: g.imageCover}} />
+                <BoxName>
+                  <Name numberOfLines={2}>{g.name}</Name>
+                </BoxName>
+              </Item>
+            );
+          })}
       </ScrollView>
     </Container>
   );
