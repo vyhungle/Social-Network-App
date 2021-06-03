@@ -11,16 +11,14 @@ import Menu from './components/menu';
 function Index() {
   const route = useRoute();
   const {id, displayname,members} = route.params;
-  const [memberCount, setMemberCount] = React.useState(2);
   const setCount = value => {
     setMemberCount(value);
   };
-  // console.log(memberCount)
   return (
     <Container>
       <TopBar title={displayname} />
-      <Menu memberCount={memberCount} members={members}/>
-      <LoadContent id={id} setCount={setCount} />
+      <Menu memberCount={members.length} members={members} roomId={id}/>
+      <LoadContent id={id}/>
       <FormBody id={id} />
     </Container>
   );

@@ -110,7 +110,7 @@ function LoadContent(props) {
         {chat &&
           chat.content.map((Chat, index) => {
             const Item = () => GetBoxItem(Chat, index);
-            props.setCount(chat.members.length);
+          
             return Item();
           })}
       </ScrollView>

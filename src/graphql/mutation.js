@@ -301,3 +301,15 @@ export const LEAVE_THE_GROUP = gql`
     leaveTheGroup(groupId: $groupId)
   }
 `;
+
+export const JOIN_THE_ROOM = gql`
+  mutation joinTheRoom($roomId: String!, $userIds: [String]!) {
+    joinTheRoom(roomId: $roomId, userIds: $userIds)
+  }
+`;
+
+export const LEAVE_THE_ROOM = gql`
+  mutation leaveTheRoom($roomId: String!) {
+    leaveTheRoom(roomId: $roomId)
+  }
+`;

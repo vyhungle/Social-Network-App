@@ -28,6 +28,7 @@ import {
 } from '../../styles/components/profile/editProfile';
 import {EDIT_PROFILE} from '../../graphql/mutation';
 import {GET_USER_PROFILE} from '../../graphql/query';
+import { colorTextPrimary, colorTextSecondary } from '../../color';
 
 function editProfile() {
   const [EditProfile, {loading}] = useMutation(EDIT_PROFILE);
@@ -104,7 +105,7 @@ function editProfile() {
         {formProps => {
           return (
             <ViewForm>
-              {formProps.values.imageCover === undefined ? (
+              {formProps.values.coverImage === undefined ? (
                 <ImageCover source={require('../../fonts/icon/cover.jpg')} />
               ) : (
                 <ImageCover source={{uri: formProps.values.coverImage}} />
@@ -135,7 +136,7 @@ function editProfile() {
                 <ViewDate>
                   <TextDate>{date.toISOString().slice(0, 10)}</TextDate>
                   <IconDate onPress={showDatepicker}>
-                    <Icon name="date-range" size={30} />
+                    <Icon name="date-range" size={30} color={colorTextSecondary}/>
                   </IconDate>
                 </ViewDate>
                 {show && (

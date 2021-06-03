@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Dimensions} from 'react-native';
+import { colorTextPrimary } from '../../../color';
 const win = Dimensions.get('window');
 
 export const Container = styled.View`
@@ -61,7 +62,7 @@ export const ViewFormButton = styled.View`
 export const ButtonSubmit = styled.TouchableOpacity`
   width: 100px;
   height: 50px;
-  background-color: #262626;
+  background-color: ${colorTextPrimary};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Dimensions} from 'react-native';
+import { colorTextPrimary } from '../../color';
 const win = Dimensions.get('window');
 
 export const Container = styled.View`
@@ -35,7 +36,7 @@ export const TextStory = styled.Text`
 `;
 
 export const TouchableOpacityButton = styled.TouchableOpacity`
-  background-color: #262626;
+  background-color: ${colorTextPrimary};
   height: 44px;
   width: 120px;
   display: flex;

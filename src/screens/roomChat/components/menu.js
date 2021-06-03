@@ -8,17 +8,38 @@ import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommun
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
+import {useMutation} from '@apollo/react-hooks';
 
+import {LEAVE_THE_ROOM} from '../../../graphql/mutation';
 import {colorTextPrimary, colorTextSecondary} from '../../../color';
 
 export default function Example(props) {
   const refRBSheet = useRef();
   const navigation = useNavigation();
+  const [leave] = useMutation(LEAVE_THE_ROOM);
+
   const memberOnPress = members => {
     navigation.push('MemberScreen', {
       members: members,
     });
     refRBSheet.current.close();
+  };
+  const addMemberOnPress = () => {
+    navigation.push('AddMemberInChatScreen', {
+      roomMembers: props.members,
+      roomId: props.roomId,
+    });
+    refRBSheet.current.close();
+  };
+
+  const leaveRoomOnPress = () => {
+    leave({
+      variables: {
+        roomId: props.roomId,
+      },
+    });
+    refRBSheet.current.close();
+    navigation.goBack()
   };
   const MenuChat = () => {
     return (
@@ -27,7 +48,7 @@ export default function Example(props) {
           <Icon name="people-outline" size={30} />
           <TextItem>Thành viên</TextItem>
         </ItemList>
-        <ItemList>
+        <ItemList onPress={() => leaveRoomOnPress()}>
           <IconMaterialCommunityIcons name="chat-remove-outline" size={30} />
           <TextItem>Rời khỏi phòng trò chuyện</TextItem>
         </ItemList>
@@ -42,9 +63,7 @@ export default function Example(props) {
           <Icon name="people-outline" size={30} />
           <TextItem>Thành viên</TextItem>
         </ItemList>
-        <ItemList onPress={()=>navigation.push("AddMemberInChatScreen",{
-          roomMembers:props.members
-        })}>
+        <ItemList onPress={() => addMemberOnPress()}>
           <IconAntDesign name="addusergroup" size={30} />
           <TextItem>Thêm thành viên</TextItem>
         </ItemList>
@@ -52,7 +71,7 @@ export default function Example(props) {
           <IconFeather name="edit" size={30} />
           <TextItem>Chỉnh sửa nhóm</TextItem>
         </ItemList>
-        <ItemList>
+        <ItemList onPress={() => leaveRoomOnPress()}>
           <IconMaterialCommunityIcons name="chat-remove-outline" size={30} />
           <TextItem>Rời khỏi phòng trò chuyện</TextItem>
         </ItemList>
