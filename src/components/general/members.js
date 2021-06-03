@@ -1,32 +1,37 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
-import { useNavigation } from "@react-navigation/native";
-
-import Follow from './follow';
+import {useNavigation} from '@react-navigation/native';
+import {ScrollView} from 'react-native';
 
 export default function members(props) {
-  const navigation=useNavigation()
+
+  const navigation = useNavigation();
   return (
     <Container>
-      {props.members.map((m, index) => (
-        <Item key={index}>
-          <TouchableOpacity onPress={()=>navigation.push("ProfileScreen",{
-            username:m.username
-          })}>
-            {m.profile.avatar === null ? (
-              <Avatar source={require('../../fonts/icon/user.jpg')} />
-            ) : (
-              <Avatar source={{uri: m.profile.avatar}} />
-            )}
-          </TouchableOpacity>
-          <BoxName>
-            <Name>{m.displayname}</Name>
-            <Username>@{m.username}</Username>
-          </BoxName>
-          {/* <Follow /> */}
-        </Item>
-      ))}
+      <ScrollView>
+        {props.members.map((m, index) => (
+          <Item key={index}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.push('ProfileScreen', {
+                  username: m.username,
+                })
+              }>
+              {m.profile.avatar === null ? (
+                <Avatar source={require('../../fonts/icon/user.jpg')} />
+              ) : (
+                <Avatar source={{uri: m.profile.avatar}} />
+              )}
+            </TouchableOpacity>
+            <BoxName>
+              <Name>{m.displayname}</Name>
+              <Username>@{m.username}</Username>
+            </BoxName>
+          </Item>
+        ))}
+     
+      </ScrollView>
     </Container>
   );
 }

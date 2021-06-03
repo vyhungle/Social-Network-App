@@ -21,9 +21,11 @@ export const LOGIN = gql`
         }
         following {
           id
+          username
         }
         follower {
           id
+          username
         }
       }
     }
@@ -311,5 +313,11 @@ export const JOIN_THE_ROOM = gql`
 export const LEAVE_THE_ROOM = gql`
   mutation leaveTheRoom($roomId: String!) {
     leaveTheRoom(roomId: $roomId)
+  }
+`;
+
+export const EDIT_ROOM = gql`
+  mutation editRoom($roomId: String!, $image: String!, $name: String!) {
+    editRoom(roomId: $roomId, image: $image, name: $name)
   }
 `;

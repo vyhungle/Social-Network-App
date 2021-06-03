@@ -3,6 +3,7 @@ import React from 'react';
 import {View} from 'react-native';
 
 import RBSheet from 'react-native-raw-bottom-sheet';
+import IconFeather from 'react-native-vector-icons/Feather';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useMutation} from '@apollo/react-hooks';
@@ -29,7 +30,7 @@ export default function Example(props) {
         ref={refRBSheet}
         closeOnDragDown={true}
         closeOnPressMask={false}
-        height={180}
+        height={200}
         customStyles={{
           wrapper: {
             backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -47,7 +48,7 @@ export default function Example(props) {
                 <TextItem>Xóa</TextItem>
               </ItemList>
               <ItemList>
-                <Icon name="edit" size={30} />
+                <IconFeather name="edit" size={30} />
                 <TextItem>chỉnh sửa</TextItem>
               </ItemList>
             </View>
@@ -78,5 +79,5 @@ const ItemList = styled.TouchableOpacity`
 const TextItem = styled.Text`
   font-weight: 700;
   font-size: 18px;
-  margin-left: 20px;
+  margin-left: 10px;
 `;

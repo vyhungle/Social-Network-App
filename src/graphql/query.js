@@ -177,6 +177,7 @@ export const GET_ROOM_CHAT = gql`
       name
       image
       members {
+        id
         username
         displayname
         profile {

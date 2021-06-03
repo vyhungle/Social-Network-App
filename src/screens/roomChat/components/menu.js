@@ -41,6 +41,15 @@ export default function Example(props) {
     refRBSheet.current.close();
     navigation.goBack()
   };
+
+  const editRoomOnPress = () => {
+    navigation.push('EditChatScreen',{
+      roomId:props.roomId,
+      image:props.image,
+      name:props.name
+    });
+    refRBSheet.current.close();
+  };
   const MenuChat = () => {
     return (
       <BoxItem>
@@ -67,7 +76,7 @@ export default function Example(props) {
           <IconAntDesign name="addusergroup" size={30} />
           <TextItem>Thêm thành viên</TextItem>
         </ItemList>
-        <ItemList>
+        <ItemList onPress={()=>editRoomOnPress()}>
           <IconFeather name="edit" size={30} />
           <TextItem>Chỉnh sửa nhóm</TextItem>
         </ItemList>

@@ -5,6 +5,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useMutation} from '@apollo/react-hooks';
+import IconFeather from 'react-native-vector-icons/Feather';
 
 import {DELETE_POST_IN_GROUP} from '../../../../graphql/mutation';
 import {AuthContext} from '../../../../context/auth';
@@ -47,7 +48,7 @@ export default function Example(props) {
                 <TextItem>Xóa</TextItem>
               </ItemList>
               <ItemList>
-                <Icon name="edit" size={30} />
+                <IconFeather name="edit" size={30} />
                 <TextItem>chỉnh sửa</TextItem>
               </ItemList>
             </View>

@@ -53,25 +53,22 @@ function Listchats() {
   };
 
   const getUriAvatar = (chat, uri) => {
-    return chat.image==='' ? (
-      chat.image === '' ? (
-        renderImageGroup(chat.members)
-      ) : (
-        <Avatar source={{uri: chat.image}} />
-      )
-    ) : uri ? (
-      <Avatar source={{uri: uri}} />
-    ) : (
-      <Avatar source={require('../../../fonts/icon/user.jpg')} />
-    );
+    if (chat.image === '') {
+      return renderImageGroup(chat.members);
+    } else if (chat.image === null) {
+      if (uri) return <Avatar source={{uri: uri}} />;
+      return <Avatar source={require('../../../fonts/icon/user.jpg')} />;
+    }
+    return <Avatar source={{uri: chat.image}} />;
   };
   const navigation = useNavigation();
 
-  const handleClick = (id, displayname,members) => {
+  const handleClick = (id, displayname, members,image) => {
     navigation.navigate('RoomChatScreen', {
       id: id,
       displayname: displayname,
-      members:members
+      members: members,
+      image:image
     });
   };
   if (loading)
@@ -92,7 +89,12 @@ function Listchats() {
             <ChatItem
               key={index}
               onPress={() =>
-                handleClick(chat.id, chat.name ? chat.name : member.displayname,chat.members)
+                handleClick(
+                  chat.id,
+                  chat.name ? chat.name : member.displayname,
+                  chat.members,
+                  chat.image,
+                )
               }>
               {AvatarUser}
               <BoxText>
