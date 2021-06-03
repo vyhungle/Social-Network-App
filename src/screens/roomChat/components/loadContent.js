@@ -16,12 +16,14 @@ import {
   TextYou,
   TextFriend,
   BoxImageYou,
+  NameFriend,
 } from '../../../styles/components/roomChat/loadContent';
 
-function LoadContent({id}) {
+function LoadContent(props) {
+  
   const context = React.useContext(AuthContext);
   const {loading, data: {getChat: chat} = {}} = useQuery(GET_CHAT, {
-    variables: {roomId: id},
+    variables: {roomId: props.id},
     pollInterval: 500,
   });
   const GetTime = index => {
@@ -34,6 +36,7 @@ function LoadContent({id}) {
     }
     return null;
   };
+
   const getImageImage = chat => {
     if (chat.image !== null) {
       return (
@@ -85,7 +88,10 @@ function LoadContent({id}) {
           {time === null ? (
             <View></View>
           ) : (
-            <TimeFriend>{moment(time).fromNow(true)}</TimeFriend>
+            <View style={{flexDirection: 'row'}}>
+              <NameFriend>{chat.displayname}</NameFriend>
+              <TimeFriend>{moment(time).fromNow(true)}</TimeFriend>
+            </View>
           )}
         </View>
       );
@@ -98,11 +104,13 @@ function LoadContent({id}) {
       <ScrollView
         ref={scrollViewRef}
         onContentSizeChange={() =>
-          scrollViewRef.current.scrollToEnd({animated:false})
-        }>
+          scrollViewRef.current.scrollToEnd({animated: false})
+        }
+        style={{paddingTop: 10}}>
         {chat &&
           chat.content.map((Chat, index) => {
             const Item = () => GetBoxItem(Chat, index);
+            props.setCount(chat.members.length);
             return Item();
           })}
       </ScrollView>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Dimensions} from 'react-native';
+import { colorTextPrimary } from '../../../color';
 const win = Dimensions.get('window');
 
 export const Container = styled.View`
@@ -57,6 +58,6 @@ export const ButtonNext = styled.TouchableOpacity`
   top: -100px;
   right: 10px;
   z-index: 20;
-  background-color:#262626;
+  background-color:${colorTextPrimary};
   border-radius: 10px;
 `;

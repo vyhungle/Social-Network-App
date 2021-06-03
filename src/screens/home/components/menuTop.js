@@ -4,6 +4,7 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 
 
+import { colorTextPrimary,colorTextSecondary } from "../../../color";
 import {
   Container,
   Title,
@@ -18,10 +19,10 @@ function MenuTop() {
       <Title>SocialNetwork</Title>
       <IconRight>
         <ButtonIcon onPress={()=>navigation.navigate("SearchScreen")}>
-          <Icon name="search" size={30} />
+          <IconAntDesign name="search1" size={30} color={colorTextSecondary}/>
         </ButtonIcon>
         <ButtonIcon  onPress={()=>navigation.navigate("MessageScreen")}>
-          <IconAntDesign name="message1" size={30} />
+          <IconAntDesign name="message1" size={30} color={colorTextSecondary}/>
         </ButtonIcon>
       </IconRight>
     </Container>

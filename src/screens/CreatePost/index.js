@@ -26,6 +26,7 @@ import {
   ImagePost,
 } from '../../styles/screens/createPost';
 import {CREATE_POST} from '../../graphql/mutation';
+import { colorTextPrimary, colorTextSecondary } from '../../color';
 function Index() {
   const context = React.useContext(AuthContext);
   const navigation = useNavigation();
@@ -66,6 +67,7 @@ function Index() {
             name="arrowleft"
             size={30}
             onPress={() => navigation.goBack()}
+            color={colorTextPrimary}
           />
         </ButtonIcon>
         <Title>Tạo bài viết</Title>

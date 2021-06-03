@@ -4,27 +4,18 @@ import {useRoute} from '@react-navigation/native';
 import { useNavigation } from "@react-navigation/native";
 
 import {AuthContext} from '../../../../context/auth';
-import ListMember from './members';
+import ListMember from '../../../../components/general/members';
 import styled from 'styled-components';
 import TopBar from '../../../../components/general/topBar';
-import Search from './search';
+
 
 export default function index() {
-  const navigation=useNavigation();
-  const context = React.useContext(AuthContext);
   const route = useRoute();
-  const {members, groupId, leader} = route.params;
+  const {members} = route.params;
 
   return (
     <Container>
-      <TopBar title="Thành viên" />
-      {context.user.username === leader.username && (
-        <ButtonManage onPress={()=>navigation.navigate("ManageScreen",{groupId:groupId})}>
-          <TextName>Duyệt</TextName>
-        </ButtonManage>
-      )}
-
-      <Search />
+      <TopBar title="Thành viên" />    
       <ListMember members={members} />
     </Container>
   );

@@ -7,7 +7,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
-import {BottomSheet, ListItem} from 'react-native-elements';
+
 
 import UserImage from '../../../fonts/icon/user.jpg';
 import {LIKEPOST} from '../../../graphql/mutation';
@@ -29,6 +29,8 @@ import {
 } from '../../../styles/components/home/singlePost';
 import {AuthContext} from '../../../context/auth';
 import BottomMenu from "./bottomSheet";
+import { colorTextPrimary, colorTextSecondary } from '../../../color';
+import BottomSheet from "../components/bottomSheet";
 
 function SinglePost({
   post: {
@@ -73,30 +75,21 @@ function SinglePost({
   const [isUsername,setUsername]=useState("");
 
 
+  const refRBSheet = React.useRef();
+  
   const setValue=(postId,username)=>{
     setUsername(username)
     setPostId(postId);
-    setIsVisible(true)
+    refRBSheet.current.open()
   } 
 
-  const handleChangeVisible = value => {
-    setIsVisible(value);
-  };
-  const buttonSheet = () => {
-    return (
-      <BottomSheet
-        isVisible={isVisible}
-        containerStyle={{backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)'}}>
-        <BottomMenu handleChangeVisible={handleChangeVisible}  postId={isPostId} username={isUsername}/>
-      </BottomSheet>
-    );
-  };
+
 
 
   return (
     <Container>
       <TopTitle>
-      {buttonSheet()}
+      <BottomSheet refRBSheet={refRBSheet} postId={isPostId} username={isUsername}/>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('ProfileScreen', {
@@ -139,21 +132,21 @@ function SinglePost({
       <BottomPost>
         <BoxButton>
           {liked ? (
-            <IconAntDesign name="like1" size={30} onPress={() => LikePost()} />
+            <IconAntDesign name="like1" size={30} onPress={() => LikePost()} color={colorTextPrimary}/>
           ) : (
-            <IconAntDesign name="like2" size={30} onPress={() => LikePost()} />
+            <IconAntDesign name="like2" size={30} onPress={() => LikePost()} color={colorTextSecondary}/>
           )}
 
           <NumForButton>{likeCount}</NumForButton>
         </BoxButton>
 
         <BoxButton onPress={() => handleClickImage(id)}>
-          <IconFontisto name="comment" size={30} />
+          <IconFontisto name="comment" size={30} color={colorTextSecondary}/>
           <NumForButton>{commentCount}</NumForButton>
         </BoxButton>
 
         <BoxButton>
-          <Icon name="share-outline" size={30} />
+          <Icon name="share-outline" size={30} color={colorTextSecondary}/>
           <NumForButton>0</NumForButton>
         </BoxButton>
       </BottomPost>

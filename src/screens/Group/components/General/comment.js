@@ -37,6 +37,7 @@ import {
 import SinglePost from '../Main/singlePost';
 import TopBar from '../../../../components/general/topBar';
 import Loading from '../../../../components/general/loading';
+import { colorTextSecondary } from '../../../../color';
 
 function Comment() {
   const context = React.useContext(AuthContext);
@@ -110,7 +111,7 @@ function Comment() {
                   value={formProps.values.body}
                 />
                 <ButtonSubmit onPress={formProps.handleSubmit}>
-                  <Icon name="send-o" size={30} />
+                  <Icon name="send-o" size={30} color={colorTextSecondary}/>
                 </ButtonSubmit>
               </BoxInput>
             );

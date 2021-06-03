@@ -5,6 +5,7 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
+import { colorTextSecondary } from "../../color";
 import {AuthContext} from '../../context/auth';
 import {
   Container,
@@ -22,7 +23,7 @@ import {
 function Menu() {
   const context = React.useContext(AuthContext);
   const navigation = useNavigation();
-
+ 
   return (
     <Container>
       <MenuTop>
@@ -45,15 +46,15 @@ function Menu() {
               <TextUsername>@ {context.user.username}</TextUsername>
               <View style={{flexDirection: 'row'}}>
                 <TextFollow>
-                  {context.user.following.length === 0
+                  {context.user.following === undefined
                     ? 0
-                    : context.user.following.length}{' '}
+                    : context.user.following.length} {" "}
                   Theo dõi
                 </TextFollow>
                 <TextFollow>
-                  {context.user.follower.length === 0
+                  {context.user.follower === undefined
                     ? 0
-                    : context.user.follower.length}{' '}
+                    : context.user.follower.length} {" "}
                   Người theo dõi
                 </TextFollow>
               </View>
@@ -66,12 +67,12 @@ function Menu() {
 
       <MenuContent>
         <BoxItem onPress={() => navigation.navigate('Home')}>
-          <Icon name="home-outline" size={30} />
+          <Icon name="home-outline" size={30} color={colorTextSecondary}/>
           <TextMenu>Trang chủ</TextMenu>
         </BoxItem>
 
         <BoxItem onPress={() => navigation.push('MessageScreen')}>
-          <IconAntDesign name="message1" size={30} />
+          <IconAntDesign name="message1" size={30} color={colorTextSecondary}/>
           <TextMenu>Tin nhắn</TextMenu>
         </BoxItem>
 
@@ -81,12 +82,12 @@ function Menu() {
               username: context.user.username,
             })
           }>
-          <IconFeather name="user" size={30} />
+          <IconFeather name="user" size={30} color={colorTextSecondary}/>
           <TextMenu>Hồ sơ</TextMenu>
         </BoxItem>
 
         <BoxItem onPress={() => navigation.navigate('GroupScreen')}>
-          <Icon name="people-outline" size={30} />
+          <Icon name="people-outline" size={30} color={colorTextSecondary}/>
           <TextMenu>Nhóm</TextMenu>
         </BoxItem>
 
@@ -95,7 +96,7 @@ function Menu() {
        
 
         <BoxItem onPress={() => navigation.navigate('Product')}>
-          <IconFeather name="shopping-bag" size={30} />
+          <IconFeather name="shopping-bag" size={30} color={colorTextSecondary}/>
           <TextMenu>Chợ</TextMenu>
         </BoxItem>
 
@@ -105,12 +106,12 @@ function Menu() {
               context.logout();
               navigation.push('Login');
             }}>
-            <IconAntDesign name="logout" size={30} />
+            <IconAntDesign name="logout" size={30} color={colorTextSecondary}/>
             <TextMenu>Đăng xuất</TextMenu>
           </BoxItem>
         ) : (
           <BoxItem onPress={() => navigation.push('Login')}>
-            <IconAntDesign name="logout" size={30} />
+            <IconAntDesign name="logout" size={30} color={colorTextSecondary}/>
             <TextMenu>Đăng nhập</TextMenu>
           </BoxItem>
         )}

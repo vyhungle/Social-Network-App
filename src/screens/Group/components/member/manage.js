@@ -18,7 +18,6 @@ export default function manage() {
   return (
     <Container>
       <TopBar title="Yêu cầu tham gia" />
-
       {joins &&
         joins.map((m, index) => (
           <Item key={index}>

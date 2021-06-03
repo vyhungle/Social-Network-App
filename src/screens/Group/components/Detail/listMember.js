@@ -17,25 +17,22 @@ export default function listMember(props) {
         style={{flexDirection: 'row'}}
         onPress={() =>
           navigation.navigate('MemberScreen', {
-            members: props.members,
             groupId: props.groupId,
-            leader:props.leader,
+            leader: props.leader,
+            members:props.members
           })
         }>
         {props.members.map((member, index) => {
           if (index < 3)
             return (
-              <View key={index}>           
+              <View key={index}>
                 {member.profile.avatar === null ? (
-                  <Item             
+                  <Item
                     source={require('../../../../fonts/icon/user.jpg')}
                     vt={index}
                   />
                 ) : (
-                  <Item
-                    source={{uri: member.profile.avatar}}
-                    vt={index}
-                  />
+                  <Item source={{uri: member.profile.avatar}} vt={index} />
                 )}
               </View>
             );

@@ -59,7 +59,7 @@ function Index() {
               <TextStory>{user.profile.story}</TextStory>
               <TextDate>{user.profile.dateOfBirth}</TextDate>
               <Text>
-                {user.following.length} following {user.follower.length}{' '}
+                {user.following ? user.following.length:0 } following {user.follower ? user.follower.length:0}{' '}
                 follower
               </Text>
             </ViewBoxContentTop>

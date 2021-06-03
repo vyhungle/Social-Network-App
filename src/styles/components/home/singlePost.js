@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colorTextSecondary } from "../../../color/index";
 
 export const Container = styled.View`
   border-color:gainsboro;
@@ -60,7 +61,9 @@ export const BoxButton = styled.TouchableOpacity`
 `;
 
 export const NumForButton=styled.Text `
-  margin-left:3px
+  margin-left:3px;
+  color: ${colorTextSecondary};
+  font-weight: 700;
 `
 
 

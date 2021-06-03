@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colorTextSecondary } from '../../../color';
 
 export const Container = styled.View`
   flex-direction: row;
@@ -17,6 +18,7 @@ export const Title = styled.Text`
   font-size: 25px;
   margin-left: 15px;
   margin-top: -5px;
+  color: ${colorTextSecondary};
 `;
 
 export const IconRight = styled.View`

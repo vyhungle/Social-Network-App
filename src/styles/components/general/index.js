@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colorTextSecondary } from "../../../color";
 
 export const ButtonIcon =styled.TouchableOpacity `
     width:40px;
@@ -26,6 +27,7 @@ export const Title = styled.Text`
   font-size: 20px;
   margin-left: 10px;
   max-width:300px;
+  color: ${colorTextSecondary};
 `;
 
 export const ContainerLoading=styled.View `

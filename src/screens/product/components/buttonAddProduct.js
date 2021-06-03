@@ -2,12 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
+import { colorTextSecondary } from '../../../color';
 
 function ButtonAddProduct() {
     const navigation=useNavigation()
     return (
         <Container onPress={()=>navigation.push("AddProductScreen")}>
-            <Icon name="add-circle-outline" size={30} color="#262626" />
+            <Icon name="add-circle-outline" size={30} color={colorTextSecondary} />
         </Container>
     )
 }

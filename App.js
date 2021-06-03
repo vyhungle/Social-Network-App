@@ -40,6 +40,8 @@ import MemberScreen from './src/screens/Group/components/member';
 import AddGroupScreen from './src/screens/Group/components/addGroup';
 import ManageScreen from './src/screens/Group/components/member/manage';
 import MyGroupScreen from './src/screens/Group/components/myGroup';
+import AddMemberInChatScreen from './src/screens/roomChat/components/addMember';
+import { colorTextPrimary, colorTextSecondary } from './src/color';
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -66,8 +68,8 @@ function MyTabs() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#262626',
-        inactiveTintColor: '#262626',
+        activeTintColor: `${colorTextPrimary}`,
+        inactiveTintColor: `${colorTextSecondary}`,
         style: {height: 70, paddingTop: 10},
       }}>
       <Tab.Screen
@@ -88,7 +90,7 @@ function MyTabs() {
       <Tab.Screen
         name="NotificationScreen"
         component={NotificationScreen}
-        options={{tabBarLabel: ''}}
+        options={{tabBarLabel: '',tabBarBadge:4}}
       />
       <Tab.Screen
         name="MenuScreen"
@@ -196,6 +198,10 @@ const App = () => {
               <RootStack.Screen
                 name="MyGroupScreen"
                 component={MyGroupScreen}
+              />
+               <RootStack.Screen
+                name="AddMemberInChatScreen"
+                component={AddMemberInChatScreen}
               />
             </RootStack.Navigator>
           </NavigationContainer>

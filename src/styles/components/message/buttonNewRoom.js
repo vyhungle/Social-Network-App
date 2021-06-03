@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { colorTextPrimary } from "../../../color";
 
 export const ButtonBox =styled.TouchableOpacity `
-    background-color:#262626;
+    background-color:${colorTextPrimary};
     width:60px;
     height: 60px;
     border-radius:60px;

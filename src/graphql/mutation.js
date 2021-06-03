@@ -119,7 +119,7 @@ export const FIND_USERS = gql`
 `;
 
 export const CREATE_ROOM_CHAT = gql`
-  mutation createRoomChat($userId: String!) {
+  mutation createRoomChat($userId: [String]!) {
     createRoomChat(userId: $userId)
   }
 `;
@@ -293,5 +293,11 @@ export const ACCEPT_JOIN = gql`
 export const DELETE_POST_IN_GROUP = gql`
   mutation deletePostInGroup($groupId: String!, $postId: String!) {
     deletePostInGroup(groupId: $groupId, postId: $postId)
+  }
+`;
+
+export const LEAVE_THE_GROUP = gql`
+  mutation leaveTheGroup($groupId: String!) {
+    leaveTheGroup(groupId: $groupId)
   }
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colorTextPrimary, colorTextSecondary } from "../../../color";
 
 
 export const Container = styled.View `
@@ -23,7 +24,7 @@ export const BoxMember = styled.View `
     margin-right:5px;
     width:48px;
     height:48px;
-    background-color:#262626;
+    background-color:${colorTextSecondary};
     border-radius:50px;
     display:flex;
     align-items:center;

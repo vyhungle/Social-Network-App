@@ -3,6 +3,7 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 
 import {TopBar, ButtonIcon, Title} from '../../styles/components/general';
+import { colorTextPrimary, colorTextSecondary } from '../../color';
 
 function Index({title}){
   const navigation = useNavigation();
@@ -12,6 +13,7 @@ function Index({title}){
         <IconAntDesign
           name="arrowleft"
           size={30}
+          color={colorTextPrimary}
           onPress={() => navigation.goBack()}
         />
       </ButtonIcon>

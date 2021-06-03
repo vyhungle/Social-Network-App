@@ -15,8 +15,9 @@ import {
   TouchableOpacityBox,
   ButtonNext,
 } from '../../../styles/components/createChat/listFollower';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Loading from "../../notification/components/loading";
+import { colorTextPrimary } from '../../../color';
 
 const getAvatarUri = user => {
   if (user.profile.avatar === null)
@@ -35,7 +36,7 @@ function ListSearch({keyword}) {
     variables: {displayname: keyword},
   });
 
-  const [userId, SetUserId] = React.useState('');
+  const [userId, SetUserId] = React.useState([]);
   const [roomID, setRoomID] = React.useState('');
   const [displayname, setDisplayname] = React.useState('');
 
@@ -44,11 +45,16 @@ function ListSearch({keyword}) {
 
   const handleClickBox = (displayname, id) => {
     setDisplayname(displayname);
-    SetUserId(id);
-
-    // console.log(displayname,id)
+    var ref=true;
+    userId.map((e)=>{
+      if(e===id){
+        ref=false
+      }
+    })
+    if(ref===true) SetUserId( arr => [...arr, `${id}`])
+    else SetUserId(userId.filter(item => item !== id));
   };
-
+  console.log(userId)
   const AddChat = userId => {
     createRoom({
       variables: {
@@ -66,6 +72,13 @@ function ListSearch({keyword}) {
 
     
   };
+  const isUsername=(userId,id)=>{
+    var ref=false;
+    userId.map((e)=>{
+      if(e===id) ref=true
+    })
+    return ref;
+  }
   if (loading) return (
     <Container>
       <Loading/>
@@ -75,11 +88,12 @@ function ListSearch({keyword}) {
   );
   return (
     <Container>
-      {userId === '' ? (
+      {userId.length === 0 ? (
         <View></View>
       ) : (
         <ButtonNext onPress={() => AddChat(userId)}>
-          <Text style={{color: 'white'}}>Tiếp</Text>
+         {/* {loading ? (<ActivityIndicator size="small" color={colorTextPrimary}/>):( <Text style={{color: 'white'}}>Tiếp</Text>)} */}
+         <Text style={{color: 'white'}}>Tiếp</Text>
         </ButtonNext>
       )}
       <ScrollView>
@@ -87,14 +101,14 @@ function ListSearch({keyword}) {
           users.map((user, index) => (
             <BoxItem
               key={index}
-              onPress={() => handleClickBox(user.displayname, user.id)}>
+              onPress={() => handleClickBox(userId.length>=2?`Nhóm của ${user.displayname}` : user.displayname, user.id)}>
               {getAvatarUri(user)}
               <ViewBoxItem>
                 <TextName>{user.displayname}</TextName>
                 <TextUsername>@{user.username}</TextUsername>
               </ViewBoxItem>
 
-              {userId === user.id ? (
+              {isUsername(userId,user.id)? (
                 <TouchableOpacityBox>
                   <Icon name="check-square" size={25} />
                 </TouchableOpacityBox>

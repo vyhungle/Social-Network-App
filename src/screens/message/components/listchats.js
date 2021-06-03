@@ -17,6 +17,7 @@ import {
   TextBody,
 } from '../../../styles/components/message/listchat';
 import {AuthContext} from '../../../context/auth';
+import styled from 'styled-components';
 
 function Listchats() {
   const context = React.useContext(AuthContext);
@@ -37,44 +38,69 @@ function Listchats() {
     return chat.members[0];
   };
 
-  const getUriAvatar = uri => {
-    if (uri === null) {
-      return <Avatar source={require('../../../fonts/icon/user.jpg')} />;
-    }
+  const renderImageGroup = members => {
     return (
-      <Avatar
-        source={{
-          uri: uri,
-        }}
-      />
+      <BoxImage>
+        <BoxImageLeft>
+          <ImageLeft source={{uri: members[0].profile.avatar}} />
+          <ImageLeft source={{uri: members[1].profile.avatar}} />
+        </BoxImageLeft>
+        <BoxImageRight>
+          <ImageRight source={{uri: members[2].profile.avatar}} />
+        </BoxImageRight>
+      </BoxImage>
+    );
+  };
+
+  const getUriAvatar = (chat, uri) => {
+    return chat.image==='' ? (
+      chat.image === '' ? (
+        renderImageGroup(chat.members)
+      ) : (
+        <Avatar source={{uri: chat.image}} />
+      )
+    ) : uri ? (
+      <Avatar source={{uri: uri}} />
+    ) : (
+      <Avatar source={require('../../../fonts/icon/user.jpg')} />
     );
   };
   const navigation = useNavigation();
 
-  const handleClick = (id, displayname) => {
+  const handleClick = (id, displayname,members) => {
     navigation.navigate('RoomChatScreen', {
       id: id,
       displayname: displayname,
+      members:members
     });
   };
-  if (loading) return (
-    <Container>
-      <Loading />
-      <Loading />
-      <Loading />
-    </Container>
-  );
+  if (loading)
+    return (
+      <Container>
+        <Loading />
+        <Loading />
+        <Loading />
+      </Container>
+    );
   return (
     <Container>
       {chats &&
         chats.map((chat, index) => {
           const member = getUser(chat);
-          const AvatarUser = getUriAvatar(member.profile.avatar);
+          const AvatarUser = getUriAvatar(chat, member.profile.avatar);
           return (
-            <ChatItem key={index} onPress={() => handleClick(chat.id, member.displayname)}>
+            <ChatItem
+              key={index}
+              onPress={() =>
+                handleClick(chat.id, chat.name ? chat.name : member.displayname,chat.members)
+              }>
               {AvatarUser}
               <BoxText>
-                <TextName>{member.displayname}</TextName>
+                {chat.name ? (
+                  <TextName>{chat.name}</TextName>
+                ) : (
+                  <TextName>{member.displayname}</TextName>
+                )}
                 {chat.content.length === 0 ? (
                   <View></View>
                 ) : (
@@ -108,3 +134,30 @@ function Listchats() {
 }
 
 export default Listchats;
+
+const BoxImage = styled.View`
+  flex-direction: row;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+`;
+const BoxImageLeft = styled.View`
+  flex-direction: column;
+  overflow: hidden;
+`;
+const BoxImageRight = styled.View`
+  overflow: hidden;
+`;
+
+const ImageLeft = styled.Image`
+  width: 25px;
+  height: 25px;
+`;
+const ImageRight = styled.Image`
+  width: 25px;
+  height: 50px;
+
+  /* border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px; */
+`;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colorTextSecondary } from '../../color';
 
 export const Container = styled.View`
   flex: 1;
@@ -19,6 +20,7 @@ export const Title = styled.Text`
   font-weight: 700;
   font-size: 20px;
   margin-left: 10px;
+  color: ${colorTextSecondary};
 `;
 export const Content = styled.View`
   flex: 1;

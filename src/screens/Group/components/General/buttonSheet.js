@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {View} from 'react-native';
 
@@ -7,22 +6,23 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useMutation} from '@apollo/react-hooks';
 
-import {DELETE_POST} from '../../../graphql/mutation';
-import {AuthContext} from '../../../context/auth';
+import {DELETE_POST_IN_GROUP} from '../../../../graphql/mutation';
+import {AuthContext} from '../../../../context/auth';
 
 export default function Example(props) {
-  const context = React.useContext(AuthContext);
-  const [deletePost, {loading}] = useMutation(DELETE_POST);
-  const refRBSheet=props.refRBSheet;
-
-  const handleDelete = postId => {
-    deletePost({
-      variables: {
-        postId: postId,
-      },
-    });
+    const context = React.useContext(AuthContext);
+    const [deletePost, {loading}] = useMutation(DELETE_POST_IN_GROUP);
+    const refRBSheet=props.refRBSheet;
+  
+    const handleDelete = (groupId, postId) => {
+      deletePost({
+        variables: {
+          groupId: groupId,
+          postId: postId,
+        },
+      });
     refRBSheet.current.close()
-  };
+    };
   return (
     <Container>
       <RBSheet
@@ -39,10 +39,10 @@ export default function Example(props) {
           },
         }}>
         <BoxItem>
-          {context.user && context.user.username === props.username ? (
+         
+          {context.user.username === props.username ? (
             <View>
-              <ItemList
-                onPress={() => handleDelete(props.postId)}>
+              <ItemList onPress={() => handleDelete(props.groupId, props.postId)}>
                 <Icon name="delete" size={30} />
                 <TextItem>Xóa</TextItem>
               </ItemList>
@@ -54,7 +54,7 @@ export default function Example(props) {
           ) : (
             <View></View>
           )}
-          <ItemList onPress={() => refRBSheet.current.close()}>
+          <ItemList onPress={() =>refRBSheet.current.close()}>
             <Icon name="back" size={30} />
             <TextItem>Trở về</TextItem>
           </ItemList>
@@ -64,7 +64,9 @@ export default function Example(props) {
   );
 }
 
-const Container = styled.View``;
+const Container = styled.View`
+
+`;
 const BoxItem = styled.View`
   margin-top: 20px;
 `;
@@ -74,6 +76,7 @@ const ItemList = styled.TouchableOpacity`
   align-items: center;
   padding: 5px;
   padding-left: 20px;
+
 `;
 const TextItem = styled.Text`
   font-weight: 700;

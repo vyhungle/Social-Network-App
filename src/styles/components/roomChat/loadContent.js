@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.View`
   padding-bottom: 110px;
+  /* padding-top:5px; */
 `;
 
 export const BoxItemFriend = styled.View`
@@ -23,12 +24,19 @@ export const TextFriend = styled.View`
   align-self: flex-start;
   min-width: 50px;
 `;
-export const TimeFriend = styled.Text`
+export const NameFriend = styled.Text`
   max-width: 250px;
   margin: 5px;
   margin-bottom: 15px;
   color: gray;
   margin-left: 15px;
+`;
+
+export const TimeFriend = styled.Text`
+  max-width: 250px;
+  margin: 5px;
+  margin-bottom: 15px;
+  color: gray;
 `;
 
 export const BoxItemYou = styled.View`
@@ -72,4 +80,6 @@ export const ImageChat = styled.Image`
   width: 250px;
   height: 150px;
   border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;

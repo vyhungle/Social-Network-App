@@ -19,6 +19,7 @@ import TopBar from '../../components/general/topBar';
 import ModelCategories from './components/modelCategories';
 import ModelLocation from './components/modelLocation';
 import {CREATE_PRODUCT} from '../../graphql/mutation';
+import { colorTextPrimary, colorTextSecondary } from '../../color';
 
 const win = Dimensions.get('window');
 var base64Image = [];
@@ -172,22 +173,22 @@ function AddProduct() {
                       <Item source={{uri: uri}} key={index} />
                     ))}
                   <BoxItem onPress={() => SelectImage(formProps)}>
-                    <Icon name="camera-plus-outline" size={30} />
+                    <Icon name="camera-plus-outline" size={30} color={colorTextSecondary}/>
                   </BoxItem>
                 </ScrollView>
               </BoxImage>
 
               <PickerItem onPress={() => handelChangeModel(true)}>
-                <Text>{category}</Text>
+                <Text style={{color:colorTextSecondary}}>{category}</Text>
                 <BoxIcon>
-                  <IconMaterialIcons name="arrow-drop-down" size={25} />
+                  <IconMaterialIcons name="arrow-drop-down" size={25} color={colorTextSecondary}/>
                 </BoxIcon>
               </PickerItem>
 
               <PickerItem onPress={() => handelChangeModelLocation(true)}>
-                <Text>{location}</Text>
+                <Text style={{color:colorTextSecondary}}>{location}</Text>
                 <BoxIcon>
-                  <IconMaterialIcons name="arrow-drop-down" size={25} />
+                  <IconMaterialIcons name="arrow-drop-down" size={25} color={colorTextSecondary}/>
                 </BoxIcon>
               </PickerItem>
 
@@ -303,7 +304,9 @@ const BoxCenter = styled.View`
 const ButtonSubmit = styled.TouchableOpacity`
   width: 110px;
   border-radius: 20px;
-  background-color: #262626;
+  /* background-color: #262626; */
+  border-color: ${colorTextPrimary};
+  border-width: 2px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -314,6 +317,7 @@ const ButtonSubmit = styled.TouchableOpacity`
 const TextButton = styled.Text`
   color: white;
   font-weight: 700;
+  color: ${colorTextPrimary};
 `;
 
 const Error = styled.Text`

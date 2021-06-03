@@ -174,6 +174,8 @@ export const GET_ROOM_CHAT = gql`
   query getRoomChat {
     getRoomChat {
       id
+      name
+      image
       members {
         username
         displayname

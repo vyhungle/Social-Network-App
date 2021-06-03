@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image} from 'react-native';
 import styled from 'styled-components';
 import { TextButton } from '../../styles/screens/signup';
+import { colorTextPrimary } from "../../color/index";
 
 function Index() {
   return (
@@ -22,12 +23,13 @@ const Container=styled.View `
     display:flex;
     align-items:center;
     justify-content:center;
+    background-color: ${colorTextPrimary};
 
 `
 
 const ImageLd=styled.Image `
-    width:70px;
-    height:70px;
+    width:60px;
+    height:60px;
 `
 
 const TextBottom =styled.Text `

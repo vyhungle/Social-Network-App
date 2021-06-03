@@ -12,6 +12,7 @@ import {CREATE_GROUP} from '../../../../graphql/mutation';
 import {useMutation} from '@apollo/client';
 import ModalPublic from './modalPublic';
 import ModalTypeGroup from './modalTypeGroup';
+import { colorTextPrimary, colorTextSecondary } from '../../../../color';
 
 var errors = {};
 function index() {
@@ -141,23 +142,23 @@ function index() {
               {errors.name && <Error>{errors.name}</Error>}
               <View style={{flexDirection: 'row'}}>
                 <BoxImage onPress={() => SelectImageCover(formProps)}>
-                  <Icon name="camera-plus-outline" size={30} />
+                  <Icon name="camera-plus-outline" size={30} color={colorTextSecondary}/>
                 </BoxImage>
                 {imageCover !== '' && <ImageCover source={{uri: imageCover}} />}
               </View>
               {errors.imageCover && <Error>{errors.imageCover}</Error>}
 
               <CompoBox onPress={() => handelChangeModelPublic(true)}>
-                <Text>{isPublic}</Text>
+                <Text style={{color:colorTextSecondary}}>{isPublic}</Text>
                 <BoxIcon>
-                  <IconMaterialIcons name="arrow-drop-down" size={25} />
+                  <IconMaterialIcons name="arrow-drop-down" size={25} color={colorTextSecondary}/>
                 </BoxIcon>
               </CompoBox>
 
               <CompoBox onPress={() => handelChangeModelTypeGroup(true)}>
-                <Text>{isTypeGroup}</Text>
+                <Text style={{color:colorTextSecondary}}>{isTypeGroup}</Text>
                 <BoxIcon>
-                  <IconMaterialIcons name="arrow-drop-down" size={25} />
+                  <IconMaterialIcons name="arrow-drop-down" size={25} color={colorTextSecondary}/>
                 </BoxIcon>
               </CompoBox>
 
@@ -174,7 +175,7 @@ function index() {
               <BoxCenter>
                 <ButtonSubmit onPress={() => formProps.handleSubmit()}>
                   {loading ? (
-                    <ActivityIndicator size="small" color="while" />
+                    <ActivityIndicator size="small" color={colorTextPrimary} />
                   ) : (
                     <TextButton>Tạo nhóm</TextButton>
                   )}
@@ -262,7 +263,9 @@ const BoxCenter = styled.View`
 const ButtonSubmit = styled.TouchableOpacity`
   width: 110px;
   border-radius: 20px;
-  background-color: #262626;
+  /* background-color: #262626; */
+  border-color: ${colorTextPrimary};
+  border-width: 2px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -273,6 +276,7 @@ const ButtonSubmit = styled.TouchableOpacity`
 const TextButton = styled.Text`
   color: white;
   font-weight: 700;
+  color: ${colorTextPrimary};
 `;
 
 const ImageCover = styled.Image`

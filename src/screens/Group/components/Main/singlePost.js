@@ -14,7 +14,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
 import {useMutation} from '@apollo/react-hooks';
 import {useNavigation} from '@react-navigation/native';
-import {BottomSheet, ListItem} from 'react-native-elements';
+
 
 import UserImage from '../../../../fonts/icon/user.jpg';
 import {LIKE_POST_IN_GROUP} from '../../../../graphql/mutation';
@@ -35,7 +35,8 @@ import {
   BoxIconRight,
 } from '../../../../styles/components/home/singlePost';
 import {AuthContext} from '../../../../context/auth';
-import BottomMenu from '../General/bottomSheet';
+import BottomSheet from '../General/buttonSheet';
+import { colorTextPrimary, colorTextSecondary } from '../../../../color';
 
 // import PopupCatalog from "./popupCatalog";
 
@@ -72,40 +73,26 @@ function SinglePost(props) {
   }
 
   //popup
-
-
-
   const [isVisible, setIsVisible] = useState(false);
   const [isGroupId,setGroupId]=useState("");
   const [isPostId,setPostId]=useState("");
   const [isUsername,setUsername]=useState("");
 
 
+  const refRBSheet = React.useRef();
   const setValue=(groupId,postId,username)=>{
     setUsername(username)
     setGroupId(groupId);
     setPostId(postId);
-    setIsVisible(true)
+    refRBSheet.current.open()
   } 
 
-  const handleChangeVisible = value => {
-    setIsVisible(value);
-  };
-  const buttonSheet = () => {
-    return (
-      <BottomSheet
-        isVisible={isVisible}
-        containerStyle={{backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)'}}>
-        <BottomMenu handleChangeVisible={handleChangeVisible} groupId={isGroupId} postId={isPostId} username={isUsername}/>
-      </BottomSheet>
-    );
-  };
+
 
   return (
     <Container>
       <TopTitle>
-        {/* {modelCatalog()} */}
-        {buttonSheet()}
+      <BottomSheet refRBSheet={refRBSheet} groupId={isGroupId} postId={isPostId} username={isUsername}/>
         <TouchableOpacity
           style={{width: 60, justifyContent: 'center'}}
           onPress={() =>
@@ -139,8 +126,8 @@ function SinglePost(props) {
         </TitleBox>
 
 
-        <BoxIconRight onPress={() => setValue(props.groupId,props.post.id,props.post.username)}>
-          <IconEntypo name="dots-three-horizontal" size={20} color="gray" />
+        <BoxIconRight onPress={() =>  setValue(props.groupId,props.post.id,props.post.username)}>
+          <IconEntypo name="dots-three-horizontal" size={20} color="gray"  color={colorTextSecondary}/>
         </BoxIconRight>
       </TopTitle>
 
@@ -159,9 +146,9 @@ function SinglePost(props) {
       <BottomPost>
         <BoxButton>
           {liked ? (
-            <IconAntDesign name="like1" size={30} onPress={() => LikePost()} />
+            <IconAntDesign name="like1" size={30} onPress={() => LikePost()} color={colorTextPrimary}/>
           ) : (
-            <IconAntDesign name="like2" size={30} onPress={() => LikePost()} />
+            <IconAntDesign name="like2" size={30} onPress={() => LikePost()} color={colorTextSecondary}/>
           )}
 
           <NumForButton>{props.post.likeCount}</NumForButton>
@@ -176,12 +163,12 @@ function SinglePost(props) {
               props.Username,
             )
           }>
-          <IconFontisto name="comment" size={30} />
+          <IconFontisto name="comment" size={30}  color={colorTextSecondary}/>
           <NumForButton>{props.post.commentCount}</NumForButton>
         </BoxButton>
 
         <BoxButton>
-          <Icon name="share-outline" size={30} />
+          <Icon name="share-outline" size={30}  color={colorTextSecondary}/>
           <NumForButton>0</NumForButton>
         </BoxButton>
       </BottomPost>

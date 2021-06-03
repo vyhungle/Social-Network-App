@@ -5,6 +5,8 @@ import IconFontisto from 'react-native-vector-icons/Fontisto';
 import styled from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 
+import { colorTextPrimary, colorTextSecondary } from "../../../../color/index";
+
 export default function catalog(props) {
   const navigation = useNavigation();
   return (
@@ -17,7 +19,7 @@ export default function catalog(props) {
           name="people-outline"
           size={20}
           style={{marginRight: 5}}
-          color="white"
+          color={colorTextPrimary}
         />
         <TextItem>Nhóm của bạn</TextItem>
       </Item>
@@ -27,7 +29,7 @@ export default function catalog(props) {
           name="compass-outline"
           size={20}
           style={{marginRight: 5}}
-          color="white"
+          color={colorTextPrimary}
         />
         <TextItem>Khám phá</TextItem>
       </Item>
@@ -37,7 +39,7 @@ export default function catalog(props) {
           name="email"
           size={20}
           style={{marginRight: 5}}
-          color="white"
+          color={colorTextPrimary}
         />
         <TextItem>Thư mời</TextItem>
       </Item>
@@ -58,10 +60,12 @@ const Item = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
+  /* padding-left: 15px;
+  padding-right: 15px; */
   border-radius: 15px;
-  background-color: #262626;
+  background-color: ${colorTextSecondary};
+  /* border-width: 2px;
+  border-color: ${colorTextPrimary}; */
   flex-direction: row;
   margin-left: 5px;
 `;
@@ -69,4 +73,5 @@ const Item = styled.TouchableOpacity`
 const TextItem = styled.Text`
   color: white;
   font-weight: 700;
+  color:white;
 `;
