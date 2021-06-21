@@ -14,12 +14,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Formik} from 'formik';
 import {useMutation} from '@apollo/react-hooks';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 import TopBar from '../../components/general/topBar';
 import ModelCategories from './components/modelCategories';
 import ModelLocation from './components/modelLocation';
 import {CREATE_PRODUCT} from '../../graphql/mutation';
-import { colorTextPrimary, colorTextSecondary } from '../../color';
+import {colorTextPrimary, colorTextSecondary} from '../../color';
 
 const win = Dimensions.get('window');
 var base64Image = [];
@@ -155,67 +156,81 @@ function AddProduct() {
       {formProps => {
         return (
           <Container>
-            <TopBar title="Tạo sản phẩm" />
-            <View style={{padding:10,paddingTop:0}}>
-              {modelCategories()}
-              {modelLocation()}
-              <Field
-                placeholder="Tên sản phẩm.."
-                placeholderTextColor="gray"
-                onChangeText={formProps.handleChange('body')}
-                value={formProps.values.body}
-              />
-              {errors.body && <Error>{errors.body}</Error>}
-              <BoxImage>
-                <ScrollView horizontal={true}>
-                  {base64Image !== null &&
-                    base64Image.map((uri, index) => (
-                      <Item source={{uri: uri}} key={index} />
-                    ))}
-                  <BoxItem onPress={() => SelectImage(formProps)}>
-                    <Icon name="camera-plus-outline" size={30} color={colorTextSecondary}/>
-                  </BoxItem>
-                </ScrollView>
-              </BoxImage>
+            <KeyboardAwareScrollView >
+              <TopBar title="Tạo sản phẩm" />
+              <View style={{padding: 10, paddingTop: 0}}>
+                {modelCategories()}
+                {modelLocation()}
+                <Field
+                  placeholder="Tên sản phẩm.."
+                  placeholderTextColor="gray"
+                  onChangeText={formProps.handleChange('body')}
+                  value={formProps.values.body}
+                />
+                {errors.body && <Error>{errors.body}</Error>}
+                <BoxImage>
+                  <ScrollView horizontal={true}>
+                    {base64Image !== null &&
+                      base64Image.map((uri, index) => (
+                        <Item source={{uri: uri}} key={index} />
+                      ))}
+                    <BoxItem onPress={() => SelectImage(formProps)}>
+                      <Icon
+                        name="camera-plus-outline"
+                        size={30}
+                        color={colorTextSecondary}
+                      />
+                    </BoxItem>
+                  </ScrollView>
+                </BoxImage>
 
-              <PickerItem onPress={() => handelChangeModel(true)}>
-                <Text style={{color:colorTextSecondary}}>{category}</Text>
-                <BoxIcon>
-                  <IconMaterialIcons name="arrow-drop-down" size={25} color={colorTextSecondary}/>
-                </BoxIcon>
-              </PickerItem>
+                <PickerItem onPress={() => handelChangeModel(true)}>
+                  <Text style={{color: colorTextSecondary}}>{category}</Text>
+                  <BoxIcon>
+                    <IconMaterialIcons
+                      name="arrow-drop-down"
+                      size={25}
+                      color={colorTextSecondary}
+                    />
+                  </BoxIcon>
+                </PickerItem>
 
-              <PickerItem onPress={() => handelChangeModelLocation(true)}>
-                <Text style={{color:colorTextSecondary}}>{location}</Text>
-                <BoxIcon>
-                  <IconMaterialIcons name="arrow-drop-down" size={25} color={colorTextSecondary}/>
-                </BoxIcon>
-              </PickerItem>
+                <PickerItem onPress={() => handelChangeModelLocation(true)}>
+                  <Text style={{color: colorTextSecondary}}>{location}</Text>
+                  <BoxIcon>
+                    <IconMaterialIcons
+                      name="arrow-drop-down"
+                      size={25}
+                      color={colorTextSecondary}
+                    />
+                  </BoxIcon>
+                </PickerItem>
 
-              <Field
-                placeholder="Giá sản phẩm.."
-                placeholderTextColor="gray"
-                onChangeText={formProps.handleChange('price')}
-                value={formProps.values.price}
-              />
-              {errors.price && <Error>{errors.price}</Error>}
+                <Field
+                  placeholder="Giá sản phẩm.."
+                  placeholderTextColor="gray"
+                  onChangeText={formProps.handleChange('price')}
+                  value={formProps.values.price}
+                />
+                {errors.price && <Error>{errors.price}</Error>}
 
-              <FieldMultiple
-                placeholder="Mô tả sản phẩm.."
-                placeholderTextColor="gray"
-                multiline={true}
-                style={{textAlignVertical: 'top'}}
-                onChangeText={formProps.handleChange('describe')}
-                value={formProps.values.describe}
-              />
-              {errors.describe && <Error>{errors.describe}</Error>}
+                <FieldMultiple
+                  placeholder="Mô tả sản phẩm.."
+                  placeholderTextColor="gray"
+                  multiline={true}
+                  style={{textAlignVertical: 'top'}}
+                  onChangeText={formProps.handleChange('describe')}
+                  value={formProps.values.describe}
+                />
+                {errors.describe && <Error>{errors.describe}</Error>}
 
-              <BoxCenter>
-                <ButtonSubmit onPress={() => formProps.handleSubmit()}>
-                  <TextButton>Hoàn thành</TextButton>
-                </ButtonSubmit>
-              </BoxCenter>
-            </View>
+                <BoxCenter>
+                  <ButtonSubmit onPress={() => formProps.handleSubmit()}>
+                    <TextButton>Hoàn thành</TextButton>
+                  </ButtonSubmit>
+                </BoxCenter>
+              </View>
+            </KeyboardAwareScrollView>
           </Container>
         );
       }}
@@ -228,7 +243,6 @@ export default AddProduct;
 const Container = styled.View`
   flex: 1;
   background-color: white;
- 
 `;
 const Field = styled.TextInput`
   background-color: #f6f6f6;

@@ -3,6 +3,7 @@ import {View, Text, ScrollView, Image} from 'react-native';
 import {useQuery} from '@apollo/react-hooks';
 import moment from 'moment';
 
+
 import {AuthContext} from '../../../context/auth';
 import {GET_CHAT} from '../../../graphql/query';
 import Loading from '../../../components/general/loading';
@@ -20,7 +21,6 @@ import {
 } from '../../../styles/components/roomChat/loadContent';
 
 function LoadContent(props) {
-  
   const context = React.useContext(AuthContext);
   const {loading, data: {getChat: chat} = {}} = useQuery(GET_CHAT, {
     variables: {roomId: props.id},
@@ -100,21 +100,23 @@ function LoadContent(props) {
   const scrollViewRef = React.useRef();
   if (loading) return <Loading />;
   return (
-    <Container>
-      <ScrollView
-        ref={scrollViewRef}
-        onContentSizeChange={() =>
-          scrollViewRef.current.scrollToEnd({animated: false})
-        }
-        style={{paddingTop: 10}}>
-        {chat &&
-          chat.content.map((Chat, index) => {
-            const Item = () => GetBoxItem(Chat, index);
-          
-            return Item();
-          })}
-      </ScrollView>
-    </Container>
+    
+      <Container>
+        <ScrollView
+          ref={scrollViewRef}
+          onContentSizeChange={() =>
+            scrollViewRef.current.scrollToEnd({animated: false})
+          }
+          style={{paddingTop: 10}}>
+          {chat &&
+            chat.content.map((Chat, index) => {
+              const Item = () => GetBoxItem(Chat, index);
+
+              return Item();
+            })}
+        </ScrollView>
+      </Container>
+  
   );
 }
 

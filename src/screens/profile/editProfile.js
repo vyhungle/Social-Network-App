@@ -1,12 +1,18 @@
 import React from 'react';
 import {useMutation, useQuery} from '@apollo/react-hooks';
-import {Text, Platform, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  Platform,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons'; //camera
 import {Formik} from 'formik';
 import {useRoute} from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ImagePicker from 'react-native-image-crop-picker';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 import {
   Container,
@@ -28,7 +34,7 @@ import {
 } from '../../styles/components/profile/editProfile';
 import {EDIT_PROFILE} from '../../graphql/mutation';
 import {GET_USER_PROFILE} from '../../graphql/query';
-import { colorTextPrimary, colorTextSecondary } from '../../color';
+import {colorTextPrimary, colorTextSecondary} from '../../color';
 
 function editProfile() {
   const [EditProfile, {loading}] = useMutation(EDIT_PROFILE);
@@ -88,87 +94,93 @@ function editProfile() {
     }
 
     return (
-      <Formik
-        initialValues={{
-          coverImage: user.profile.coverImage,
-          dateOfBirth: user.profile.dateOfBirth,
-          story: user.profile.story,
-          avatar: user.profile.avatar,
-          fullName: user.profile.fullName,
-        }}
-        onSubmit={values => {
-          values.dateOfBirth = date.toISOString().slice(0, 10);
-          EditProfile({
-            variables: values,
-          });
-        }}>
-        {formProps => {
-          return (
-            <ViewForm>
-              {formProps.values.coverImage === undefined ? (
-                <ImageCover source={require('../../fonts/icon/cover.jpg')} />
-              ) : (
-                <ImageCover source={{uri: formProps.values.coverImage}} />
-              )}
-              <LayoutCover></LayoutCover>
-              {formProps.values.avatar === undefined ? (
-                <ImageAvatar source={require('../../fonts/icon/user.jpg')} />
-              ) : (
-                <ImageAvatar source={{uri: formProps.values.avatar}} />
-              )}
-              <LayoutAvatar></LayoutAvatar>
-              <TouchableOpacityCover
-                onPress={() => SelectImageCover(formProps)}>
-                <IconEvilIcons name="camera" size={70} color="white" />
-              </TouchableOpacityCover>
-
-              <TouchableOpacityAvatar
-                onPress={() => SelectImageAvatar(formProps)}>
-                <IconEvilIcons name="camera" size={45} color="white" />
-              </TouchableOpacityAvatar>
-              <ViewFormContent>
-                <TextInputField
-                  placeholder="Full Name"
-                  value={formProps.values.fullName}
-                  onChangeText={formProps.handleChange('fullName')}
-                  placeholderTextColor="gray"
-                />
-                <ViewDate>
-                  <TextDate>{date.toISOString().slice(0, 10)}</TextDate>
-                  <IconDate onPress={showDatepicker}>
-                    <Icon name="date-range" size={30} color={colorTextSecondary}/>
-                  </IconDate>
-                </ViewDate>
-                {show && (
-                  <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={mode}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                  />
+      <KeyboardAwareScrollView >
+        <Formik
+          initialValues={{
+            coverImage: user.profile.coverImage,
+            dateOfBirth: user.profile.dateOfBirth,
+            story: user.profile.story,
+            avatar: user.profile.avatar,
+            fullName: user.profile.fullName,
+          }}
+          onSubmit={values => {
+            values.dateOfBirth = date.toISOString().slice(0, 10);
+            EditProfile({
+              variables: values,
+            });
+          }}>
+          {formProps => {
+            return (
+              <ViewForm>
+                {formProps.values.coverImage === undefined ? (
+                  <ImageCover source={require('../../fonts/icon/cover.jpg')} />
+                ) : (
+                  <ImageCover source={{uri: formProps.values.coverImage}} />
                 )}
+                <LayoutCover></LayoutCover>
+                {formProps.values.avatar === undefined ? (
+                  <ImageAvatar source={require('../../fonts/icon/user.jpg')} />
+                ) : (
+                  <ImageAvatar source={{uri: formProps.values.avatar}} />
+                )}
+                <LayoutAvatar></LayoutAvatar>
+                <TouchableOpacityCover
+                  onPress={() => SelectImageCover(formProps)}>
+                  <IconEvilIcons name="camera" size={70} color="white" />
+                </TouchableOpacityCover>
 
-                <TextInputStory
-                  placeholder="Story"
-                  value={formProps.values.story}
-                  onChangeText={formProps.handleChange('story')}
-                  multiline={true}
-                  style={{textAlignVertical: 'top'}}
-                  placeholderTextColor="gray"
-                />
+                <TouchableOpacityAvatar
+                  onPress={() => SelectImageAvatar(formProps)}>
+                  <IconEvilIcons name="camera" size={45} color="white" />
+                </TouchableOpacityAvatar>
+                <ViewFormContent>
+                  <TextInputField
+                    placeholder="Full Name"
+                    value={formProps.values.fullName}
+                    onChangeText={formProps.handleChange('fullName')}
+                    placeholderTextColor="gray"
+                  />
+                  <ViewDate>
+                    <TextDate>{date.toISOString().slice(0, 10)}</TextDate>
+                    <IconDate onPress={showDatepicker}>
+                      <Icon
+                        name="date-range"
+                        size={30}
+                        color={colorTextSecondary}
+                      />
+                    </IconDate>
+                  </ViewDate>
+                  {show && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={date}
+                      mode={mode}
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChange}
+                    />
+                  )}
 
-                <ViewFormButton>
-                  <ButtonSubmit onPress={formProps.handleSubmit}>
-                    <Text style={{color: 'white'}}>Lưu</Text>
-                  </ButtonSubmit>
-                </ViewFormButton>
-              </ViewFormContent>
-            </ViewForm>
-          );
-        }}
-      </Formik>
+                  <TextInputStory
+                    placeholder="Story"
+                    value={formProps.values.story}
+                    onChangeText={formProps.handleChange('story')}
+                    multiline={true}
+                    style={{textAlignVertical: 'top'}}
+                    placeholderTextColor="gray"
+                  />
+
+                  <ViewFormButton>
+                    <ButtonSubmit onPress={formProps.handleSubmit}>
+                      <Text style={{color: 'white'}}>Lưu</Text>
+                    </ButtonSubmit>
+                  </ViewFormButton>
+                </ViewFormContent>
+              </ViewForm>
+            );
+          }}
+        </Formik>
+      </KeyboardAwareScrollView>
     );
   }
 

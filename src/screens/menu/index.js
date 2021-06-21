@@ -98,7 +98,7 @@ function Menu() {
         <BoxItem onPress={() => navigation.navigate('Product')}>
           <IconFeather name="shopping-bag" size={30} color={colorTextSecondary}/>
           <TextMenu>Chợ</TextMenu>
-        </BoxItem>
+        </BoxItem>       
 
         {context.user ? (
           <BoxItem
